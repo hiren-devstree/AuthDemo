@@ -14,15 +14,19 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import StyleConfig from 'src/helper/StyleConfig';
-import {Ionicons} from '@expo/vector-icons';
+import {FontAwesome} from '@expo/vector-icons';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import AppImages from 'src/assets/images';
 import { Button } from 'src/components/common/Button';
 import { CommonActions } from '@react-navigation/native';
 import styles from 'src/helper/styles';
+import strings from 'src/helper/strings';
+import * as Const from 'src/helper/constant';
+import { TextInputMask } from 'react-native-masked-text'
 class OTPVerificationScreen extends Component{
     constructor(props){
         super(props);
+        this.state={ otp: ''}
     }
     render(){
         return (
@@ -36,11 +40,11 @@ class OTPVerificationScreen extends Component{
                       <TouchableOpacity 
                       onPress={()=> this.props.navigation.goBack()}
                       style={{paddingHorizontal:StyleConfig.countPixelRatio(16), paddingVertical:StyleConfig.countPixelRatio(4)}}>
-                      <Ionicons name={"ios-chevron-back-sharp"} color={'#333'} size={StyleConfig.countPixelRatio(24)} />
+                      <FontAwesome name={Const.IC_BACK} color={StyleConfig.COLORS.gray20} size={StyleConfig.headerIconSize} />
                       </TouchableOpacity>
                       <Text style={local_styles.headerTitle}>SIGN UP</Text>
                       <View style={{paddingHorizontal:StyleConfig.countPixelRatio(16), paddingVertical:StyleConfig.countPixelRatio(4)}}>
-                      <Ionicons name={"ios-chevron-back-sharp"} color={'#fff'} size={StyleConfig.countPixelRatio(24)} />
+                      <FontAwesome name={Const.IC_BACK} color={StyleConfig.COLORS.transparent} size={StyleConfig.headerIconSize} />
                       </View>
                     </View>
                     <View style={{ alignItems:'center', marginVertical:StyleConfig.countPixelRatio(50) }}>
@@ -51,22 +55,20 @@ class OTPVerificationScreen extends Component{
                       <Text style={local_styles.sectionTitle1}>The world is a party let's plan one. Let's Emzee</Text>
                     </View>
                     <View style={{ alignItems:'center'}}>
-                      <View style={{
-                        borderWidth:0.5,
-                        borderRadius: StyleConfig.countPixelRatio(4),
-                        padding:StyleConfig.countPixelRatio(6),
-                        margin:StyleConfig.countPixelRatio(16),
-                        width: StyleConfig.width*0.7,
-                        justifyContent:'center',
-                        minHeight: StyleConfig.countPixelRatio(48)
-                      }}>
-                      <TextInput
-                        style={styles.textH3Regular}
-                        placeholderTextColor={"#888"}
-                        keyboardType={'phone-pad'}
-                        maxLength={6}
-                        placeholder={"Enter your confirmation number"}
-                      ></TextInput>
+                      <View style={styles.textInputWrap}>
+                        <TextInputMask
+                          type={'custom'}
+                          options={{
+                            mask: Const.MASK_OTP
+                          }}
+                          style={styles.textH3Regular}
+                          placeholderTextColor={StyleConfig.COLORS.hintTextColor}
+                          placeholder={strings.enter_your_phone_number}
+                          value={this.state.otp}
+                          onChangeText={otp => {
+                            this.setState({ otp })
+                          }}
+                        />
                       </View>
 
                       <Button 

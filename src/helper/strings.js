@@ -5,10 +5,10 @@ const strings = {
     "are_you_new_at_emzee_sign_up": "Are you new at Emzee? Sign Up",
     "sign_up": "SIGN UP",
     "sign_in": "SIGN IN",
-    "mask_phone": "(999) 999-9999",
     "enter_your_phone_number":"Enter your phone number",
     "already_have_an_account": "Already have an account?",
-    "login_here": "Login Here"
+    "login_here": "Login Here",
+    "continue": "Continue"
 };
 
 module.exports = strings ;

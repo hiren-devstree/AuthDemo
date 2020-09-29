@@ -11,13 +11,15 @@ import {
 } from 'react-native';
 
 import StyleConfig from 'src/helper/StyleConfig';
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons'; 
 import AppImages from 'src/assets/images';
 import { Button } from 'src/components/common/Button';
 import { TextInputMask } from 'react-native-masked-text'
 import styles from 'src/helper/styles';
 import strings from 'src/helper/strings';
-import withLoader from 'src/redux/actionCreator/withLoader'
+import * as Const from 'src/helper/constant';
+import withLoader from 'src/redux/actionCreator/withLoader';
+
 class LoginScreen extends Component{
     constructor(props){
         super(props);
@@ -32,11 +34,11 @@ class LoginScreen extends Component{
                       <TouchableOpacity 
                         onPress={()=> this.props.navigation.goBack()}
                         style={styles.backWrap}>
-                        <Ionicons name={"ios-arrow-back"} color={StyleConfig.COLORS.gray20} size={StyleConfig.headerIconSize} />
+                        <FontAwesome name={Const.IC_BACK} color={StyleConfig.COLORS.gray20} size={StyleConfig.headerIconSize} />
                       </TouchableOpacity>
                       <Text style={styles.headerTitle}>{strings.sign_in}</Text>
                       <View style={styles.backWrap}>
-                        <Ionicons name={"ios-arrow-back"} color={StyleConfig.COLORS.transparent} size={StyleConfig.headerIconSize} />
+                        <FontAwesome name={Const.IC_BACK} color={StyleConfig.COLORS.transparent} size={StyleConfig.headerIconSize} />
                       </View>
                     </View>
                     <ScrollView
@@ -54,10 +56,10 @@ class LoginScreen extends Component{
                         <TextInputMask
                           type={'custom'}
                           options={{
-                            mask: strings.mask_phone
+                            mask: Const.MASK_PHONE
                           }}
                           style={styles.textH3Regular}
-                          placeholderTextColor={StyleConfig.COLORS.inputHintColor}
+                          placeholderTextColor={StyleConfig.COLORS.hintTextColor}
                           placeholder={strings.enter_your_phone_number}
                           value={this.state.phone}
                           onChangeText={phone => {
@@ -68,14 +70,14 @@ class LoginScreen extends Component{
 
                         <Button
                           onPress={()=>this.props.navigation.navigate("OTPVerificationScreen")}
-                        buttonWrap={styles.buttonWrap}>{strings.sign_in}</Button>
+                        buttonWrap={styles.buttonWrap}>{strings.continue}</Button>
 
-                        <View style={styles.row}>
+                        {/* <View style={styles.row}>
                         <Text style={styles.textH3Regular}>{strings.already_have_an_account}</Text>
                           <TouchableOpacity onPress={()=> this.props.navigation.navigate("Login")} style={styles.linkWrap}>
                             <Text style={styles.linkText}>{strings.login_here}</Text>
                           </TouchableOpacity>
-                        </View>
+                        </View> */}
                       </View>
                 </ScrollView>
               </SafeAreaView>

@@ -40,14 +40,9 @@ class InitScreen extends Component{
                       >{strings.ready_to_plan_lets_emzee}</Button>
                       
                       <Button
-                        buttonWrap={{backgroundColor:StyleConfig.COLORS.darkRed, marginBottom:StyleConfig.countPixelRatio(24)}}
+                        buttonWrap={{backgroundColor:StyleConfig.COLORS.darkRed, marginBottom:StyleConfig.countPixelRatio(44)}}
                         onPress={() => this.props.navigation.navigate("Login")}
                       >{strings.vendors_help_emzee}</Button>
-                      
-                      <Button
-                        buttonWrap={{width:StyleConfig.width*0.85, backgroundColor:'transparent', borderWidth:0,marginBottom:StyleConfig.countPixelRatio(24)}}
-                        onPress={() => this.props.navigation.navigate("Register")}
-                      >{strings.are_you_new_at_emzee_sign_up}</Button>
                       
                   </View>
                 </ImageBackground>

@@ -8,30 +8,36 @@ import {
   Text,
   Image,
   StatusBar,
+  TextInput, TouchableOpacity
 } from 'react-native';
 
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
 import StyleConfig from 'src/helper/StyleConfig';
 
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+
 import AppImages from 'src/assets/images';
 import { Button } from 'src/components/common/Button';
-import {FontAwesome} from '@expo/vector-icons';
+import {FontAwesome, Ionicons} from '@expo/vector-icons';
 import withLoader from 'src/redux/actionCreator/withLoader';
 import styles from 'src/helper/styles';
+import * as Const from 'src/helper/constant';
+import InitialViewComponent from 'src/screens/EventScreen/InitialViewComponent';
 class EventScreen extends Component{
     constructor(props){
         super(props);
         this.state={
-          isCalendarView: true
+          isCalendarView: true,
+          showWelcome:false
         }
     }
     componentDidMount= async()=>{
-      this.props.loader(true);
+      // this.props.loader(true);
+      // setTimeout(()=>{
+      //   this.props.loader(false)
+      // },
+      // 5000);
+      this.setState({showWelcome:true})
       setTimeout(()=>{
-        this.props.loader(false)
+        this.setState({showWelcome:false})
       },
       5000);
     }
@@ -50,64 +56,23 @@ class EventScreen extends Component{
                       <TouchableOpacity 
                         onPress={()=> this.setState({isCalendarView: !isCalendarView})}
                         style={styles.backWrap}>
-                        <FontAwesome name={ isCalendarView ? "list" : "calendar"} color={'#333333dd'} size={StyleConfig.countPixelRatio(24)} />
+                        <FontAwesome name={ isCalendarView ? Const.IC_EVENT_LIST : Const.IC_EVENT_CALENDAR} color={'#333333dd'} size={StyleConfig.countPixelRatio(24)} />
                       </TouchableOpacity>
                   </View>                 
                 <ScrollView
                   contentInsetAdjustmentBehavior="automatic"
                   style={styles.content}>
-                    <View style={[StyleConfig.card,{ flexDirection:'row', alignItems:'center', margin:StyleConfig.countPixelRatio(16)}]}>
+                    <InitialViewComponent />
+
+                    { this.state.showWelcome && <View style={[StyleConfig.card,{ marginTop: StyleConfig.countPixelRatio(-10), position:'absolute', alignSelf:'center',zIndex:99, flexDirection:'row', flex:1, alignItems:'center', margin:StyleConfig.countPixelRatio(16)}]}>
                       <FontAwesome name={"check-circle"} size={StyleConfig.countPixelRatio(30)} color={'#388E3C88'} />
                       <View style={{marginLeft:StyleConfig.countPixelRatio(12)}}>
                         <Text style={styles.textH23Medium}>You are all set!</Text>
                         <Text style={styles.textH23Medium}>Lets add your first event now!</Text>
                       </View>
-                    </View>
-
-                    <View style={[StyleConfig.card,{  margin:StyleConfig.countPixelRatio(16)}]}>
-                        <View style={[styles.textInputWrap, {flex:1, width:null,margin:StyleConfig.countPixelRatio(8)}]}>
-                          <TextInput
-                            style={styles.textH3Regular}
-                            placeholderTextColor={"#33333399"}
-                            placeholder={"Event name e.g. 50th Bob's Birthday"}
-                          />
-                        </View>
-                        <View style={[styles.textInputWrap, {flex:1, width:null,margin:StyleConfig.countPixelRatio(8)}]}>
-                          <TextInput
-                            style={styles.textH3Regular}
-                            placeholderTextColor={"#33333399"}
-                            placeholder={"Location e.g. ABC Banquet Hall"}
-                          />
-                        </View>
-                        <Text style={styles.notesText}>a name your guests and vendors recorgnise</Text>
-                        
-                        <View style={[styles.textInputWrap, {flex:1, width:null,margin:StyleConfig.countPixelRatio(8)}]}>
-                          <TextInput
-                            style={styles.textH3Regular}
-                            placeholderTextColor={"#33333399"}
-                            placeholder={"address (start typing and we'll look )"}
-                          />
-                        </View>
-
-                        <View style={[styles.textInputWrap, {flex:1, width:null,margin:StyleConfig.countPixelRatio(8)}]}>
-                          <TextInput
-                            style={styles.textH3Regular}
-                            placeholderTextColor={"#33333399"}
-                            placeholder={"type of event (Bithday)"}
-                          />
-                        </View>
-
-                        <View style={{flexDirection:'row-reverse'}}>
-                          <Button  buttonWrap={{width:StyleConfig.width*0.25, height:StyleConfig.countPixelRatio(36)}}>Next</Button>
-                        </View>
-
-
-
-                    </View>
-
-
-
+                    </View>}
                 </ScrollView>
+                
               </SafeAreaView>
             </>
           );

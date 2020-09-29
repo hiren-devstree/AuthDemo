@@ -57,7 +57,7 @@ class RegisterScreen extends Component{
                             mask: strings.mask_phone
                           }}
                           style={styles.textH3Regular}
-                          placeholderTextColor={StyleConfig.COLORS.inputHintColor}
+                          placeholderTextColor={StyleConfig.COLORS.hintTextColor}
                           placeholder={strings.enter_your_phone_number}
                           value={this.state.phone}
                           onChangeText={phone => {
