@@ -13,9 +13,21 @@ import AppImages from 'src/assets/images';
 import { Button } from 'src/components/common/Button';
 import styles from 'src/helper/styles';
 import strings from 'src/helper/strings';
+import * as Const from 'src/helper/constant';
+import * as SecureStore from 'expo-secure-store';
+import { CommonActions } from '@react-navigation/native';
+
+
 class InitScreen extends Component{
     constructor(props){
         super(props);
+    }
+    componentDidMount =async() =>{
+      let isLogin = await SecureStore.getItemAsync( Const.SS_IS_LOGIN );
+      if(isLogin == "true"){
+        this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: 'Dashboard' }] }))
+      }
+
     }
     render(){
         return (

@@ -49,7 +49,7 @@ const InitialViewComponent=(props)=>{
                 />
             </View>
             <View style={{flexDirection:'row-reverse'}}>
-                <Button  buttonWrap={{width:StyleConfig.width*0.25, height:StyleConfig.countPixelRatio(36)}}>Next</Button>
+                <Button onPress={props.onSavePress} buttonWrap={{width:StyleConfig.width*0.25, height:StyleConfig.countPixelRatio(36)}}>Save</Button>
             </View>
         </View>
     )

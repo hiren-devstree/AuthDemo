@@ -8,7 +8,9 @@ const strings = {
     "enter_your_phone_number":"Enter your phone number",
     "already_have_an_account": "Already have an account?",
     "login_here": "Login Here",
-    "continue": "Continue"
+    "continue": "Continue",
+    "you_are_all_set": "You are all set!",
+    "lets_add_your_first_event_now": "Let's add your first event now!"
 };
 
 module.exports = strings ;

@@ -9,7 +9,12 @@ const styles= StyleSheet.create({
         backgroundColor: StyleConfig.COLORS.white
     },
     row:{
-        flexDirection:'row'
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    center: {
+        alignItems:'center',
+        justifyContent:'center'
     },
     flex1:{
         flex:1
@@ -19,6 +24,9 @@ const styles= StyleSheet.create({
         flex:1
     },
     content:{
+        flex:1
+    },
+    contentWithPadding:{
         ...paddingHori,
         flex:1
     },
@@ -37,10 +45,19 @@ const styles= StyleSheet.create({
         fontSize: StyleConfig.fontSizeH3,
         color: StyleConfig.COLORS.white,
     },
-    headerWrap:{
-        flexDirection: 'row',
-        alignItems:'center',
-        justifyContent:'space-between'
+    headerWrapSingle: {
+        flexDirection: 'row', 
+        alignItems:'center', 
+        justifyContent:'center', 
+        borderBottomWidth: 0.5, 
+        borderBottomColor: StyleConfig.COLORS.headerBorderColor
+    },
+    headerWrap: {
+        flexDirection: 'row', 
+        alignItems:'center', 
+        justifyContent:'space-between', 
+        borderBottomWidth: 0.5, 
+        borderBottomColor: StyleConfig.COLORS.headerBorderColor
     },
     backWrap:{
         paddingHorizontal:StyleConfig.countPixelRatio(16), 
@@ -74,6 +91,11 @@ const styles= StyleSheet.create({
         fontSize: StyleConfig.fontSizeH3,
         color: StyleConfig.COLORS.defaultTextColor
     },
+    textH3Bold:{
+        fontFamily: StyleConfig.fontBold,
+        fontSize: StyleConfig.fontSizeH3,
+        color: StyleConfig.COLORS.defaultTextColor
+    },
     linkWrap:{
         marginLeft: StyleConfig.countPixelRatio(6),
         borderBottomWidth:1,
@@ -86,7 +108,13 @@ const styles= StyleSheet.create({
     },
     textH23Medium:{
         fontFamily: StyleConfig.fontMedium,
-        fontSize: StyleConfig.fontSizeH2_3
+        fontSize: StyleConfig.fontSizeH2_3,
+        color: StyleConfig.COLORS.defaultTextColor
+    },
+    textH23Bold:{
+        fontFamily: StyleConfig.fontBold,
+        fontSize: StyleConfig.fontSizeH2_3,
+        color: StyleConfig.COLORS.defaultTextColor
     },
     notesText:{
         fontFamily: StyleConfig.fontRegular,
@@ -94,6 +122,16 @@ const styles= StyleSheet.create({
         marginTop: StyleConfig.countPixelRatio(-6),
         marginLeft: StyleConfig.countPixelRatio(8),
         marginBottom: StyleConfig.countPixelRatio(8)
+    },
+    eventItemRow1:{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        borderBottomColor: StyleConfig.COLORS.headerBorderColor,
+        borderBottomWidth:0.5
+    },
+    eventItemRow:{
+        padding: StyleConfig.countPixelRatio(4)
     }
 });
 

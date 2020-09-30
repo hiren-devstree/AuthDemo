@@ -57,12 +57,14 @@ export default {
       darkPurple: "#250A40",
       purple: "#462673",
       cyanBlue: "#2196F3",
+      green:"#4CAF50",
+      yellow: "#FDD835",
 
       white: "#fff",
       black: "#000",
       gray20: "#333",
+      headerBorderColor: "#aaa",
       inputHintColor: "#888",
-      
 
       defaultTextColor: "#333",
       hintTextColor: "#888"
@@ -79,7 +81,7 @@ export default {
     },
     shadowOpacity: 0.3,
     elevation: 2,
-    shadowRadius: 6* ratioCount,
+    shadowRadius: 2* ratioCount,
     padding:8* ratioCount,
     margin:8* ratioCount,
     

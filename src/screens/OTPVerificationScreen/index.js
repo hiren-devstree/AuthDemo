@@ -23,10 +23,18 @@ import styles from 'src/helper/styles';
 import strings from 'src/helper/strings';
 import * as Const from 'src/helper/constant';
 import { TextInputMask } from 'react-native-masked-text'
+import * as SecureStore from 'expo-secure-store';
 class OTPVerificationScreen extends Component{
     constructor(props){
         super(props);
         this.state={ otp: ''}
+    }
+    onVerifyOtp=async ()=>{
+      //if(this.state.otp.length == 6){
+        await SecureStore.setItemAsync( Const.SS_IS_LOGIN, "true" );
+
+        this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: 'Dashboard' }] }))
+      //}
     }
     render(){
         return (
@@ -72,7 +80,7 @@ class OTPVerificationScreen extends Component{
                       </View>
 
                       <Button 
-                        onPress={()=> this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: 'Dashboard' }] })) }
+                        onPress={this.onVerifyOtp}
                         buttonWrap={{width: StyleConfig.width*0.5}}>Verify</Button>
 
                     </View>

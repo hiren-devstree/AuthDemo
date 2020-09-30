@@ -18,6 +18,7 @@ import StyleConfig from 'src/helper/StyleConfig';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import AppImages from 'src/assets/images';
 import { Button } from 'src/components/common/Button';
+import styles from 'src/helper/styles'
 class PhotosScreen extends Component{
     constructor(props){
         super(props);
@@ -29,7 +30,7 @@ class PhotosScreen extends Component{
               <SafeAreaView style={{ flex:1, backgroundColor:'#fff'}}>
                 <ScrollView
                   contentInsetAdjustmentBehavior="automatic"
-                  style={styles.scrollView}>
+                  style={styles.content}>
                <View style={{flexDirection: 'row', alignItems:'center', justifyContent:'center'}}>
                            <Text style={styles.headerTitle}>Photo</Text>
                     </View>
