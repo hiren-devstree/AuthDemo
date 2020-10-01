@@ -17,17 +17,22 @@ import EventScreen from '../screens/EventScreen';
 import GuestScreen from '../screens/GuestScreen';
 import PhotosScreen from '../screens/PhotosScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import EventDetailScreen from '../screens/EventScreen/EventDetailScreen';
 import StyleConfig from "../helper/StyleConfig";
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
+const EventStack = ((props) =>
+  <Stack.Navigator>
+    <Stack.Screen options={{ headerShown: false }} name='EventScreen' component={EventScreen} />
+    <Stack.Screen options={{ headerShown: false }} name='EventDetailScreen' component={EventDetailScreen} />
+  </Stack.Navigator>
+)
 const TabNavigator = ((props) => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName = "birthday-cake";
-
           if (route.name === 'EventScreen') {
             iconName = "birthday-cake";
           } else if (route.name === 'Photos') {
@@ -46,7 +51,7 @@ const TabNavigator = ((props) => {
         inactiveTintColor: "#333333aa"
       }}
     >
-      <Tab.Screen name="Events" component={EventScreen} />
+      <Tab.Screen name="Events" component={EventStack} />
       <Tab.Screen name="Photos" component={PhotosScreen} />
       <Tab.Screen  name="Guests" component={GuestScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />

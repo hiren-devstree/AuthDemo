@@ -17,60 +17,62 @@ import {FontAwesome, Ionicons} from '@expo/vector-icons';
 import withLoader from 'src/redux/actionCreator/withLoader';
 import styles from 'src/helper/styles';
 import * as Const from 'src/helper/constant';
-import InitialViewComponent from 'src/screens/EventScreen/InitialViewComponent';
+import AddEventComponent from 'src/screens/EventScreen/AddEventComponent';
 import EventListItem from 'src/screens/EventScreen/EventListItem';
 import { FlatList } from 'react-native-gesture-handler';
 import strings from 'src/helper/strings';
 const userId = 50;
+
 const DUMMY_DATA = [
-  {
-    "id": 1001,
-    "hostUserId": 50,
-    "eventName": "Dev's Birthday",
-    "date": "Oct 20,2020",
-    "location": "Honest Banquet",
-    "address": "700 5th Avenue, New York",
-    "eventType": "Birthday",
-    "guest":{
-      "confirmed": 22,
-      "cancelled": 8,
-      "tentative": 12
+    {
+      "id": 1001,
+      "hostUserId": 50,
+      "eventName": "Dev's Birthday",
+      "date": "Oct 20,2020",
+      "location": "Honest Banquet",
+      "address": "700 5th Avenue, New York",
+      "eventType": "Birthday",
+      "guest":{
+        "confirmed": 22,
+        "cancelled": 8,
+        "tentative": 12
+      }
+    },
+    {
+      "id": 1002,
+      "hostUserId": 49,
+      "eventName": "James & Eline Anniversary",
+      "date": "Oct 25,2020",
+      "location": "Mango Hotel",
+      "address": "133, West 55th street. New York",
+      "eventType": "Anniversary",
+      "guest": null,
+      "myRes": 1 // accepted
+    },
+    {
+      "id": 1003,
+      "hostUserId": 49,
+      "eventName": "Edan & Robin Anniversary",
+      "date": "Oct 25,2020",
+      "location": "Mango Hotel",
+      "address": "133, West 55th street. New York",
+      "eventType": "Anniversary",
+      "guest": null,
+      "myRes": -1 // rejected
+    },
+    {
+      "id": 1004,
+      "hostUserId": 49,
+      "eventName": "Amelia's Birthday",
+      "date": "Nov 09,2020",
+      "location": "7Star Hotel",
+      "address": "15, West 24th street. New York",
+      "eventType": "Birthday",
+      "guest": null,
+      "myRes": 0 // tentative
     }
-  },
-  {
-    "id": 1002,
-    "hostUserId": 49,
-    "eventName": "James & Eline Anniversary",
-    "date": "Oct 25,2020",
-    "location": "Mango Hotel",
-    "address": "133, West 55th street. New York",
-    "eventType": "Anniversary",
-    "guest": null,
-    "myRes": 1 // accepted
-  },
-  {
-    "id": 1003,
-    "hostUserId": 49,
-    "eventName": "Edan & Robin Anniversary",
-    "date": "Oct 25,2020",
-    "location": "Mango Hotel",
-    "address": "133, West 55th street. New York",
-    "eventType": "Anniversary",
-    "guest": null,
-    "myRes": -1 // rejected
-  },
-  {
-    "id": 1004,
-    "hostUserId": 49,
-    "eventName": "Amelia's Birthday",
-    "date": "Nov 09,2020",
-    "location": "7Star Hotel",
-    "address": "15, West 24th street. New York",
-    "eventType": "Birthday",
-    "guest": null,
-    "myRes": 0 // tentative
-  }
-]
+  ]
+
 class EventScreen extends Component{
     constructor(props){
         super(props);
@@ -79,13 +81,19 @@ class EventScreen extends Component{
           showWelcome: true,
           data: []
         }
+
+        this.setState({showWelcome:true})
+        setTimeout(()=>{
+          this.setState({showWelcome:false})
+        },
+        5000);
     }
     componentDidMount= async()=>{
-      this.setState({showWelcome:true})
+      this.props.loader(true);
       setTimeout(()=>{
-        this.setState({showWelcome:false})
-      },
-      5000);
+        this.setState({data:DUMMY_DATA})
+        this.props.loader(false)
+      }, 2000);
       
     }
     onSavePress=()=> {
@@ -94,6 +102,17 @@ class EventScreen extends Component{
         this.setState({data:DUMMY_DATA})
         this.props.loader(false)
       }, 2000);
+    }
+
+    onAddPress=()=>{
+        this.setState({data: []})
+    }
+    onItemPress= (event) => {
+        if(event==null){
+            this.setState({data: []})
+        } else  if(event.hostUserId == userId){
+            this.props.navigation.navigate("EventDetailScreen", {event})
+        }
     }
     render(){
       const { isCalendarView, showWelcome, data } = this.state;
@@ -106,7 +125,7 @@ class EventScreen extends Component{
                         style={styles.backWrap}>
                         <Ionicons name={"ios-chevron-back-sharp"} color={'transparent'} size={StyleConfig.countPixelRatio(24)} />
                       </View>
-                      <Text style={styles.headerTitle}>Event</Text>
+                      <Text style={styles.headerTitle}>{strings.events}</Text>
                       <TouchableOpacity 
                         onPress={()=> this.setState({isCalendarView: !isCalendarView})}
                         style={styles.backWrap}>
@@ -116,14 +135,14 @@ class EventScreen extends Component{
                 <ScrollView
                   contentInsetAdjustmentBehavior="automatic"
                   style={styles.content}>
-                    { data.length == 0 &&  <InitialViewComponent onSavePress={this.onSavePress} />}
+                    { data.length == 0 &&  <AddEventComponent onSavePress={this.onSavePress} />}
                     {data.length > 0 && !isCalendarView && 
                       <FlatList 
                         data={data}
                         extraData={this.state}
                         keyExtractor={(item,index)=>item.id.toString()}
-                        renderItem={({item,index})=> <EventListItem onPress={()=> Alert.alert(`You have Selected ${item.eventName}`)} event={item} isHostedByMe={item.hostUserId == userId} /> }
-                        ListFooterComponent={() => <EventListItem onPress={()=> Alert.alert("You want to add new Event?")}/>}
+                        renderItem={({item,index})=> <EventListItem onPress={()=> this.onItemPress(item)} event={item} isHostedByMe={item.hostUserId == userId} /> }
+                        ListFooterComponent={() => <EventListItem onPress={ () => this.onItemPress(null)}/>}
                       />
                     
                     }
@@ -143,8 +162,3 @@ class EventScreen extends Component{
     }
 }
 export default withLoader(EventScreen) ;
-
-// const styles = StyleSheet.create({
-  
-  
-// });

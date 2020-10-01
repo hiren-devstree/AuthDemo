@@ -43,7 +43,6 @@ const EventListItem=({event, isHostedByMe, ...props})=>{
             {event ?
         <View style={[StyleConfig.card]}>
             <View style={[styles.eventItemRow1, styles.eventItemRow]}>
-                <FontAwesome name={"star"} color={StyleConfig.COLORS.transparent} size={StyleConfig.headerIconSize} />
                 <Text style={styles.textH23Bold}>{event.eventName}</Text>
                 <FontAwesome name={ headerIconName} color={headerIconColor} size={StyleConfig.headerIconSize} />
             </View>
@@ -71,9 +70,8 @@ const EventListItem=({event, isHostedByMe, ...props})=>{
             </View>
 
             
-        </View> : <View style={[StyleConfig.card, styles.center, {paddingVertical: StyleConfig.countPixelRatio(16)} ]} >
-
-        <FontAwesome name={"plus-square-o"} color={StyleConfig.COLORS.defaultTextColor} size={StyleConfig.headerIconSize*1.5} />
+        </View> : <View style={[StyleConfig.card, styles.center, { paddingVertical: StyleConfig.countPixelRatio(16), borderWidth:1, borderStyle: 'dashed',} ]} >
+            <FontAwesome name={"plus-square-o"} color={StyleConfig.COLORS.defaultTextColor} size={StyleConfig.headerIconSize*1.5} />
         
 
         </View> }
