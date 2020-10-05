@@ -42,7 +42,6 @@ class LoginScreen extends Component{
                       </View>
                     </View>
                     <ScrollView
-                      contentInsetAdjustmentBehavior="automatic"
                       style={styles.content}>
                       <View style={styles.appIconWrap}>
                         <Image

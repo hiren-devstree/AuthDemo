@@ -42,9 +42,8 @@ class OTPVerificationScreen extends Component{
               <StatusBar barStyle="dark-content" />
               <SafeAreaView style={styles.container}>
                 <ScrollView
-                  contentInsetAdjustmentBehavior="automatic"
                   style={styles.content}>
-                    <View style={{flexDirection: 'row', alignItems:'center', justifyContent:'space-between'}}>
+                    <View style={styles.headerWrap}>
                       <TouchableOpacity 
                       onPress={()=> this.props.navigation.goBack()}
                       style={{paddingHorizontal:StyleConfig.countPixelRatio(16), paddingVertical:StyleConfig.countPixelRatio(4)}}>

@@ -29,7 +29,6 @@ class PhotosScreen extends Component{
               <StatusBar barStyle="dark-content" />
               <SafeAreaView style={{ flex:1, backgroundColor:'#fff'}}>
                 <ScrollView
-                  contentInsetAdjustmentBehavior="automatic"
                   style={styles.content}>
                <View style={{flexDirection: 'row', alignItems:'center', justifyContent:'center'}}>
                            <Text style={styles.headerTitle}>Photo</Text>

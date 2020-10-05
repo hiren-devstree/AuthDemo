@@ -123,7 +123,7 @@ class EventScreen extends Component{
                   <View style={styles.headerWrap}>
                       <View
                         style={styles.backWrap}>
-                        <Ionicons name={"ios-chevron-back-sharp"} color={'transparent'} size={StyleConfig.countPixelRatio(24)} />
+                        <FontAwesome name={Const.IC_BACK} color={'transparent'} size={StyleConfig.headerIconSize} />
                       </View>
                       <Text style={styles.headerTitle}>{strings.events}</Text>
                       <TouchableOpacity 
@@ -133,7 +133,6 @@ class EventScreen extends Component{
                       </TouchableOpacity>
                   </View>                 
                 <ScrollView
-                  contentInsetAdjustmentBehavior="automatic"
                   style={styles.content}>
                     { data.length == 0 &&  <AddEventComponent onSavePress={this.onSavePress} />}
                     {data.length > 0 && !isCalendarView && 

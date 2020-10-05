@@ -24,6 +24,13 @@ import * as Const from 'src/helper/constant';
 import strings from 'src/helper/strings';
 const userId = 50;
 const initialLayout = { width:StyleConfig.width };
+
+const vendors =[
+  { "id": "vendors1", "name": "Micah\'s Photography", "status": 1 },
+  { "id": "vendors2", "name": "Jeremy\'s Catering", "status": 1 },
+  { "id": "vendors3", "name": "M20 Banquet", "status": -1 },
+  { "id": "vendors4", "name": "Rosy\'s Flowers", "status": 0 }
+]
 class EventDetailScreen extends Component{
     constructor(props){
         super(props);
@@ -33,6 +40,7 @@ class EventDetailScreen extends Component{
         this.state={
           isCalendarView: true,
           showNewEventCreate: false,
+          isAddNewVendor:false,
           event,
           routes:[
             { key: 'vendors', title: 'Vendors' },
@@ -53,8 +61,9 @@ class EventDetailScreen extends Component{
         
     }
     render(){
+        const {isAddNewVendor} = this.state ;
         const renderScene = SceneMap({
-            vendors: VendorComponent,
+            vendors:()=> <VendorComponent initial={isAddNewVendor} vendors={vendors} onSavePress={()=> this.setState({isAddNewVendor:false})} onAddNewPress={()=> this.setState({isAddNewVendor:true})} />,
             guests: GuestComponent,
             photos: PhotosComponent,
             chat: ChatComponent
@@ -65,17 +74,15 @@ class EventDetailScreen extends Component{
               <StatusBar barStyle="dark-content" />
               <SafeAreaView style={{ flex:1, backgroundColor:'#fff'}}>
                   <View style={styles.headerWrap}>
-                      <TouchableOpacity onPress={()=> this.props.navigation.goBack()}
-                        style={styles.backWrap}>
-                        <FontAwesome name={"chevron-left"} color={'#333'} size={StyleConfig.countPixelRatio(24)} />
-                      </TouchableOpacity>
-                      <Text style={styles.headerTitle}>{event.eventName}</Text>
-                      <View
-                        style={styles.backWrap}>
-                        <Ionicons name={"ios-chevron-back-sharp"} color={'transparent'} size={StyleConfig.countPixelRatio(24)} />
-                      </View>
-                      
-                      
+                    <TouchableOpacity onPress={()=> this.props.navigation.goBack()}
+                      style={styles.backWrap}>
+                      <FontAwesome name={Const.IC_BACK} color={'#333'} size={StyleConfig.headerIconSize} />
+                    </TouchableOpacity>
+                    <Text style={styles.headerTitle}>{event.eventName}</Text>
+                    <View
+                      style={styles.backWrap}>
+                      <Ionicons name={Const.IC_BACK} color={'transparent'} size={StyleConfig.headerIconSize} />
+                    </View>
                   </View>                 
                 <View style={styles.content}>
                     <TabView
@@ -83,7 +90,7 @@ class EventDetailScreen extends Component{
                         renderScene={renderScene}
                         onIndexChange={(index)=> this.setState({index})}
                         initialLayout={initialLayout}
-                        />
+                    />
                     { showNewEventCreate && <View style={[StyleConfig.card,{ 
                       marginTop: StyleConfig.countPixelRatio(4), position:'absolute', alignSelf:'center',zIndex:99, flexDirection:'row', flex:1, alignItems:'center', margin:StyleConfig.countPixelRatio(16)}]}>
                       <FontAwesome name={"check-circle"} size={StyleConfig.countPixelRatio(30)} color={'#388E3C88'} />

@@ -27,7 +27,7 @@ export default {
   convertHeightPer: (per, isLandscape = false) => per * (isLandscape && width < height ? widthPer : heightPer),
   convertWidthPerVal: (val) => val * height / 812,
   convertHeightPerVal: (val) => val * width / 375,
-
+  toolbarHeight: Platform.OS === 'ios' ? 64 : 56,
   width,
   height,
   fontLight: 'Comfortaa-Light',
@@ -48,7 +48,7 @@ export default {
   iPhoneX,
   statusBarHeight: 55,
   isPad: Platform.OS === 'ios' && Platform.isPad,
-  headerIconSize: ratioCount*24,
+  headerIconSize: ratioCount*30,
   COLORS:{
       transparent:"#00000000",
       rusticRed:"#40010D",
@@ -63,11 +63,15 @@ export default {
       white: "#fff",
       black: "#000",
       gray20: "#333",
-      headerBorderColor: "#aaa",
+      headerBorderColor: "#ccc",
       inputHintColor: "#888",
 
       defaultTextColor: "#333",
-      hintTextColor: "#888"
+      hintTextColor: "#888",
+
+      lightRed: "#D32F2FCC",
+      lightYellow: "#FBC02DCC",
+      lightGreen: "#388E3CCC"
 
   },
 

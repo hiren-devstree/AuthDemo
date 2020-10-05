@@ -32,15 +32,14 @@ class RegisterScreen extends Component{
                       <TouchableOpacity 
                         onPress={()=> this.props.navigation.goBack()}
                         style={styles.backWrap}>
-                        <Ionicons name={"ios-chevron-back-sharp"} color={StyleConfig.COLORS.gray20} size={StyleConfig.headerIconSize} />
+                        <Ionicons name={Const.IC_BACK} color={StyleConfig.COLORS.gray20} size={StyleConfig.headerIconSize} />
                       </TouchableOpacity>
                       <Text style={styles.headerTitle}>{strings.sign_up}</Text>
                       <View style={styles.backWrap}>
-                        <Ionicons name={"ios-chevron-back-sharp"} color={StyleConfig.COLORS.transparent} size={StyleConfig.headerIconSize} />
+                        <Ionicons name={Const.IC_BACK} color={StyleConfig.COLORS.transparent} size={StyleConfig.headerIconSize} />
                       </View>
                     </View>
                     <ScrollView
-                      contentInsetAdjustmentBehavior="automatic"
                       style={styles.content}>
                       <View style={styles.appIconWrap}>
                         <Image

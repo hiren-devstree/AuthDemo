@@ -49,15 +49,24 @@ const styles= StyleSheet.create({
         flexDirection: 'row', 
         alignItems:'center', 
         justifyContent:'center', 
-        borderBottomWidth: 0.5, 
-        borderBottomColor: StyleConfig.COLORS.headerBorderColor
+        minHeight: StyleConfig.toolbarHeight,
+        shadowColor: "#555",
+        shadowOffset: {
+        width: 0,
+        height: 2,
+        }
+        
     },
     headerWrap: {
         flexDirection: 'row', 
         alignItems:'center', 
         justifyContent:'space-between', 
-        borderBottomWidth: 0.5, 
-        borderBottomColor: StyleConfig.COLORS.headerBorderColor
+        minHeight: StyleConfig.toolbarHeight,
+        shadowColor: "#555",
+        shadowOffset: {
+        width: 0,
+        height: 2,
+        }
     },
     backWrap:{
         paddingHorizontal:StyleConfig.countPixelRatio(16), 
@@ -116,6 +125,11 @@ const styles= StyleSheet.create({
         fontSize: StyleConfig.fontSizeH2_3,
         color: StyleConfig.COLORS.defaultTextColor
     },
+    textH3Medium:{
+        fontFamily: StyleConfig.fontMedium,
+        fontSize: StyleConfig.fontSizeH3,
+        color: StyleConfig.COLORS.defaultTextColor
+    },
     notesText:{
         fontFamily: StyleConfig.fontRegular,
         fontSize: StyleConfig.fontSizeH4,
@@ -132,6 +146,16 @@ const styles= StyleSheet.create({
     },
     eventItemRow:{
         padding: StyleConfig.countPixelRatio(4)
+    },
+
+    countCircle:{
+        paddingVertical: StyleConfig.countPixelRatio(8),
+        paddingHorizontal: StyleConfig.countPixelRatio(20),
+        marginHorizontal: StyleConfig.countPixelRatio(20),
+        borderRadius:StyleConfig.countPixelRatio(40),
+        transform: [
+            {scaleX: 1.75}
+          ]
     }
 });
 

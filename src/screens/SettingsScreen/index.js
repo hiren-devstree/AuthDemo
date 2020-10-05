@@ -18,6 +18,7 @@ import StyleConfig from 'src/helper/StyleConfig';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import AppImages from 'src/assets/images';
 import { Button } from 'src/components/common/Button';
+import styles from 'src/helper/styles';
 class SettingsScreen extends Component{
     constructor(props){
         super(props);
@@ -28,7 +29,6 @@ class SettingsScreen extends Component{
               <StatusBar barStyle="dark-content" />
               <SafeAreaView style={{ flex:1, backgroundColor:'#fff'}}>
                 <ScrollView
-                  contentInsetAdjustmentBehavior="automatic"
                   style={styles.scrollView}>
                  <View style={{flexDirection: 'row', alignItems:'center', justifyContent:'center'}}>
                          <Text style={styles.headerTitle}>Setting</Text>
