@@ -1,4 +1,5 @@
 import { Dimensions, Platform } from 'react-native';
+import Constants from 'expo-constants';
 
 const { height, width } = Dimensions.get('window');
 const deviceType = width < 480 ? 'phone' : 'tablet';
@@ -27,7 +28,7 @@ export default {
   convertHeightPer: (per, isLandscape = false) => per * (isLandscape && width < height ? widthPer : heightPer),
   convertWidthPerVal: (val) => val * height / 812,
   convertHeightPerVal: (val) => val * width / 375,
-  toolbarHeight: Platform.OS === 'ios' ? 64 : 56,
+  statusBarHeight: Constants.statusBarHeight,
   width,
   height,
   fontLight: 'Comfortaa-Light',
@@ -46,7 +47,6 @@ export default {
   headerHeight: iPhoneX ? 90 * width / 375 : 60 * width / 375,
   isIphone: Platform.OS === 'ios',
   iPhoneX,
-  statusBarHeight: 55,
   isPad: Platform.OS === 'ios' && Platform.isPad,
   headerIconSize: ratioCount*30,
   COLORS:{
@@ -56,6 +56,7 @@ export default {
       darkRed: "#8C0327",
       darkPurple: "#250A40",
       purple: "#462673",
+      purpleTran: "#46267388",
       cyanBlue: "#2196F3",
       green:"#4CAF50",
       yellow: "#FDD835",

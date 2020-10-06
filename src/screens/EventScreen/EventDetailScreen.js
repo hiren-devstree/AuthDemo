@@ -22,6 +22,7 @@ import withLoader from 'src/redux/actionCreator/withLoader';
 import styles from 'src/helper/styles';
 import * as Const from 'src/helper/constant';
 import strings from 'src/helper/strings';
+import Animated from 'react-native-reanimated';
 const userId = 50;
 const initialLayout = { width:StyleConfig.width };
 
@@ -36,7 +37,7 @@ class EventDetailScreen extends Component{
         super(props);
         
         const {event} = props.route.params;
-        console.log("event-> ", event)
+        console.log("statusBarHeight -> ", StyleConfig.statusBarHeight)
         this.state={
           isCalendarView: true,
           showNewEventCreate: false,
@@ -60,6 +61,36 @@ class EventDetailScreen extends Component{
     onItemPress= (event) => {
         
     }
+    _renderTabBar = props => {
+      
+      const inputRange = props.navigationState.routes.map((x, i) => i);
+      return (
+        <View style={[styles.row]}>
+          {props.navigationState.routes.map((route, i) => {
+            const color = Animated.color(
+              Animated.round(
+                Animated.interpolate(props.position, {
+                  inputRange,
+                  outputRange: inputRange.map(inputIndex =>
+                    inputIndex === i ? 255 : 0
+                  ),
+                })
+              ),
+              0,
+              0
+            );
+            const selected = i== this.state.index ; 
+            return (
+              <TouchableOpacity
+                style={[styles.tabItem, {backgroundColor: StyleConfig.COLORS.purple, borderBottomWidth: 2, borderColor: StyleConfig.COLORS[ selected ? 'darkPurple' : 'purple' ] }]}
+                onPress={() => this.setState({ index: i })}>
+                <Animated.Text style={{fontFamily: selected ? StyleConfig.fontBold : StyleConfig.fontRegular, color:'#fff'}}>{route.title}</Animated.Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      );
+    };
     render(){
         const {isAddNewVendor} = this.state ;
         const renderScene = SceneMap({
@@ -68,6 +99,7 @@ class EventDetailScreen extends Component{
             photos: PhotosComponent,
             chat: ChatComponent
           });
+          //
         const { isCalendarView, showNewEventCreate, event, index, routes } = this.state;
         return (
             <>
@@ -86,10 +118,11 @@ class EventDetailScreen extends Component{
                   </View>                 
                 <View style={styles.content}>
                     <TabView
-                        navigationState={{ index, routes }}
-                        renderScene={renderScene}
-                        onIndexChange={(index)=> this.setState({index})}
-                        initialLayout={initialLayout}
+                      navigationState={{ index, routes }}
+                      renderScene={renderScene}
+                      renderTabBar={this._renderTabBar}
+                      onIndexChange={(index)=> this.setState({index})}
+                      initialLayout={initialLayout}
                     />
                     { showNewEventCreate && <View style={[StyleConfig.card,{ 
                       marginTop: StyleConfig.countPixelRatio(4), position:'absolute', alignSelf:'center',zIndex:99, flexDirection:'row', flex:1, alignItems:'center', margin:StyleConfig.countPixelRatio(16)}]}>

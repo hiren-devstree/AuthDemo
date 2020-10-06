@@ -144,17 +144,24 @@ const styles= StyleSheet.create({
         borderBottomColor: StyleConfig.COLORS.headerBorderColor,
         borderBottomWidth:0.5
     },
+
+    tabItem: {
+        flex: 1,
+        alignItems: 'center',
+        padding: StyleConfig.countPixelRatio(8)
+    },
+
     eventItemRow:{
         padding: StyleConfig.countPixelRatio(4)
     },
 
     countCircle:{
-        paddingVertical: StyleConfig.countPixelRatio(8),
-        paddingHorizontal: StyleConfig.countPixelRatio(20),
+        paddingVertical: StyleConfig.countPixelRatio(4),
+        paddingHorizontal: StyleConfig.countPixelRatio(12),
         marginHorizontal: StyleConfig.countPixelRatio(20),
-        borderRadius:StyleConfig.countPixelRatio(40),
+        borderRadius:StyleConfig.countPixelRatio(50),
         transform: [
-            {scaleX: 1.75}
+            {scaleX: 1.8}
           ]
     }
 });

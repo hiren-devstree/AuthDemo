@@ -70,10 +70,13 @@ const EventListItem=({event, isHostedByMe, ...props})=>{
             </View>
 
             
-        </View> : <View style={[StyleConfig.card, styles.center, { paddingVertical: StyleConfig.countPixelRatio(16), borderWidth:1, borderStyle: 'dashed',} ]} >
-            <FontAwesome name={"plus-square-o"} color={StyleConfig.COLORS.defaultTextColor} size={StyleConfig.headerIconSize*1.5} />
-        
-
+        </View> :
+        <View style={[StyleConfig.card, styles.center, { 
+            paddingVertical: StyleConfig.countPixelRatio(16), 
+            borderWidth:1, 
+            borderColor: StyleConfig.COLORS.purple,
+            borderStyle: 'dashed',} ]} >
+            <FontAwesome name={"plus-square-o"} color={StyleConfig.COLORS.purple} size={StyleConfig.headerIconSize*1.5} />
         </View> }
         </TouchableOpacity>
         

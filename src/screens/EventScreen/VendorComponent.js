@@ -66,10 +66,11 @@ const VendorComponent=(props)=>{
                     <FlatList
                         data={props.vendors}
                         extraData={props}
+                        keyExtractor={(item)=> item.id}
                         renderItem={({item})=> <View style={{flexDirection:'row', borderBottomColor: StyleConfig.COLORS.headerBorderColor, borderBottomWidth:1, alignItems:'center', paddingVertical: StyleConfig.countPixelRatio(8)}}>
                            <FontAwesome name={item.status == 1 ? "check-circle": item.status == -1 ? "times-circle" : "question-circle"} 
                             size={StyleConfig.countPixelRatio(24)} 
-                            color={item.status == 1 ? StyleConfig.COLORS.lightGreen : item.status == -1 ? StyleConfig.COLORS.lightYellow : StyleConfig.COLORS.lightRed} /> 
+                            color={item.status == 1 ? StyleConfig.COLORS.lightGreen : item.status == -1 ? StyleConfig.COLORS.lightRed : StyleConfig.COLORS.lightYellow} /> 
                             <View style={{width: StyleConfig.countPixelRatio(6)}} />
                            <Text style={styles.textH23Medium}>{item.name}</Text> 
                         </View>}
@@ -77,10 +78,11 @@ const VendorComponent=(props)=>{
                             marginVertical:StyleConfig.countPixelRatio(8),
                             paddingVertical: StyleConfig.countPixelRatio(8),
                             borderWidth:1,
+                            borderColor: StyleConfig.COLORS.purple,
                             borderRadius: StyleConfig.countPixelRatio(8),
                             borderStyle: 'dashed',} ]} >
-                        <Text style={[styles.textH23Medium,{color:StyleConfig.COLORS.hintTextColor}]}>{'Invite another vendor'}</Text> 
-                            <FontAwesome name={"plus-square-o"} color={StyleConfig.COLORS.hintTextColor} size={StyleConfig.headerIconSize*1.5} />                        
+                        <Text style={[styles.textH23Medium,{color:StyleConfig.COLORS.purple}]}>{'Invite another vendor'}</Text> 
+                            <FontAwesome name={"plus-square-o"} color={StyleConfig.COLORS.purple} size={StyleConfig.headerIconSize*1.5} />                        
                    </TouchableOpacity>}
                             
                     />

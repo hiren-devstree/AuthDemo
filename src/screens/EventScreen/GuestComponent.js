@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
     SafeAreaView,
     StyleSheet,
@@ -10,7 +10,8 @@ import {
     TextInput,
     TouchableOpacity
   } from 'react-native';
-  
+  import * as Contacts from 'expo-contacts';
+
 import StyleConfig from 'src/helper/StyleConfig';
 import AppImages from 'src/assets/images';
 import { Button } from 'src/components/common/Button';
@@ -18,7 +19,24 @@ import {FontAwesome, Ionicons} from '@expo/vector-icons';
 import styles from 'src/helper/styles';
 
 const GuestComponent=(props)=>{
+    useEffect(() => {
+        (async () => {
+          const { status } = await Contacts.requestPermissionsAsync();
+          if (status === 'granted') {
+            const { data } = await Contacts.getContactsAsync({
+              fields: [Contacts.Fields.Emails,Contacts.Fields.PhoneNumbers],
+            });
     
+            if (data.length > 0) {
+            //   for(let ind in data){
+            //     console.log(data[ind]);
+            //   }
+                console.log("statusBarHeight: ", StyleConfig.statusBarHeight)
+               console.log("NUMBER OF CONTACTS: ", data.length)
+            }
+          }
+        })();
+      }, []);
     return(
         <ScrollView>
             <View style={[styles.flex1, StyleConfig.card,]}>
