@@ -28,7 +28,7 @@ export default {
   convertHeightPer: (per, isLandscape = false) => per * (isLandscape && width < height ? widthPer : heightPer),
   convertWidthPerVal: (val) => val * height / 812,
   convertHeightPerVal: (val) => val * width / 375,
-  statusBarHeight: Constants.statusBarHeight,
+  statusBarHeight: Platform.OS === 'ios' ? Constants.statusBarHeight*1.5 : Constants.statusBarHeight,
   width,
   height,
   fontLight: 'Comfortaa-Light',
