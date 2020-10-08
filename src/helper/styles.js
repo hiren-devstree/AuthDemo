@@ -41,6 +41,7 @@ const styles= StyleSheet.create({
         width:StyleConfig.countPixelRatio(200)
     },
     appDescText: {
+        includeFontPadding:false,
         fontFamily: StyleConfig.fontSemiBold,
         fontSize: StyleConfig.fontSizeH3,
         color: StyleConfig.COLORS.white,
@@ -81,6 +82,7 @@ const styles= StyleSheet.create({
         marginVertical:StyleConfig.countPixelRatio(28)
     },
     headerTitle:{
+        includeFontPadding:false,
         fontFamily: StyleConfig.fontMedium,
         fontSize: StyleConfig.fontSizeH2,
         opacity: 0.8
@@ -96,11 +98,13 @@ const styles= StyleSheet.create({
         minHeight: StyleConfig.countPixelRatio(48)
     },
     textH3Regular:{
+        includeFontPadding:false,
         fontFamily: StyleConfig.fontRegular,
         fontSize: StyleConfig.fontSizeH3,
         color: StyleConfig.COLORS.defaultTextColor
     },
     textH3Bold:{
+        includeFontPadding:false,
         fontFamily: StyleConfig.fontBold,
         fontSize: StyleConfig.fontSizeH3,
         color: StyleConfig.COLORS.defaultTextColor
@@ -111,26 +115,31 @@ const styles= StyleSheet.create({
         borderColor: StyleConfig.COLORS.cyanBlue
     },
     linkText:{
+        includeFontPadding:false,
         fontFamily: StyleConfig.fontSemiBold,
         fontSize: StyleConfig.fontSizeH3,
         color: StyleConfig.COLORS.cyanBlue
     },
     textH23Medium:{
+        includeFontPadding:false,
         fontFamily: StyleConfig.fontMedium,
         fontSize: StyleConfig.fontSizeH2_3,
         color: StyleConfig.COLORS.defaultTextColor
     },
     textH23Bold:{
+        includeFontPadding:false,
         fontFamily: StyleConfig.fontBold,
         fontSize: StyleConfig.fontSizeH2_3,
         color: StyleConfig.COLORS.defaultTextColor
     },
     textH3Medium:{
+        includeFontPadding:false,
         fontFamily: StyleConfig.fontMedium,
         fontSize: StyleConfig.fontSizeH3,
         color: StyleConfig.COLORS.defaultTextColor
     },
     notesText:{
+        includeFontPadding:false,
         fontFamily: StyleConfig.fontRegular,
         fontSize: StyleConfig.fontSizeH4,
         marginTop: StyleConfig.countPixelRatio(-6),
@@ -157,12 +166,12 @@ const styles= StyleSheet.create({
 
     countCircle:{
         paddingVertical: StyleConfig.countPixelRatio(4),
-        paddingHorizontal: StyleConfig.countPixelRatio(12),
-        marginHorizontal: StyleConfig.countPixelRatio(20),
-        borderRadius:StyleConfig.countPixelRatio(50),
-        transform: [
-            {scaleX: 1.8}
-          ]
+        paddingHorizontal: StyleConfig.countPixelRatio(4),
+        alignItems:'center',
+        justifyContent: 'center',
+        borderRadius:StyleConfig.countPixelRatio(40),
+        minHeight: StyleConfig.countPixelRatio(40),
+        minWidth: StyleConfig.countPixelRatio(40),
     }
 });
 
