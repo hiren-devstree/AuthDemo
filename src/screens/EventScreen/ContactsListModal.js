@@ -28,8 +28,8 @@ const ContactsListModal = (props) => {
             Alert.alert("Modal has been closed.");
             }}
         >
-            <View style={{flex:1, backgroundColor:"#00000099"}}>
-                <View style={[StyleConfig.card,{ height: StyleConfig.height*0.8, marginVertical: StyleConfig.height*0.1}]}>
+            <View style={{flex:1, backgroundColor:"#00000099", justifyContent:'center'}}>
+                <View style={[StyleConfig.card,{ minHeight: StyleConfig.height*0.4, maxHeight:StyleConfig.height*0.8}]}>
                     <View style={[{ justifyContent:'space-between', flexDirection:'row' ,backgroundColor:StyleConfig.COLORS.purple, padding:StyleConfig.countPixelRatio(16), marginHorizontal: StyleConfig.countPixelRatio( -8), marginTop:StyleConfig.countPixelRatio( -8)}]}>
                         <View style={styles.row}>
                         <TouchableOpacity onPress={props.onClose}>

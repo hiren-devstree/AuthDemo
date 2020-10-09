@@ -10,7 +10,7 @@ import {
     TextInput,
     TouchableOpacity
   } from 'react-native';
-import { TextInputMask } from 'react-native-masked-text'
+import { TextInputMask } from 'react-native-masked-text';
 import StyleConfig from 'src/helper/StyleConfig';
 import AppImages from 'src/assets/images';
 import { Button } from 'src/components/common/Button';
@@ -52,7 +52,7 @@ const VendorComponent=(props)=>{
                             }}
                             style={styles.textH3Regular}
                             placeholderTextColor={StyleConfig.COLORS.hintTextColor}
-                            placeholder={strings.enter_your_phone_number}
+                            placeholder={strings.enter_phone_number}
                             value={phone}
                             onChangeText={phone => {
                                 setPhone(phone)

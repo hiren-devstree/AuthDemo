@@ -37,7 +37,6 @@ class EventDetailScreen extends Component{
         super(props);
         
         const {event} = props.route.params;
-        console.log("statusBarHeight -> ", StyleConfig.statusBarHeight)
         this.state={
           isCalendarView: true,
           showNewEventCreate: false,

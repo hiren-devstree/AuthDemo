@@ -10,6 +10,7 @@ const strings = {
     "sign_up": "SIGN UP",
     "sign_in": "SIGN IN",
     "enter_your_phone_number":"Enter your phone number",
+    "enter_phone_number":"Enter phone number",
     "already_have_an_account": "Already have an account?",
     "login_here": "Login Here",
     "continue": "Continue",
