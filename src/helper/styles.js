@@ -50,7 +50,7 @@ const styles= StyleSheet.create({
         flexDirection: 'row', 
         alignItems:'center', 
         justifyContent:'center', 
-        minHeight: StyleConfig.toolbarHeight,
+        minHeight: StyleConfig.statusBarHeight,
         shadowColor: "#555",
         shadowOffset: {
         width: 0,
@@ -62,7 +62,7 @@ const styles= StyleSheet.create({
         flexDirection: 'row', 
         alignItems:'center', 
         justifyContent:'space-between', 
-        minHeight: StyleConfig.toolbarHeight,
+        minHeight: StyleConfig.statusBarHeight,
         shadowColor: "#555",
         shadowOffset: {
         width: 0,

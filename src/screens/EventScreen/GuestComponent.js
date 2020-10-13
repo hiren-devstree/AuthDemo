@@ -69,7 +69,7 @@ const DATA={
     rejected: [0,1,2,3],
     tentative: [0,1,2,3,4,5]
 }
-const HEADER_HEIGHT = 44 ;
+const HEADER_HEIGHT = 52 ;
 
 class GuestComponent extends React.Component{
     constructor(props){
@@ -179,8 +179,8 @@ class GuestComponent extends React.Component{
                     <ExpandedComponent
                         onTitlePress={this.onAcceptedPress}
                         height={this.heightAccepted}
-                        title={()=> <View style={[styles.flex1,{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}]}>
-                        <View style={{flex:1}}><Text style={styles.headerTitle}>{"Accepted"}</Text></View>
+                        title={()=> <View style={[{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}]}>
+                        <View style={{flex:1, backgroundColor:'red'}}><Text style={styles.headerTitle}>{"Accepted"}</Text></View>
                         <View style={{flex:1, flexDirection:'row', justifyContent:'space-between'}}>
                             <View style={[styles.countCircle, {backgroundColor:StyleConfig.COLORS.lightGreen, }]}>
                                 <Text style={styles.textH23Bold}>{`${data.accepted.length}`}</Text>
@@ -207,7 +207,7 @@ class GuestComponent extends React.Component{
                         onTitlePress={this.onRejectedPress}
                         height={this.heightRejected}
                         title={()=> <View
-                            style={[styles.flex1,{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}]}>
+                            style={[{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}]}>
                                <View style={{flex:1}}>
                                    <Text style={styles.headerTitle}>{"Declined"}</Text>
                                 </View>
@@ -236,7 +236,7 @@ class GuestComponent extends React.Component{
                     <ExpandedComponent
                         onTitlePress={this.onTentativePress}
                         height={this.heightTentative}
-                        title={()=>  <View  style={[styles.flex1,{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}]}>
+                        title={()=>  <View  style={[{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}]}>
                         <View style={{flex:1}}>
                         <Text style={styles.headerTitle}>{"Tentative"}</Text>
                         </View>

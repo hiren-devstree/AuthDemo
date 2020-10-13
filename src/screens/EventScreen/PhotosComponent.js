@@ -16,6 +16,7 @@ import AppImages from 'src/assets/images';
 import { Button } from 'src/components/common/Button';
 import FontAwesome  from '@expo/vector-icons/FontAwesome';
 import styles from 'src/helper/styles';
+import utils from 'src/helper/utils';
 const images = [
     {
         "id":"12",
@@ -70,8 +71,16 @@ const images = [
 class PhotosComponent extends Component{
     constructor(props){
         super(props);
+        console.log(utils.randomDate().toString())
+        let albums = images.map((album,index)=>({...album,
+            photos:album.photos.map((item)=>({
+                ...item, datetime: utils.randomDate()
+            }))
+        }))
+
+        console.log("PHOTOS  ", albums)
         this.state={
-            albums: images,
+            albums,
             width: StyleConfig.countPixelRatio(110),
             showDropdown:false,
             groupBy:''

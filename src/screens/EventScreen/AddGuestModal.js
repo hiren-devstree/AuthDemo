@@ -32,8 +32,8 @@ const AddGuestModal = (props) => {
             Alert.alert("Modal has been closed.");
             }}
         >
-            <View style={{flex:1, backgroundColor:"#00000099", justifyContent:'flex-end'}}>
-                <View style={[StyleConfig.card,{ minHeight: StyleConfig.height*0.2, marginBottom: StyleConfig.countPixelRatio(-8), marginHorizontal: StyleConfig.countPixelRatio(-8)}]}>
+            <View style={{flex:1, backgroundColor:"#00000099", justifyContent:'center'}}>
+                <View style={[StyleConfig.card,{ minHeight: StyleConfig.height*0.2, marginBottom: StyleConfig.countPixelRatio(-8)}]}>
                     <View style={[{ justifyContent:'space-between', flexDirection:'row' ,backgroundColor:StyleConfig.COLORS.purple, padding:StyleConfig.countPixelRatio(16), marginHorizontal: StyleConfig.countPixelRatio( -8), marginTop:StyleConfig.countPixelRatio( -8)}]}>
                         <Text style={[styles.textH2Medium, {color:"#fff", marginLeft:StyleConfig.countPixelRatio(8) }]}>{"Add Guest"}</Text>
                         <TouchableOpacity onPress={props.onClose}>
