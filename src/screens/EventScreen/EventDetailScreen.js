@@ -94,9 +94,9 @@ class EventDetailScreen extends Component{
         const {isAddNewVendor} = this.state ;
         const renderScene = SceneMap({
             vendors:()=> <VendorComponent initial={isAddNewVendor} vendors={vendors} onSavePress={()=> this.setState({isAddNewVendor:false})} onAddNewPress={()=> this.setState({isAddNewVendor:true})} />,
-            guests: GuestComponent,
-            photos: PhotosComponent,
-            chat: ChatComponent
+            guests: () => <GuestComponent {...this.props} />,
+            photos: () => <PhotosComponent {...this.props} />,
+            chat: () => <ChatComponent {...this.props} />
           });
           //
         const { isCalendarView, showNewEventCreate, event, index, routes } = this.state;

@@ -114,6 +114,9 @@ class PhotosScreen extends Component{
 
         }
       };
+    previewPhoto=(item)=>{
+        this.props.navigation.navigate('PreviewPhoto', { photoUri:item.uri })
+    }
     render(){
         const { albums, width, showDropdown, groupBy } = this.state;
         let itemWidth = (StyleConfig.width - StyleConfig.countPixelRatio(64))/3
@@ -122,17 +125,10 @@ class PhotosScreen extends Component{
           <>
           <StatusBar barStyle="dark-content" />
           <SafeAreaView style={{ flex:1, backgroundColor:'#fff'}}>
-          <View style={styles.headerWrapSingle}>
+            <View style={styles.headerWrapSingle}>
                       <Text style={styles.headerTitle}>{strings.photos}</Text>
-                      
-                  </View>       
-          <View style={styles.flex1}>
-                <View style={{height:StyleConfig.statusBarHeight, flexDirection:'row-reverse', alignItems:'center'}}>
-                    <TouchableOpacity onPress={()=> this.setState({showDropdown:!showDropdown})} style={{flexDirection:'row-reverse', width: StyleConfig.countPixelRatio(110), alignItems:'center', justifyContent:'space-between'}}>
-                        <FontAwesome style={{paddingHorizontal:StyleConfig.countPixelRatio(8)}} name={"caret-down"} size={20} color={StyleConfig.COLORS.defaultTextColor} />
-                        <Text style={styles.textH23Medium}>{groupBy == ''? "Group By": groupBy}</Text>
-                    </TouchableOpacity>
-                </View>
+            </View>
+            <View style={styles.flex1}>
                 <ScrollView>
                     {albums.map((item,index)=>(
                     <View key={item.id} style={[StyleConfig.card,{borderRadius:StyleConfig.countPixelRatio(20)}]}>
@@ -156,37 +152,17 @@ class PhotosScreen extends Component{
                                     //justifyContent: "space-around",
                                     marginVertical:StyleConfig.countPixelRatio(4)
                                 }}
-                                renderItem={({item})=><View>
+                                renderItem={({item})=><TouchableOpacity onPress={()=> this.previewPhoto(item)}>
                                     <Image 
                                         style={{width:itemWidth, height:itemWidth, marginLeft: StyleConfig.countPixelRatio(8), borderRadius:8}}
                                         source={{uri:item.uri}}
                                     />
-                                </View>}
+                                </TouchableOpacity>}
                             />
                     </View>
-                        ))}
+                    ))}
                     
                 </ScrollView>
-                { showDropdown && <View style={{position:'absolute',zIndex:88, margin:StyleConfig.statusBarHeight-StyleConfig.countPixelRatio(4), alignSelf:'flex-end', width:width, backgroundColor: StyleConfig.COLORS.white}}>
-                <TouchableOpacity onPress={()=>this.setState({groupBy:'Member', showDropdown:false})} style={{padding:4}} >
-                    <Text style={styles.textH3Medium}>{'Member'}</Text>
-                </TouchableOpacity>    
-                <TouchableOpacity onPress={()=>this.setState({groupBy:'Date', showDropdown:false})} style={{padding:4}} >
-                    <Text style={styles.textH3Medium}>{'Date'}</Text>
-                </TouchableOpacity>    
-                </View>}
-    
-                {/* <TouchableOpacity
-                    onPress={this.pickImage}
-                style={{position:'absolute',zIndex:87,
-                borderRadius: StyleConfig.countPixelRatio(28),
-                alignItems:'center', justifyContent:'center',
-                borderWidth:0.25,
-                borderColor: StyleConfig.COLORS.headerBorderColor,
-                 width:StyleConfig.countPixelRatio(56), marginTop: StyleConfig.height -(StyleConfig.statusBarHeight * 4 +StyleConfig.countPixelRatio(60)), marginLeft: StyleConfig.width- StyleConfig.countPixelRatio(16+56), height:StyleConfig.countPixelRatio(56), backgroundColor: StyleConfig.COLORS.white}}>
-                     <FontAwesome name={"plus"} size={StyleConfig.countPixelRatio(32)} color={"#333"} />
-                </TouchableOpacity> */}
-    
             </View>
           </SafeAreaView>
           </>

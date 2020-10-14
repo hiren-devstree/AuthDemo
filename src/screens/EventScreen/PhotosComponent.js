@@ -77,8 +77,6 @@ class PhotosComponent extends Component{
                 ...item, datetime: utils.randomDate()
             }))
         }))
-
-        console.log("PHOTOS  ", albums)
         this.state={
             albums,
             width: StyleConfig.countPixelRatio(110),
@@ -112,6 +110,9 @@ class PhotosComponent extends Component{
 
         }
       };
+    previewPhoto=(item)=>{
+        this.props.navigation.navigate('PreviewPhoto', { photoUri:item.uri })
+    }
     render(){
         const { albums, width, showDropdown, groupBy } = this.state;
         let itemWidth = (StyleConfig.width - StyleConfig.countPixelRatio(64))/3
@@ -148,12 +149,12 @@ class PhotosComponent extends Component{
                                     //justifyContent: "space-around",
                                     marginVertical:StyleConfig.countPixelRatio(4)
                                 }}
-                                renderItem={({item})=><View>
+                                renderItem={({item})=><TouchableOpacity onPress={()=> this.previewPhoto(item)}>
                                     <Image 
                                         style={{width:itemWidth, height:itemWidth, marginLeft: StyleConfig.countPixelRatio(8), borderRadius:8}}
                                         source={{uri:item.uri}}
                                     />
-                                </View>}
+                                </TouchableOpacity>}
                             />
                     </View>
                         ))}

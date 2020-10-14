@@ -17,6 +17,7 @@ import EventScreen from '../screens/EventScreen';
 import GuestScreen from '../screens/GuestScreen';
 import PhotosScreen from '../screens/PhotosScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import PreviewPhoto from '../screens/PreviewPhoto';
 import EventDetailScreen from '../screens/EventScreen/EventDetailScreen';
 import StyleConfig from "../helper/StyleConfig";
 const Stack = createStackNavigator();
@@ -75,7 +76,8 @@ const AppNavigator = ({ ...props }) => {
         <Stack.Screen options={{ headerShown: false }} name="OTPVerificationScreen" component={OTPVerificationScreen} />
 
         <Stack.Screen options={{ headerShown: false }} name="Dashboard" component={TabNavigator} />
-        
+        <Stack.Screen options={{ headerShown: false }} name="PreviewPhoto" component={PreviewPhoto} />
+                
        
       </Stack.Navigator>
 
