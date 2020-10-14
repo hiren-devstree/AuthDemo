@@ -17,71 +17,92 @@ import { Button } from 'src/components/common/Button';
 import FontAwesome  from '@expo/vector-icons/FontAwesome';
 import styles from 'src/helper/styles';
 import utils from 'src/helper/utils';
-const images = [
-    {
-        "id":"12",
-        "name":"Michael Thomas",
-        "designation": "Photographer",
-        "profilePhoto": "https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png",
-        photos:[
-            {datetime:"", uri:"https://media.weddingz.in/images/5ccc11ff9323aa867c3b4123a10b8211/small-birthday-party-places-in-nagpur-to-host-your-glittering-evening.jpg"},
-            {datetime:"", uri:"https://static.toiimg.com/photo/msid-61737605,width-96,height-65.cms"},
-            {datetime:"", uri:"https://www.claimsaction.co.uk/wp-content/uploads/2017/12/new_years_party.jpg"},
-            {datetime:"", uri:"https://mlhuyqg8xyvz.i.optimole.com/w:1600/h:1067/q:75/https://glowkidsparty.com/wp-content/uploads/2019/08/IMG_Aug142019at10421AM.jpg"},
-            {datetime:"", uri:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRNPYWoioa3lVAdY_SXoQv3sL7Q7SSshGqohg&usqp=CAU"},
-            {datetime:"", uri:"https://seda.college/wp-content/uploads/party.jpg"},
-            {datetime:"", uri:"https://img.freepik.com/free-photo/people-enjoying-new-years-eve-party_53876-20990.jpg?size=626&ext=jpg"},
-            {datetime:"", uri:"https://media.weddingz.in/images/5ccc11ff9323aa867c3b4123a10b8211/small-birthday-party-places-in-nagpur-to-host-your-glittering-evening.jpg"},
-            {datetime:"", uri:"https://static.toiimg.com/photo/msid-61737605,width-96,height-65.cms"},
-            {datetime:"", uri:"https://www.claimsaction.co.uk/wp-content/uploads/2017/12/new_years_party.jpg"},
-            {datetime:"", uri:"https://mlhuyqg8xyvz.i.optimole.com/w:1600/h:1067/q:75/https://glowkidsparty.com/wp-content/uploads/2019/08/IMG_Aug142019at10421AM.jpg"},
-            {datetime:"", uri:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRNPYWoioa3lVAdY_SXoQv3sL7Q7SSshGqohg&usqp=CAU"},
-            {datetime:"", uri:"https://seda.college/wp-content/uploads/party.jpg"},
-            {datetime:"", uri:"https://img.freepik.com/free-photo/people-enjoying-new-years-eve-party_53876-20990.jpg?size=626&ext=jpg"}    
-        ]
-    },
-    {
+import _ from 'lodash';
+const users ={
+    "6":{
         "id":"6",
         "name":"Era Kwan",
         "designation": "Event Planner",
         "profilePhoto": "https://icon-library.com/images/lady-icon/lady-icon-7.jpg",
-        photos:[
-            {datetime:"", uri:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRNPYWoioa3lVAdY_SXoQv3sL7Q7SSshGqohg&usqp=CAU"},
-            {datetime:"", uri:"https://img.freepik.com/free-photo/people-enjoying-new-years-eve-party_53876-20990.jpg?size=626&ext=jpg"},    
-            {datetime:"", uri:"https://seda.college/wp-content/uploads/party.jpg"},
-            {datetime:"", uri:"https://mlhuyqg8xyvz.i.optimole.com/w:1600/h:1067/q:75/https://glowkidsparty.com/wp-content/uploads/2019/08/IMG_Aug142019at10421AM.jpg"},
-            {datetime:"", uri:"https://www.claimsaction.co.uk/wp-content/uploads/2017/12/new_years_party.jpg"},
-            {datetime:"", uri:"https://static.toiimg.com/photo/msid-61737605,width-96,height-65.cms"},
-            {datetime:"", uri:"https://media.weddingz.in/images/5ccc11ff9323aa867c3b4123a10b8211/small-birthday-party-places-in-nagpur-to-host-your-glittering-evening.jpg"},
-            {datetime:"", uri:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRNPYWoioa3lVAdY_SXoQv3sL7Q7SSshGqohg&usqp=CAU"},
-            {datetime:"", uri:"https://img.freepik.com/free-photo/people-enjoying-new-years-eve-party_53876-20990.jpg?size=626&ext=jpg"},    
-            {datetime:"", uri:"https://seda.college/wp-content/uploads/party.jpg"},
-            {datetime:"", uri:"https://mlhuyqg8xyvz.i.optimole.com/w:1600/h:1067/q:75/https://glowkidsparty.com/wp-content/uploads/2019/08/IMG_Aug142019at10421AM.jpg"},
-            {datetime:"", uri:"https://www.claimsaction.co.uk/wp-content/uploads/2017/12/new_years_party.jpg"},
-            {datetime:"", uri:"https://static.toiimg.com/photo/msid-61737605,width-96,height-65.cms"},
-            {datetime:"", uri:"https://media.weddingz.in/images/5ccc11ff9323aa867c3b4123a10b8211/small-birthday-party-places-in-nagpur-to-host-your-glittering-evening.jpg"},
-            {datetime:"", uri:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRNPYWoioa3lVAdY_SXoQv3sL7Q7SSshGqohg&usqp=CAU"},
-            {datetime:"", uri:"https://img.freepik.com/free-photo/people-enjoying-new-years-eve-party_53876-20990.jpg?size=626&ext=jpg"},    
-            {datetime:"", uri:"https://seda.college/wp-content/uploads/party.jpg"},
-            {datetime:"", uri:"https://mlhuyqg8xyvz.i.optimole.com/w:1600/h:1067/q:75/https://glowkidsparty.com/wp-content/uploads/2019/08/IMG_Aug142019at10421AM.jpg"},
-            {datetime:"", uri:"https://www.claimsaction.co.uk/wp-content/uploads/2017/12/new_years_party.jpg"},
-        ]
+    },
+    "12":{
+        "id":"12",
+        "name":"Michael Thomas",
+        "designation": "Photographer",
+        "profilePhoto": "https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png",
     }
+}
+const images = [
+    { "id":"12", datetime:"", uri:"https://media.weddingz.in/images/5ccc11ff9323aa867c3b4123a10b8211/small-birthday-party-places-in-nagpur-to-host-your-glittering-evening.jpg"},
+    { "id":"12", datetime:"", uri:"https://static.toiimg.com/photo/msid-61737605,width-96,height-65.cms"},
+    { "id":"12", datetime:"", uri:"https://www.claimsaction.co.uk/wp-content/uploads/2017/12/new_years_party.jpg"},
+    { "id":"12", datetime:"", uri:"https://mlhuyqg8xyvz.i.optimole.com/w:1600/h:1067/q:75/https://glowkidsparty.com/wp-content/uploads/2019/08/IMG_Aug142019at10421AM.jpg"},
+    { "id":"12", datetime:"", uri:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRNPYWoioa3lVAdY_SXoQv3sL7Q7SSshGqohg&usqp=CAU"},
+    { "id":"12", datetime:"", uri:"https://seda.college/wp-content/uploads/party.jpg"},
+    { "id":"12", datetime:"", uri:"https://img.freepik.com/free-photo/people-enjoying-new-years-eve-party_53876-20990.jpg?size=626&ext=jpg"},
+    { "id":"12", datetime:"", uri:"https://media.weddingz.in/images/5ccc11ff9323aa867c3b4123a10b8211/small-birthday-party-places-in-nagpur-to-host-your-glittering-evening.jpg"},
+    { "id":"12", datetime:"", uri:"https://static.toiimg.com/photo/msid-61737605,width-96,height-65.cms"},
+    { "id":"12", datetime:"", uri:"https://www.claimsaction.co.uk/wp-content/uploads/2017/12/new_years_party.jpg"},
+    { "id":"12", datetime:"", uri:"https://mlhuyqg8xyvz.i.optimole.com/w:1600/h:1067/q:75/https://glowkidsparty.com/wp-content/uploads/2019/08/IMG_Aug142019at10421AM.jpg"},
+    { "id":"12", datetime:"", uri:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRNPYWoioa3lVAdY_SXoQv3sL7Q7SSshGqohg&usqp=CAU"},
+    { "id":"12", datetime:"", uri:"https://seda.college/wp-content/uploads/party.jpg"},
+    { "id":"12", datetime:"", uri:"https://img.freepik.com/free-photo/people-enjoying-new-years-eve-party_53876-20990.jpg?size=626&ext=jpg"},
+    { "id":"6", datetime:"", uri:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRNPYWoioa3lVAdY_SXoQv3sL7Q7SSshGqohg&usqp=CAU"},
+    { "id":"6", datetime:"", uri:"https://img.freepik.com/free-photo/people-enjoying-new-years-eve-party_53876-20990.jpg?size=626&ext=jpg"},    
+    { "id":"6", datetime:"", uri:"https://seda.college/wp-content/uploads/party.jpg"},
+    { "id":"6", datetime:"", uri:"https://mlhuyqg8xyvz.i.optimole.com/w:1600/h:1067/q:75/https://glowkidsparty.com/wp-content/uploads/2019/08/IMG_Aug142019at10421AM.jpg"},
+    { "id":"6", datetime:"", uri:"https://www.claimsaction.co.uk/wp-content/uploads/2017/12/new_years_party.jpg"},
+    { "id":"6", datetime:"", uri:"https://static.toiimg.com/photo/msid-61737605,width-96,height-65.cms"},
+    { "id":"6", datetime:"", uri:"https://media.weddingz.in/images/5ccc11ff9323aa867c3b4123a10b8211/small-birthday-party-places-in-nagpur-to-host-your-glittering-evening.jpg"},
+    { "id":"6", datetime:"", uri:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRNPYWoioa3lVAdY_SXoQv3sL7Q7SSshGqohg&usqp=CAU"},
+    { "id":"6", datetime:"", uri:"https://img.freepik.com/free-photo/people-enjoying-new-years-eve-party_53876-20990.jpg?size=626&ext=jpg"},    
+    { "id":"6", datetime:"", uri:"https://seda.college/wp-content/uploads/party.jpg"},
+    { "id":"6", datetime:"", uri:"https://mlhuyqg8xyvz.i.optimole.com/w:1600/h:1067/q:75/https://glowkidsparty.com/wp-content/uploads/2019/08/IMG_Aug142019at10421AM.jpg"},
+    { "id":"6", datetime:"", uri:"https://www.claimsaction.co.uk/wp-content/uploads/2017/12/new_years_party.jpg"},
+    { "id":"6", datetime:"", uri:"https://static.toiimg.com/photo/msid-61737605,width-96,height-65.cms"},
+    { "id":"6", datetime:"", uri:"https://media.weddingz.in/images/5ccc11ff9323aa867c3b4123a10b8211/small-birthday-party-places-in-nagpur-to-host-your-glittering-evening.jpg"},
+    { "id":"6", datetime:"", uri:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRNPYWoioa3lVAdY_SXoQv3sL7Q7SSshGqohg&usqp=CAU"},
+    { "id":"6", datetime:"", uri:"https://img.freepik.com/free-photo/people-enjoying-new-years-eve-party_53876-20990.jpg?size=626&ext=jpg"},    
+    { "id":"6", datetime:"", uri:"https://seda.college/wp-content/uploads/party.jpg"},
+    { "id":"6", datetime:"", uri:"https://mlhuyqg8xyvz.i.optimole.com/w:1600/h:1067/q:75/https://glowkidsparty.com/wp-content/uploads/2019/08/IMG_Aug142019at10421AM.jpg"},
+    { "id":"6", datetime:"", uri:"https://www.claimsaction.co.uk/wp-content/uploads/2017/12/new_years_party.jpg"},
 ]
 class PhotosComponent extends Component{
     constructor(props){
         super(props);
-        console.log(utils.randomDate().toString())
-        let albums = images.map((album,index)=>({...album,
-            photos:album.photos.map((item)=>({
-                ...item, datetime: utils.randomDate()
-            }))
-        }))
+        for(let ind in images){
+            images[ind].datetime = utils.randomDate()
+        }
+        let albums = this.getGroupBy('Date')
+        albums = this.getGroupBy('Member')
         this.state={
             albums,
             width: StyleConfig.countPixelRatio(110),
             showDropdown:false,
-            groupBy:''
+            groupBy:'Member'
+        }
+    }
+    getGroupBy=(type)=>{
+        let albums = [];
+        switch(type){
+            case 'Member':
+                albums = images.reduce((r, a) => {
+                    r[a.id] = [...r[a.id] || [], a];
+                    return r;
+                   }, {});
+                let mAlbums = [];
+                for(let ind in albums){
+                    mAlbums.push({
+                        ...users[ind],
+                        photos: albums[ind]
+                    })
+                }
+                return mAlbums;
+            case 'Date':
+                let date= new Date();
+                for(let ind in images){
+                    console.log((date - images[ind].datetime)/(1000*60*60*24));
+                }
         }
     }
     componentDidMount =async()=>{
