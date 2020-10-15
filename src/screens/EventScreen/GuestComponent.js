@@ -180,7 +180,7 @@ class GuestComponent extends React.Component{
                         onTitlePress={this.onAcceptedPress}
                         height={this.heightAccepted}
                         title={()=> <View style={[{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}]}>
-                        <View style={{flex:1, backgroundColor:'red'}}><Text style={styles.headerTitle}>{"Accepted"}</Text></View>
+                        <View style={{flex:1}}><Text style={styles.headerTitle}>{"Accepted"}</Text></View>
                         <View style={{flex:1, flexDirection:'row', justifyContent:'space-between'}}>
                             <View style={[styles.countCircle, {backgroundColor:StyleConfig.COLORS.lightGreen, }]}>
                                 <Text style={styles.textH23Bold}>{`${data.accepted.length}`}</Text>

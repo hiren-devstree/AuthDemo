@@ -8,7 +8,8 @@ import {
     Image,
     FlatList,
     TextInput,
-    TouchableOpacity
+    TouchableOpacity,
+    ImageBackground
   } from 'react-native';
   
 import StyleConfig from 'src/helper/StyleConfig';
@@ -37,25 +38,29 @@ class ChatComponent extends Component{
     render(){
         return(
             <View style={[styles.flex1]}>
+                <ImageBackground 
+                    source={AppImages.chatBack}
+                style={{flex:1, width:StyleConfig.width}}>
+                    <View style={[styles.flex1,{backgroundColor:"#ffffffaa"}]} >
                 <View style={[styles.flex1]}>
-                <FlatList
-                    data={this.state.chats}
-                    inverted
-                    renderItem={({item})=>{
-                        return(
-                            <View style={{flexDirection: USER_ID == item.userId ? 'row-reverse': "row", paddingHorizontal:8}}>
-                                <Image 
-                                    source={{uri: item.userId ? "https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png": "https://icon-library.com/images/lady-icon/lady-icon-7.jpg"}}
-                                    style={{height:StyleConfig.countPixelRatio(48), width:StyleConfig.countPixelRatio(48), borderRadius:StyleConfig.countPixelRatio(24)}}
-                                />
-                                <View style={{...StyleConfig.card, flexDirection:'row',}}>
-                                    <Text style={styles.textH3Regular}>{item.message}</Text>
+                    <FlatList
+                        data={this.state.chats}
+                        inverted
+                        renderItem={({item})=>{
+                            return(
+                                <View style={{flexDirection: USER_ID == item.userId ? 'row-reverse': "row", paddingHorizontal:8}}>
+                                    <Image 
+                                        source={{uri: item.userId ? "https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png": "https://icon-library.com/images/lady-icon/lady-icon-7.jpg"}}
+                                        style={{height:StyleConfig.countPixelRatio(48), width:StyleConfig.countPixelRatio(48), borderRadius:StyleConfig.countPixelRatio(24)}}
+                                    />
+                                    <View style={{...StyleConfig.card, flexDirection:'row',}}>
+                                        <Text style={styles.textH3Regular}>{item.message}</Text>
+                                    </View>
                                 </View>
-                            </View>
-                            
-                        )
-                    }}
-                    />
+                                
+                            )
+                        }}
+                        />
                 </View>
                 <View style={{...StyleConfig.card,flexDirection:'row', alignItems:'center', width:StyleConfig.width-StyleConfig.countPixelRatio(32), marginHorizontal:StyleConfig.countPixelRatio(16), paddingHorizontal: StyleConfig.countPixelRatio(16), borderRadius:StyleConfig.countPixelRatio(30)}}>
                     <View style={styles.flex1}>
@@ -80,7 +85,8 @@ class ChatComponent extends Component{
                         name="send" size={StyleConfig.countPixelRatio(30)} color={StyleConfig.COLORS.cyanBlue} />
                     
                 </View>
-            
+                </View>
+                </ImageBackground>
             </View>
             
         )

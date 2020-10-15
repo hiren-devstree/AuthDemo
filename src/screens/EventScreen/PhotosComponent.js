@@ -74,12 +74,13 @@ class PhotosComponent extends Component{
             images[ind].datetime = utils.randomDate()
         }
         let albums = this.getGroupBy('Date')
-        albums = this.getGroupBy('Member')
+        // albums = this.getGroupBy('Member')
+        
         this.state={
             albums,
             width: StyleConfig.countPixelRatio(110),
             showDropdown:false,
-            groupBy:'Member'
+            groupBy:'Date'
         }
     }
     getGroupBy=(type)=>{
@@ -99,10 +100,7 @@ class PhotosComponent extends Component{
                 }
                 return mAlbums;
             case 'Date':
-                let date= new Date();
-                for(let ind in images){
-                    console.log((date - images[ind].datetime)/(1000*60*60*24));
-                }
+                return utils.testDateFilter(images)
         }
     }
     componentDidMount =async()=>{
@@ -133,6 +131,15 @@ class PhotosComponent extends Component{
       };
     previewPhoto=(item)=>{
         this.props.navigation.navigate('PreviewPhoto', { photoUri:item.uri })
+    }
+    changeGroupBy=(type)=>{
+        if(type == this.state.groupBy){
+            this.setState({ showDropdown:false })
+        } else{
+            let albums = this.getGroupBy(type);
+            this.setState({groupBy:type, albums, showDropdown:false})
+        }
+        
     }
     render(){
         const { albums, width, showDropdown, groupBy } = this.state;
@@ -182,10 +189,10 @@ class PhotosComponent extends Component{
                     
                 </ScrollView>
                 { showDropdown && <View style={{position:'absolute',zIndex:88, margin:StyleConfig.statusBarHeight-StyleConfig.countPixelRatio(4), alignSelf:'flex-end', width:width, backgroundColor: StyleConfig.COLORS.white}}>
-                <TouchableOpacity onPress={()=>this.setState({groupBy:'Member', showDropdown:false})} style={{padding:4}} >
+                <TouchableOpacity onPress={()=> this.changeGroupBy('Member')} style={{padding:4}} >
                     <Text style={styles.textH3Medium}>{'Member'}</Text>
                 </TouchableOpacity>    
-                <TouchableOpacity onPress={()=>this.setState({groupBy:'Date', showDropdown:false})} style={{padding:4}} >
+                <TouchableOpacity onPress={()=> this.changeGroupBy('Date') } style={{padding:4}} >
                     <Text style={styles.textH3Medium}>{'Date'}</Text>
                 </TouchableOpacity>    
                 </View>}
