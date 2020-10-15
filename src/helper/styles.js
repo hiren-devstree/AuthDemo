@@ -19,6 +19,10 @@ const styles= StyleSheet.create({
     flex1:{
         flex:1
     },
+    flex1White:{
+        flex:1,
+        backgroundColor: StyleConfig.COLORS.white
+    },
     flexRow1:{
         flexDirection:'row',
         flex:1

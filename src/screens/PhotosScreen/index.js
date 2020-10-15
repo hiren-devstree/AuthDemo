@@ -73,14 +73,11 @@ const images = [
 class PhotosScreen extends Component{
     constructor(props){
         super(props);
-        console.log(utils.randomDate().toString())
         let albums = images.map((album,index)=>({...album,
             photos:album.photos.map((item)=>({
                 ...item, datetime: utils.randomDate()
             }))
         }))
-
-        console.log("PHOTOS  ", albums)
         this.state={
             albums,
             width: StyleConfig.countPixelRatio(110),
@@ -101,21 +98,17 @@ class PhotosScreen extends Component{
           aspect: [3, 5],
           quality: 1,
         });
-    
-        console.log(result);
         let {albums} = this.state;
         if (!result.cancelled) {
-          //setImage(result.uri);
           albums[0].photos.push({
             "datetime":"",
             uri:result.uri
           })
           this.setState({albums})
-
         }
       };
     previewPhoto=(item)=>{
-        this.props.navigation.navigate('PreviewPhoto', { photoUri:item.uri })
+        this.props.navigation.navigate(Const.NK_PREVIEW_PHOTO, { photoUri:item.uri })
     }
     render(){
         const { albums, width, showDropdown, groupBy } = this.state;
@@ -124,9 +117,9 @@ class PhotosScreen extends Component{
         return(
           <>
           <StatusBar barStyle="dark-content" />
-          <SafeAreaView style={{ flex:1, backgroundColor:'#fff'}}>
+          <SafeAreaView style={styles.flex1White}>
             <View style={styles.headerWrapSingle}>
-                      <Text style={styles.headerTitle}>{strings.photos}</Text>
+                <Text style={styles.headerTitle}>{strings.photos}</Text>
             </View>
             <View style={styles.flex1}>
                 <ScrollView>

@@ -33,7 +33,7 @@ class OTPVerificationScreen extends Component{
       //if(this.state.otp.length == 6){
         await SecureStore.setItemAsync( Const.SS_IS_LOGIN, "true" );
 
-        this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: 'Dashboard' }] }))
+        this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
       //}
     }
     render(){

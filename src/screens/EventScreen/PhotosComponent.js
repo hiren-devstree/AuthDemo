@@ -11,6 +11,7 @@ import {
     TouchableOpacity
   } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import * as Const from 'src/helper/constant';
 import StyleConfig from 'src/helper/StyleConfig';
 import AppImages from 'src/assets/images';
 import { Button } from 'src/components/common/Button';
@@ -130,7 +131,7 @@ class PhotosComponent extends Component{
         }
       };
     previewPhoto=(item)=>{
-        this.props.navigation.navigate('PreviewPhoto', { photoUri:item.uri })
+        this.props.navigation.navigate( Const.NK_PREVIEW_PHOTO, { photoUri:item.uri })
     }
     changeGroupBy=(type)=>{
         if(type == this.state.groupBy){

@@ -16,7 +16,14 @@ const strings = {
     "continue": "Continue",
     "you_are_all_set": "You are all set!",
     "lets_add_your_first_event_now": "Let's add your first event now!",
-    "select_event_date_time": "Select event date time"
+    "select_event_date_time": "Select event date time",
+    "event_name_placeholder":"Event name e.g. 50th Bob's Birthday",
+    "location_placeholder":"Location e.g. ABC Banquet Hall",
+    "address_placeholder": "address (start typing and we'll look )",
+    "type_of_event_placeholder":"type of event (Bithday)",
+    "save": "Save"
+
+
 };
 
 module.exports = strings ;

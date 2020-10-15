@@ -66,12 +66,12 @@ class RegisterScreen extends Component{
                         </View>
 
                         <Button
-                          onPress={()=>this.props.navigation.navigate("OTPVerificationScreen")}
+                          onPress={()=>this.props.navigation.navigate(Const.NK_OTP_VERIFICATION)}
                         buttonWrap={styles.buttonWrap}>{strings.sign_up}</Button>
 
                         <View style={styles.row}>
                         <Text style={styles.textH3Regular}>{strings.already_have_an_account}</Text>
-                          <TouchableOpacity onPress={()=> this.props.navigation.navigate("Login")} style={styles.linkWrap}>
+                          <TouchableOpacity onPress={()=> this.props.navigation.navigate(Const.NK_LOGIN)} style={styles.linkWrap}>
                             <Text style={styles.linkText}>{strings.login_here}</Text>
                           </TouchableOpacity>
                         </View>

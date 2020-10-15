@@ -14,13 +14,12 @@ import {
 import StyleConfig from 'src/helper/StyleConfig';
 import AppImages from 'src/assets/images';
 import { Button } from 'src/components/common/Button';
-import {FontAwesome, Ionicons} from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import styles from 'src/helper/styles';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import strings from 'src/helper/strings';
 import * as Const from 'src/helper/constant'
 import moment from 'moment';
-
 
 class AddEventComponent extends React.Component{
     constructor(props){
@@ -33,8 +32,6 @@ class AddEventComponent extends React.Component{
     }
     onDateConfirm=(date) => {
         let eventDateTime = moment(date).format("DD-mm-yyyy hh:MM A")
-
-
         this.setState({eventDateTime, showDateTimePicker: false})
     }
     render(){
@@ -46,14 +43,14 @@ class AddEventComponent extends React.Component{
                     <TextInput
                     style={styles.textH3Regular}
                     placeholderTextColor={StyleConfig.COLORS.hintTextColor}
-                    placeholder={"Event name e.g. 50th Bob's Birthday"}
+                    placeholder={strings.event_name_placeholder}
                     />
                 </View>
                 <View style={[styles.textInputWrap, {flex:1, width:null,margin:StyleConfig.countPixelRatio(8)}]}>
                     <TextInput
                     style={styles.textH3Regular}
                     placeholderTextColor={StyleConfig.COLORS.hintTextColor}
-                    placeholder={"Location e.g. ABC Banquet Hall"}
+                    placeholder={strings.location_placeholder}
                     />
                 </View>
                 <Text style={styles.notesText}>a name your guests and vendors recorgnise</Text>
@@ -61,22 +58,22 @@ class AddEventComponent extends React.Component{
                     <TextInput
                     style={styles.textH3Regular}
                     placeholderTextColor={StyleConfig.COLORS.hintTextColor}
-                    placeholder={"address (start typing and we'll look )"}
+                    placeholder={strings.address_placeholder}
                     />
                 </View>
                 <View style={[styles.textInputWrap, {flex:1, width:null,margin:StyleConfig.countPixelRatio(8)}]}>
                     <TextInput
                     style={styles.textH3Regular}
                     placeholderTextColor={StyleConfig.COLORS.hintTextColor} 
-                    placeholder={"type of event (Bithday)"}
+                    placeholder={strings.type_of_event_placeholder}
                     />
                 </View>
                 <TouchableOpacity onPress={()=> this.setState({showDateTimePicker:true})} style={[styles.textInputWrap, {flex:1, flexDirection:'row', alignItems:'center', justifyContent:'space-between', width:null,margin:StyleConfig.countPixelRatio(8)}]}>
                     <Text style={[styles.textH3Regular, { color: eventDateTime == null ? StyleConfig.COLORS.hintTextColor : StyleConfig.COLORS.defaultTextColor }]}>{eventDateTime == null ? strings.select_event_date_time : eventDateTime.toString() }</Text>
-                    <FontAwesome name={Const.IC_EVENT_CALENDAR} color={'#333333dd'} size={StyleConfig.countPixelRatio(24)} />
+                    <FontAwesome name={Const.IC_EVENT_CALENDAR} color={StyleConfig.COLORS.defaultTextColor} size={StyleConfig.countPixelRatio(24)} />
                 </TouchableOpacity>
                 <View style={{flexDirection:'row-reverse'}}>
-                    <Button onPress={onSavePress} buttonWrap={{width:StyleConfig.width*0.25, height:StyleConfig.countPixelRatio(36)}}>Save</Button>
+                    <Button onPress={onSavePress} buttonWrap={{width:StyleConfig.width*0.25, height:StyleConfig.countPixelRatio(36)}}>{strings.save}</Button>
                 </View>
                 <DateTimePickerModal
                     isVisible={showDateTimePicker}

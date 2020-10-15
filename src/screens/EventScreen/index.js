@@ -81,7 +81,6 @@ class EventScreen extends Component{
           showWelcome: true,
           data: []
         }
-
         this.setState({showWelcome:true})
         setTimeout(()=>{
           this.setState({showWelcome:false})
@@ -111,7 +110,7 @@ class EventScreen extends Component{
         if(event==null){
             this.setState({data: []})
         } else  if(event.hostUserId == userId){
-            this.props.navigation.navigate("EventDetailScreen", {event})
+            this.props.navigation.navigate(Const.NK_EVENT_DETAILS, {event})
         }
     }
     render(){

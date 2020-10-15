@@ -20,12 +20,14 @@ import SettingsScreen from '../screens/SettingsScreen';
 import PreviewPhoto from '../screens/PreviewPhoto';
 import EventDetailScreen from '../screens/EventScreen/EventDetailScreen';
 import StyleConfig from "../helper/StyleConfig";
+import {NK_INIT, NK_REGISTER, NK_LOGIN, NK_OTP_VERIFICATION, NK_DASHBOARD, NK_PREVIEW_PHOTO,
+  NK_EVENTS, NK_EVENT_DETAILS, NK_PHOTOS, NK_GUESTS, NK_SETTINGS} from 'src/helper/constant' 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const EventStack = ((props) =>
   <Stack.Navigator>
-    <Stack.Screen options={{ headerShown: false }} name='EventScreen' component={EventScreen} />
-    <Stack.Screen options={{ headerShown: false }} name='EventDetailScreen' component={EventDetailScreen} />
+    <Stack.Screen options={{ headerShown: false }} name={NK_EVENTS} component={EventScreen} />
+    <Stack.Screen options={{ headerShown: false }} name={NK_EVENT_DETAILS} component={EventDetailScreen} />
   </Stack.Navigator>
 )
 const TabNavigator = ((props) => {
@@ -34,13 +36,13 @@ const TabNavigator = ((props) => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName = "birthday-cake";
-          if (route.name === 'EventScreen') {
+          if (route.name === NK_EVENTS) {
             iconName = "birthday-cake";
-          } else if (route.name === 'Photos') {
+          } else if (route.name === NK_PHOTOS) {
             iconName = "camera";
-          } else if (route.name === 'Guests') {
+          } else if (route.name === NK_GUESTS) {
             iconName = "group";
-          } else if (route.name === 'Settings') {
+          } else if (route.name === NK_SETTINGS) {
             iconName = "gear";
           }
           return <FontAwesome name={iconName} size={StyleConfig.countPixelRatio(22)} color={color}  />;
@@ -52,12 +54,11 @@ const TabNavigator = ((props) => {
         inactiveTintColor: "#333333aa"
       }}
     >
-      <Tab.Screen name="Events" component={EventStack} />
-      <Tab.Screen name="Photos" component={PhotosScreen} />
-      <Tab.Screen  name="Guests" component={GuestScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Screen name={NK_EVENTS} component={EventStack} />
+      <Tab.Screen name={NK_PHOTOS} component={PhotosScreen} />
+      <Tab.Screen  name={NK_GUESTS} component={GuestScreen} />
+      <Tab.Screen name={NK_SETTINGS} component={SettingsScreen} />
     </Tab.Navigator>
-
   )
 })
 

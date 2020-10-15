@@ -25,7 +25,7 @@ class InitScreen extends Component{
     componentDidMount =async() =>{
       let isLogin = await SecureStore.getItemAsync( Const.SS_IS_LOGIN );
       if(isLogin == "true"){
-        this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: 'Dashboard' }] }))
+        this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
       }
 
     }
@@ -47,13 +47,13 @@ class InitScreen extends Component{
 
                       </View>
                       <Button
-                        onPress={() => this.props.navigation.navigate("Login")}
+                        onPress={() => this.props.navigation.navigate(Const.NK_LOGIN)}
                         buttonWrap={{backgroundColor:"#388E3C", borderColor:"#388E3C", marginBottom:StyleConfig.countPixelRatio(24)}}
                       >{strings.ready_to_plan_lets_emzee}</Button>
                       
                       <Button
                         buttonWrap={{backgroundColor:StyleConfig.COLORS.darkRed, marginBottom:StyleConfig.countPixelRatio(44)}}
-                        onPress={() => this.props.navigation.navigate("Login")}
+                        onPress={() => this.props.navigation.navigate(Const.NK_LOGIN)}
                       >{strings.vendors_help_emzee}</Button>
                       
                   </View>
