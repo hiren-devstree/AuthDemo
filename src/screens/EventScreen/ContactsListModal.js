@@ -29,25 +29,23 @@ const ContactsListModal = (props) => {
             }}
         >
             <View style={{flex:1, backgroundColor:"#00000099", justifyContent:'center'}}>
-                <View style={[StyleConfig.card,{ minHeight: StyleConfig.height*0.4, maxHeight:StyleConfig.height*0.8}]}>
+                <View style={[styles.card,{ minHeight: StyleConfig.height*0.4, maxHeight:StyleConfig.height*0.8}]}>
                     <View style={[{ justifyContent:'space-between', flexDirection:'row' ,backgroundColor:StyleConfig.COLORS.purple, padding:StyleConfig.countPixelRatio(16), marginHorizontal: StyleConfig.countPixelRatio( -8), marginTop:StyleConfig.countPixelRatio( -8)}]}>
-                        <View style={styles.row}>
+                        <View style={styles.rowAlignCenter}>
                         <TouchableOpacity onPress={props.onClose}>
                             <FontAwesome name={ "close"} 
-                                color={"#fff"}
+                                color={StyleConfig.COLORS.white}
                                 size={StyleConfig.countPixelRatio(20)}
                                 />
                         </TouchableOpacity>
-                        <Text style={[styles.textH2Medium, {color:"#fff", marginLeft:StyleConfig.countPixelRatio(8) }]}>{"Select from Contacts"}</Text>
+                        <Text style={[styles.textH2Medium, {color: StyleConfig.COLORS.white, marginLeft:StyleConfig.countPixelRatio(8) }]}>{"Select from Contacts"}</Text>
                         </View>
                         <TouchableOpacity onPress={props.onApply}>
                             <FontAwesome name={ "check"} 
-                                color={"#fff"}
+                                color={StyleConfig.COLORS.white}
                                 size={StyleConfig.countPixelRatio(22)}
                                 />
                         </TouchableOpacity>
-                        
-                        
                     </View>
                     <FlatList
                         data={allContacts.length ? allContacts : props.contacts}
@@ -55,10 +53,10 @@ const ContactsListModal = (props) => {
                         renderItem={({item, index})=><TouchableOpacity 
                             onPress={()=> props.onSelectContact(index)}
                         style={{
-                            padding:8,
+                            padding: StyleConfig.countPixelRatio(8),
                             flexDirection:'row',
                             justifyContent:'space-between',
-                            backgroundColor: index%2==0? "#fff":"#eee", alignItems:'center'}}>
+                            backgroundColor: index%2==0? StyleConfig.COLORS.white : StyleConfig.COLORS.offWhite, alignItems:'center'}}>
                                 <View> 
                                     <Text style={styles.textH3Bold}>{`${item.name}`}</Text>
                                     <Text style={styles.textH3Medium}>{item.phoneNumbers ? item.phoneNumbers[0].number:''}</Text>

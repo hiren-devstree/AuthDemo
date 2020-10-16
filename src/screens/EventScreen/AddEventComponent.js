@@ -1,12 +1,7 @@
 import React from 'react';
 import {
-    SafeAreaView,
-    StyleSheet,
-    ScrollView,
     View,
     Text,
-    Image,
-    StatusBar,
     TextInput,
     TouchableOpacity
   } from 'react-native';
@@ -20,7 +15,8 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import strings from 'src/helper/strings';
 import * as Const from 'src/helper/constant'
 import moment from 'moment';
-
+const TextInputWrap=({children})=><View style={[styles.textInputWrap, {flex:1, width:null,margin:StyleConfig.countPixelRatio(8)}]}>
+                {children}</View>
 class AddEventComponent extends React.Component{
     constructor(props){
         super(props);
@@ -38,41 +34,41 @@ class AddEventComponent extends React.Component{
         const {onSavePress} = this.props;
         const {showDateTimePicker, eventDateTime} = this.state;
         return(
-            <View style={[StyleConfig.card,{  margin:StyleConfig.countPixelRatio(16)}]}>
-                <View style={[styles.textInputWrap, {flex:1, width:null,margin:StyleConfig.countPixelRatio(8)}]}>
+            <View style={[styles.card,{  margin:StyleConfig.countPixelRatio(16)}]}>
+                <TextInputWrap>
                     <TextInput
                     style={styles.textH3Regular}
                     placeholderTextColor={StyleConfig.COLORS.hintTextColor}
                     placeholder={strings.event_name_placeholder}
                     />
-                </View>
-                <View style={[styles.textInputWrap, {flex:1, width:null,margin:StyleConfig.countPixelRatio(8)}]}>
+                </TextInputWrap>
+                <TextInputWrap>
                     <TextInput
                     style={styles.textH3Regular}
                     placeholderTextColor={StyleConfig.COLORS.hintTextColor}
                     placeholder={strings.location_placeholder}
                     />
-                </View>
-                <Text style={styles.notesText}>a name your guests and vendors recorgnise</Text>
-                <View style={[styles.textInputWrap, {flex:1, width:null,margin:StyleConfig.countPixelRatio(8)}]}>
+                </TextInputWrap>
+                <Text style={styles.notesText}>{strings.a_name_your_guests_and_vendors_recorgnise}</Text>
+                <TextInputWrap>
                     <TextInput
                     style={styles.textH3Regular}
                     placeholderTextColor={StyleConfig.COLORS.hintTextColor}
                     placeholder={strings.address_placeholder}
                     />
-                </View>
-                <View style={[styles.textInputWrap, {flex:1, width:null,margin:StyleConfig.countPixelRatio(8)}]}>
+                </TextInputWrap>
+                <TextInputWrap>
                     <TextInput
                     style={styles.textH3Regular}
                     placeholderTextColor={StyleConfig.COLORS.hintTextColor} 
                     placeholder={strings.type_of_event_placeholder}
                     />
-                </View>
+                </TextInputWrap>
                 <TouchableOpacity onPress={()=> this.setState({showDateTimePicker:true})} style={[styles.textInputWrap, {flex:1, flexDirection:'row', alignItems:'center', justifyContent:'space-between', width:null,margin:StyleConfig.countPixelRatio(8)}]}>
                     <Text style={[styles.textH3Regular, { color: eventDateTime == null ? StyleConfig.COLORS.hintTextColor : StyleConfig.COLORS.defaultTextColor }]}>{eventDateTime == null ? strings.select_event_date_time : eventDateTime.toString() }</Text>
                     <FontAwesome name={Const.IC_EVENT_CALENDAR} color={StyleConfig.COLORS.defaultTextColor} size={StyleConfig.countPixelRatio(24)} />
                 </TouchableOpacity>
-                <View style={{flexDirection:'row-reverse'}}>
+                <View style={styles.rowReverse}>
                     <Button onPress={onSavePress} buttonWrap={{width:StyleConfig.width*0.25, height:StyleConfig.countPixelRatio(36)}}>{strings.save}</Button>
                 </View>
                 <DateTimePickerModal

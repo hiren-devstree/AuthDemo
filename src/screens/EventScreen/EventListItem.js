@@ -17,20 +17,6 @@ import { Button } from 'src/components/common/Button';
 import {FontAwesome, Ionicons} from '@expo/vector-icons';
 import styles from 'src/helper/styles';
 
-// {
-//     "id": 1001,
-//     "hostUserId": 50,
-//     "eventName": "Dev's Birthday",
-//     "date": "Oct 20,2020",
-//     "location": "Honest Banquet",
-//     "address": "700 5th Avenue, New York",
-//     "eventType": "Birthday",
-//     "guest":{
-//       "confirmed": 22,
-//       "cancelled": 8,
-//       "tentative": 12
-//     }
-//   }
 const EventListItem=({event, isHostedByMe, ...props})=>{
     let headerIconName = "";
     let headerIconColor= StyleConfig.COLORS.darkRed ;
@@ -41,18 +27,18 @@ const EventListItem=({event, isHostedByMe, ...props})=>{
     return(
         <TouchableOpacity onPress={props.onPress}>
             {event ?
-        <View style={[StyleConfig.card]}>
+        <View style={styles.card}>
             <View style={[styles.eventItemRow1, styles.eventItemRow]}>
                 <Text style={styles.textH23Bold}>{event.eventName}</Text>
                 <FontAwesome name={ headerIconName} color={headerIconColor} size={StyleConfig.headerIconSize} />
             </View>
-            <View style={styles.row}>
+            <View style={styles.rowAlignCenter}>
                 <View style={[ styles.flex1, styles.eventItemRow ]}>
                     <Text style={[styles.textH3Bold,styles.eventItemRow]}>{event.date}</Text>
                     <Text style={[styles.textH3Regular,styles.eventItemRow]}>{event.location}</Text>
                     <Text style={[styles.textH3Regular,styles.eventItemRow]}>{event.address}</Text>
                     { isHostedByMe &&
-                    <View style={[styles.row, styles.eventItemRow]}>
+                    <View style={[styles.rowAlignCenter, styles.eventItemRow]}>
                         <FontAwesome name={"check"} color={StyleConfig.COLORS.green} size={StyleConfig.headerIconSize} />
                         <Text style={[styles.textH3Regular,styles.eventItemRow]}>{event.guest.confirmed}</Text>
                         <View style = {styles.eventItemRow} />
@@ -71,7 +57,7 @@ const EventListItem=({event, isHostedByMe, ...props})=>{
 
             
         </View> :
-        <View style={[StyleConfig.card, styles.center, { 
+        <View style={[styles.card, styles.center, { 
             paddingVertical: StyleConfig.countPixelRatio(16), 
             borderWidth:1, 
             borderColor: StyleConfig.COLORS.purple,

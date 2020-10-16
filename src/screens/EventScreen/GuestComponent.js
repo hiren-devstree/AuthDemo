@@ -21,6 +21,7 @@ import styles from 'src/helper/styles';
 import ContactsListModal from 'src/screens/EventScreen/ContactsListModal';
 import AddGuestModal from 'src/screens/EventScreen/AddGuestModal';
 import ExpandedComponent from 'src/components/ExpandedComponent';
+import strings from '../../helper/strings';
 
 const {
     set,
@@ -175,12 +176,12 @@ class GuestComponent extends React.Component{
         const { data, allContacts, contactListVisible, contactListVisibleSingle, showAccepted, showRejected, showTentative } = this.state;
         return(
             <ScrollView>
-                <View style={[styles.flex1, StyleConfig.card,]}>
+                <View style={[styles.flex1, styles.card,]}>
                     <ExpandedComponent
                         onTitlePress={this.onAcceptedPress}
                         height={this.heightAccepted}
                         title={()=> <View style={[{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}]}>
-                        <View style={{flex:1}}><Text style={styles.headerTitle}>{"Accepted"}</Text></View>
+                        <View style={{flex:1}}><Text style={styles.headerTitle}>{strings.accepted}</Text></View>
                         <View style={{flex:1, flexDirection:'row', justifyContent:'space-between'}}>
                             <View style={[styles.countCircle, {backgroundColor:StyleConfig.COLORS.lightGreen, }]}>
                                 <Text style={styles.textH23Bold}>{`${data.accepted.length}`}</Text>
@@ -193,7 +194,7 @@ class GuestComponent extends React.Component{
                         content={()=><FlatList 
                             renderSeparator={()=> <View style={{height:2, backgroundColor:"#888"}} />}
                             data={data.accepted}
-                            renderItem={(item)=><View style={[styles.row,{ paddingVertical:StyleConfig.countPixelRatio(8)}]}>
+                            renderItem={(item)=><View style={[styles.rowAlignCenter,{ paddingVertical:StyleConfig.countPixelRatio(8)}]}>
                             <FontAwesome name={"user-circle"} size={StyleConfig.countPixelRatio(30)} />
                             <View style={{marginLeft:StyleConfig.countPixelRatio(8)}}>
                                 <Text style={styles.textH23Medium}>Michael Thomas</Text>
@@ -209,7 +210,7 @@ class GuestComponent extends React.Component{
                         title={()=> <View
                             style={[{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}]}>
                                <View style={{flex:1}}>
-                                   <Text style={styles.headerTitle}>{"Declined"}</Text>
+                                   <Text style={styles.headerTitle}>{strings.declined}</Text>
                                 </View>
                                <View style={{flex:1, flexDirection:'row', justifyContent:'space-between'}}>
    
@@ -224,7 +225,7 @@ class GuestComponent extends React.Component{
                         content={()=><FlatList 
                             renderSeparator={()=> <View style={{height:2, backgroundColor:"#888"}} />}
                             data={data.rejected}
-                            renderItem={(item)=><View style={[styles.row,{ paddingVertical:StyleConfig.countPixelRatio(8)}]}>
+                            renderItem={(item)=><View style={[styles.rowAlignCenter,{ paddingVertical:StyleConfig.countPixelRatio(8)}]}>
                             <FontAwesome name={"user-circle"} size={StyleConfig.countPixelRatio(30)} />
                             <View style={{marginLeft:StyleConfig.countPixelRatio(8)}}>
                                 <Text style={styles.textH23Medium}>Michael Thomas</Text>
@@ -238,7 +239,7 @@ class GuestComponent extends React.Component{
                         height={this.heightTentative}
                         title={()=>  <View  style={[{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}]}>
                         <View style={{flex:1}}>
-                        <Text style={styles.headerTitle}>{"Tentative"}</Text>
+                        <Text style={styles.headerTitle}>{strings.tentative}</Text>
                         </View>
                         <View style={{flex:1, flexDirection:'row', justifyContent:'space-between'}}>
                             <View style={[styles.countCircle, {backgroundColor:StyleConfig.COLORS.lightYellow, }]}>
@@ -253,7 +254,7 @@ class GuestComponent extends React.Component{
                         content={()=><FlatList 
                             renderSeparator={()=> <View style={{height:2, backgroundColor:"#888"}} />}
                             data={data.tentative}
-                            renderItem={(item)=><View style={[styles.row,{ paddingVertical:StyleConfig.countPixelRatio(8)}]}>
+                            renderItem={(item)=><View style={[styles.rowAlignCenter,{ paddingVertical:StyleConfig.countPixelRatio(8)}]}>
                             <FontAwesome name={"user-circle"} size={StyleConfig.countPixelRatio(30)} />
                             <View style={{marginLeft:StyleConfig.countPixelRatio(8)}}>
                                 <Text style={styles.textH23Medium}>Michael Thomas</Text>
@@ -261,72 +262,15 @@ class GuestComponent extends React.Component{
                             </View>
                         </View>}
                         />}
-                    />                  
-
-
-                    {/* <View style={StyleConfig.card}>
-                        <View
-                         style={[styles.flex1,{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}]}>
-                            <View style={{flex:1}}><Text style={styles.headerTitle}>{"Declined"}</Text></View>
-                            <View style={{flex:1, flexDirection:'row', justifyContent:'space-between'}}>
-
-                            <View style={[styles.countCircle, {backgroundColor:StyleConfig.COLORS.lightRed, }]}>
-                                <Text style={styles.textH23Bold}>{"3"}</Text>
-                            </View>
-                            <View style={{width: StyleConfig.headerIconSize, alignItems:'center', justifyContent:'center'}}>
-                            <FontAwesome name={showRejected?"caret-down" : "caret-right"} color={StyleConfig.COLORS.defaultTextColor} size={StyleConfig.headerIconSize*1} />
-                            </View>
-                            </View>
-                        </View>
-                        {showRejected && <FlatList 
-                            renderSeparator={()=> <View style={{height:2, backgroundColor:"#888"}} />}
-                            data={data.rejected}
-                            renderItem={(item)=><View style={[styles.row,{ paddingVertical:StyleConfig.countPixelRatio(8)}]}>
-                            <FontAwesome name={"user-circle"} size={StyleConfig.countPixelRatio(30)} />
-                            <View style={{marginLeft:StyleConfig.countPixelRatio(8)}}>
-                                <Text style={styles.textH23Medium}>Michael Thomas</Text>
-                                <Text style={styles.textH3Medium}>{`2 Adults \& 2 Children`}</Text>
-                            </View>
-                        </View>}
-                        />}
-                    </View>
-
-                    <View style={StyleConfig.card}>
-                        <TouchableOpacity onPress={()=> this.setState({showAccepted: false, showRejected: false, showTentative: !showTentative})} style={[styles.flex1,{flexDirection:'row', alignItems:'center', justifyContent:'space-between'}]}>
-                            <View style={{flex:1}}>
-                            <Text style={styles.headerTitle}>{"Tentative"}</Text>
-                            </View>
-                            <View style={{flex:1, flexDirection:'row', justifyContent:'space-between'}}>
-                                <View style={[styles.countCircle, {backgroundColor:StyleConfig.COLORS.lightYellow, }]}>
-                                    <Text style={styles.textH23Bold}>{"5"}</Text>
-                                </View>
-                                <View style={{width: StyleConfig.headerIconSize, alignItems:'center', justifyContent:'center'}}>
-                                <FontAwesome name={showTentative?"caret-down" : "caret-right"} color={StyleConfig.COLORS.defaultTextColor} size={StyleConfig.headerIconSize*1} />
-                                </View>
-                            </View>
-                            
-                        </TouchableOpacity>
-                        {showTentative && <FlatList 
-                            renderSeparator={()=> <View style={{height:2, backgroundColor:"#888"}} />}
-                            data={data.tentative}
-                            renderItem={(item)=><View style={[styles.row,{ paddingVertical:StyleConfig.countPixelRatio(8)}]}>
-                            <FontAwesome name={"user-circle"} size={StyleConfig.countPixelRatio(30)} />
-                            <View style={{marginLeft:StyleConfig.countPixelRatio(8)}}>
-                                <Text style={styles.textH23Medium}>Michael Thomas</Text>
-                                <Text style={styles.textH3Medium}>{`2 Adults \& 2 Children`}</Text>
-                            </View>
-                        </View>}
-                        />}
-                    </View> */}
-                    <View style={[styles.row, styles.center,{marginVertical:StyleConfig.countPixelRatio(8)}]}>
+                    />
+                    <View style={[styles.rowAlignCenter, styles.center,{marginVertical:StyleConfig.countPixelRatio(8)}]}>
                     <Button onPress={()=>this.setState({contactListVisible:true})} buttonWrap={{minHeight:StyleConfig.countPixelRatio(36)}}>Import additional guest</Button>
                     </View>
-                    <View style={[styles.row, styles.center,{marginVertical:StyleConfig.countPixelRatio(8)}]}>
+                    <View style={[styles.rowAlignCenter, styles.center,{marginVertical:StyleConfig.countPixelRatio(8)}]}>
                     <Button onPress={()=>this.setState({contactListVisibleSingle:true})} buttonWrap={{minHeight:StyleConfig.countPixelRatio(36)}}>Add another guest</Button>
                     </View>
                 </View>
                 <ContactsListModal visible={contactListVisible} onSelectContact={this.onSelectContact} contacts ={allContacts} onClose={()=> this.setState({contactListVisible:false})} onApply={()=> this.setState({contactListVisible:false})}  />
-                {/* <ContactsListModal visible={contactListVisibleSingle} singleSelection={true} onSelectContact={this.onSelectSingleContact} contacts ={allContacts} onClose={()=> this.setState({contactListVisibleSingle:false})} onApply={()=> this.setState({contactListVisibleSingle:false})}  /> */}
                 <AddGuestModal 
                     visible={contactListVisibleSingle} 
                     onClose={()=> this.setState({contactListVisibleSingle:false})}

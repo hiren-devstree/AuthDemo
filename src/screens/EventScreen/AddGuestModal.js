@@ -4,21 +4,17 @@ import {
   Modal,
   ScrollView,
   Text,
-  TouchableHighlight,
   View,
   TextInput,
   TouchableOpacity
 } from "react-native";
 import { TextInputMask } from 'react-native-masked-text'
 import StyleConfig from 'src/helper/StyleConfig';
-import AppImages from 'src/assets/images';
 import { Button } from 'src/components/common/Button';
 import {FontAwesome, Ionicons} from '@expo/vector-icons';
 import styles from 'src/helper/styles';
 import strings from 'src/helper/strings';
 import * as Const from 'src/helper/constant'
-
-
 
 const AddGuestModal = (props) => {
     const [phone, setPhone]= useState('')
@@ -32,13 +28,13 @@ const AddGuestModal = (props) => {
             Alert.alert("Modal has been closed.");
             }}
         >
-            <View style={{flex:1, backgroundColor:"#00000099", justifyContent:'center'}}>
-                <View style={[StyleConfig.card,{ minHeight: StyleConfig.height*0.2, marginBottom: StyleConfig.countPixelRatio(-8)}]}>
-                    <View style={[{ justifyContent:'space-between', flexDirection:'row' ,backgroundColor:StyleConfig.COLORS.purple, padding:StyleConfig.countPixelRatio(16), marginHorizontal: StyleConfig.countPixelRatio( -8), marginTop:StyleConfig.countPixelRatio( -8)}]}>
-                        <Text style={[styles.textH2Medium, {color:"#fff", marginLeft:StyleConfig.countPixelRatio(8) }]}>{"Add Guest"}</Text>
+            <View style={styles.modalBackLayer}>
+                <View style={styles.extModalContainer}>
+                    <View style={styles.extModalHeaderWrap}>
+                        <Text style={[styles.textH2Medium, {color: StyleConfig.COLORS.white, marginLeft:StyleConfig.countPixelRatio(8) }]}>{strings.add_guest}</Text>
                         <TouchableOpacity onPress={props.onClose}>
                             <FontAwesome name={ "close"} 
-                                color={"#fff"}
+                                color={StyleConfig.COLORS.white}
                                 size={StyleConfig.countPixelRatio(20)}
                                 />
                         </TouchableOpacity>
@@ -48,7 +44,7 @@ const AddGuestModal = (props) => {
                         <TextInput
                             style={styles.textH3Regular}
                             placeholderTextColor={StyleConfig.COLORS.hintTextColor}
-                            placeholder={"Guest Name"}
+                            placeholder={strings.guest_name}
                         />
                     </View>
 
@@ -56,7 +52,7 @@ const AddGuestModal = (props) => {
                         <TextInput
                             style={styles.textH3Regular}
                             placeholderTextColor={StyleConfig.COLORS.hintTextColor}
-                            placeholder={"Guest Email"}
+                            placeholder={strings.guest_email}
                         />
                     </View>
 
@@ -75,7 +71,7 @@ const AddGuestModal = (props) => {
                             }}
                         />
                     </View>
-                    <View style={{flexDirection:'row', justifyContent:'center'}}>
+                    <View style={styles.rowJustifyCenter}>
                     <Button onPress={props.onApply} buttonWrap={{width:StyleConfig.width*0.5, minHeight:StyleConfig.countPixelRatio(36)}}>Invite</Button>
                     </View>
                     </ScrollView>

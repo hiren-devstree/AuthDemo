@@ -124,7 +124,7 @@ class PhotosScreen extends Component{
             <View style={styles.flex1}>
                 <ScrollView>
                     {albums.map((item,index)=>(
-                    <View key={item.id} style={[StyleConfig.card,{borderRadius:StyleConfig.countPixelRatio(20)}]}>
+                    <View key={item.id} style={[styles.card,{borderRadius:StyleConfig.countPixelRatio(20)}]}>
                         <View style={{flexDirection:'row', marginBottom:10}}> 
                                 <Image 
                                     style={{width:StyleConfig.width*0.15, height:StyleConfig.width*0.15, borderRadius:StyleConfig.width*0.075}}

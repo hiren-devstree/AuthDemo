@@ -21,7 +21,15 @@ const strings = {
     "location_placeholder":"Location e.g. ABC Banquet Hall",
     "address_placeholder": "address (start typing and we'll look )",
     "type_of_event_placeholder":"type of event (Bithday)",
-    "save": "Save"
+    "save": "Save",
+    "a_name_your_guests_and_vendors_recorgnise": "a name your guests and vendors recorgnise",
+    "add_guest": "Add Guest",
+    "guest_name": "Guest Name",
+    "guest_email": "Guest Email",
+    "type_a_message": "Type a Message",
+    "accepted": "Accepted",
+    "declined": "Declined",
+    "tentative": "Tentative"
 
 
 };

@@ -26,7 +26,7 @@ const VendorComponent=(props)=>{
     return(
         <ScrollView>
             { addNew ? 
-                <View style={[styles.flex1, StyleConfig.card,]}>
+                <View style={[styles.flex1, styles.card,]}>
                     <Text style={styles.textH3Regular}>{'We want your party to be stressfree and painless. Let\'s add everyone who is going to serve at the event. Cateres, Photographers etc..'}</Text>
                     <View style={[styles.textInputWrap, { width:null,margin:StyleConfig.countPixelRatio(8)}]}>
                         <TextInput
@@ -62,7 +62,7 @@ const VendorComponent=(props)=>{
                     <View style={{flexDirection:'row-reverse'}}>
                         <Button onPress={props.onSavePress} buttonWrap={{width:StyleConfig.width*0.25, minHeight:StyleConfig.countPixelRatio(36)}}>Invite</Button>
                     </View>
-                </View> : <View style={[styles.flex1, StyleConfig.card,]}>
+                </View> : <View style={[styles.flex1, styles.card,]}>
                     <FlatList
                         data={props.vendors}
                         extraData={props}

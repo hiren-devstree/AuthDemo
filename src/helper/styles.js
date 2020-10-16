@@ -8,9 +8,22 @@ const styles= StyleSheet.create({
         flex:1,
         backgroundColor: StyleConfig.COLORS.white
     },
-    row:{
+    rowAlignCenter:{
         flexDirection:'row',
         alignItems:'center'
+    },
+    rowJustifyCenter:{
+        flexDirection:'row',
+        justifyContent:'center'
+    },
+    rowReverse:{
+        flexDirection: 'row-reverse',
+        alignItems:'center'
+    },
+    modalBackLayer:{
+        flex:1,
+        backgroundColor:"#00000099",
+        justifyContent:'center'
     },
     center: {
         alignItems:'center',
@@ -60,7 +73,31 @@ const styles= StyleSheet.create({
         width: 0,
         height: 2,
         }
-        
+    },
+    modalContainer:{
+        ...StyleConfig.card, 
+        marginTop: StyleConfig.countPixelRatio(4),
+        alignSelf:'center',
+        zIndex:99,
+        flexDirection:'row',
+        flex:1,
+        alignItems:'center',
+        margin:StyleConfig.countPixelRatio(16)
+    },
+    extModalContainer:{
+        ...StyleConfig.card,
+        minHeight: StyleConfig.height*0.2
+    },
+    extModalHeaderWrap:{ 
+        justifyContent:'space-between',
+        flexDirection:'row',
+        backgroundColor:StyleConfig.COLORS.purple,
+        padding:StyleConfig.countPixelRatio(16),
+        marginHorizontal: StyleConfig.countPixelRatio( -8),
+        marginTop: StyleConfig.countPixelRatio( -8)
+    },
+    modalTextWrap:{
+        marginLeft:StyleConfig.countPixelRatio(12)
     },
     headerWrap: {
         flexDirection: 'row', 
@@ -91,6 +128,15 @@ const styles= StyleSheet.create({
         fontSize: StyleConfig.fontSizeH2,
         opacity: 0.8
     },
+    card:{
+        ...StyleConfig.card
+    },
+    cardRow:{
+        ...StyleConfig.card,
+        flexDirection:'row'
+        
+    },
+
     textInputWrap:{
         borderWidth:0.5,
         borderRadius: StyleConfig.countPixelRatio(4),
@@ -123,6 +169,12 @@ const styles= StyleSheet.create({
         fontFamily: StyleConfig.fontSemiBold,
         fontSize: StyleConfig.fontSizeH3,
         color: StyleConfig.COLORS.cyanBlue
+    },
+    textH2Medium:{
+        includeFontPadding:false,
+        fontFamily: StyleConfig.fontMedium,
+        fontSize: StyleConfig.fontSizeH2,
+        color: StyleConfig.COLORS.defaultTextColor
     },
     textH23Medium:{
         includeFontPadding:false,
@@ -176,6 +228,11 @@ const styles= StyleSheet.create({
         borderRadius:StyleConfig.countPixelRatio(40),
         minHeight: StyleConfig.countPixelRatio(40),
         minWidth: StyleConfig.countPixelRatio(40),
+    },
+    chatProfilePhoto:{
+        height:StyleConfig.countPixelRatio(48),
+        width:StyleConfig.countPixelRatio(48),
+        borderRadius:StyleConfig.countPixelRatio(24)
     }
 });
 

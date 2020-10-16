@@ -62,6 +62,7 @@ export default {
       yellow: "#FDD835",
 
       white: "#fff",
+      offWhite: "#eee",
       black: "#000",
       gray20: "#333",
       headerBorderColor: "#ccc",

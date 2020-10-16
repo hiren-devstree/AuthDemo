@@ -64,7 +64,7 @@ class EventDetailScreen extends Component{
       
       const inputRange = props.navigationState.routes.map((x, i) => i);
       return (
-        <View style={[styles.row]}>
+        <View style={[styles.rowAlignCenter]}>
           {props.navigationState.routes.map((route, i) => {
             const color = Animated.color(
               Animated.round(
@@ -103,16 +103,16 @@ class EventDetailScreen extends Component{
         return (
             <>
               <StatusBar barStyle="dark-content" />
-              <SafeAreaView style={{ flex:1, backgroundColor:'#fff'}}>
+              <SafeAreaView style={styles.flex1White}>
                   <View style={styles.headerWrap}>
                     <TouchableOpacity onPress={()=> this.props.navigation.goBack()}
                       style={styles.backWrap}>
-                      <FontAwesome name={Const.IC_BACK} color={'#333'} size={StyleConfig.headerIconSize} />
+                      <FontAwesome name={Const.IC_BACK} color={StyleConfig.COLORS.defaultTextColor} size={StyleConfig.headerIconSize} />
                     </TouchableOpacity>
                     <Text style={styles.headerTitle}>{event.eventName}</Text>
                     <View
                       style={styles.backWrap}>
-                      <Ionicons name={Const.IC_BACK} color={'transparent'} size={StyleConfig.headerIconSize} />
+                      <Ionicons name={Const.IC_BACK} color={StyleConfig.COLORS.transparent} size={StyleConfig.headerIconSize} />
                     </View>
                   </View>                 
                 <View style={styles.content}>
@@ -123,9 +123,9 @@ class EventDetailScreen extends Component{
                       onIndexChange={(index)=> this.setState({index})}
                       initialLayout={initialLayout}
                     />
-                    { showNewEventCreate && <View style={[StyleConfig.card,{ 
+                    { showNewEventCreate && <View style={[ styles.card,{ 
                       marginTop: StyleConfig.countPixelRatio(4), position:'absolute', alignSelf:'center',zIndex:99, flexDirection:'row', flex:1, alignItems:'center', margin:StyleConfig.countPixelRatio(16)}]}>
-                      <FontAwesome name={"check-circle"} size={StyleConfig.countPixelRatio(30)} color={'#388E3C88'} />
+                      <FontAwesome name={"check-circle"} size={StyleConfig.countPixelRatio(30)} color={StyleConfig.COLORS.lightGreen} />
                       <View style={{marginLeft:StyleConfig.countPixelRatio(12)}}>
                         <Text style={styles.textH23Medium}>{}</Text>
                         <Text style={styles.textH23Medium}>{strings.lets_add_your_first_event_now}</Text>

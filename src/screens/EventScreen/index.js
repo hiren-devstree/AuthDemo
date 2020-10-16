@@ -118,11 +118,11 @@ class EventScreen extends Component{
         return (
             <>
               <StatusBar barStyle="dark-content" />
-              <SafeAreaView style={{ flex:1, backgroundColor:'#fff'}}>
+              <SafeAreaView style={styles.flex1White}>
                   <View style={styles.headerWrap}>
                       <View
                         style={styles.backWrap}>
-                        <FontAwesome name={Const.IC_BACK} color={'transparent'} size={StyleConfig.headerIconSize} />
+                        <FontAwesome name={Const.IC_BACK} color={StyleConfig.COLORS.transparent} size={StyleConfig.headerIconSize} />
                       </View>
                       <Text style={styles.headerTitle}>{strings.events}</Text>
                       <TouchableOpacity 
@@ -142,12 +142,10 @@ class EventScreen extends Component{
                         renderItem={({item,index})=> <EventListItem onPress={()=> this.onItemPress(item)} event={item} isHostedByMe={item.hostUserId == userId} /> }
                         ListFooterComponent={() => <EventListItem onPress={ () => this.onItemPress(null)}/>}
                       />
-                    
                     }
-                    { showWelcome && <View style={[StyleConfig.card,{ 
-                      marginTop: StyleConfig.countPixelRatio(4), position:'absolute', alignSelf:'center',zIndex:99, flexDirection:'row', flex:1, alignItems:'center', margin:StyleConfig.countPixelRatio(16)}]}>
-                      <FontAwesome name={"check-circle"} size={StyleConfig.countPixelRatio(30)} color={'#388E3C88'} />
-                      <View style={{marginLeft:StyleConfig.countPixelRatio(12)}}>
+                    { showWelcome && <View style={[styles.modalContainer,{ position:'absolute',}]}>
+                      <FontAwesome name={"check-circle"} size={StyleConfig.countPixelRatio(30)} color={StyleConfig.COLORS.lightGreen} />
+                      <View style={styles.modalTextWrap}>
                         <Text style={styles.textH23Medium}>{strings.you_are_all_set}</Text>
                         <Text style={styles.textH23Medium}>{strings.lets_add_your_first_event_now}</Text>
                       </View>

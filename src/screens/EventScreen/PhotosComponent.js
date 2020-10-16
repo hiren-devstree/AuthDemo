@@ -157,13 +157,13 @@ class PhotosComponent extends Component{
                 </View>
                 <ScrollView>
                     {albums.map((item,index)=>(
-                    <View key={item.id} style={[StyleConfig.card,{borderRadius:StyleConfig.countPixelRatio(20)}]}>
-                        <View style={{flexDirection:'row', marginBottom:10}}> 
+                    <View key={item.id} style={[styles.card,{borderRadius:StyleConfig.countPixelRatio(20)}]}>
+                        <View style={{flexDirection:'row', marginBottom: StyleConfig.countPixelRatio(10)}}> 
                                 <Image 
                                     style={{width:StyleConfig.width*0.15, height:StyleConfig.width*0.15, borderRadius:StyleConfig.width*0.075}}
                                     source={{uri: item.profilePhoto}}
                                 />
-                                <View style={{marginLeft: 10, justifyContent:'center'}}>
+                                <View style={{marginLeft: StyleConfig.countPixelRatio(10), justifyContent:'center'}}>
                                     <Text style={styles.textH23Medium}>{item.name}</Text>
                                     <Text style={styles.textH3Medium}>{item.designation}</Text>
                                 </View>
