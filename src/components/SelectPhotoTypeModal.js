@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Alert,
   Modal,
-  ScrollView,
   Text,
   View,
-  TextInput,
   TouchableOpacity
 } from "react-native";
-import { TextInputMask } from 'react-native-masked-text'
 import StyleConfig from 'src/helper/StyleConfig';
-import { Button } from 'src/components/common/Button';
-import {FontAwesome, Ionicons} from '@expo/vector-icons';
 import styles from 'src/helper/styles';
 import strings from 'src/helper/strings';
-import * as Const from 'src/helper/constant'
 
 const SelectPhotoTypeModal = (props) => {
     return (
@@ -30,22 +24,20 @@ const SelectPhotoTypeModal = (props) => {
             <View style={styles.modalBackLayer}>
                 <View style={styles.extModalContainer}>
                     <View style={{paddingVertical: StyleConfig.countPixelRatio(8)}}>
-                        <Text style={styles.textH23Medium}>Add Photos From</Text>
+                        <Text style={styles.textH23Medium}>{strings.add_photos_from}</Text>
                         
                         <TouchableOpacity onPress={props.onPressCamera} style={styles.modalSelectButtonWrap} >
-                            <Text style={styles.textH23Medium}>Take picture</Text>
+                            <Text style={styles.textH23Medium}>{strings.take_picture}</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity onPress={props.onPressGallery} style={styles.modalSelectButtonWrap} >
-                            <Text style={styles.textH23Medium}>Select from Gallery</Text>
+                            <Text style={styles.textH23Medium}>{strings.select_from_gallery}</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity onPress={props.onCancel} style={[styles.modalSelectButtonWrap, {borderBottomWidth:0, marginBottom: StyleConfig.countPixelRatio(-12)}]} >
-                            <Text style={[styles.textH23Medium, {color: StyleConfig.COLORS.red}]}>Cancel</Text>
+                            <Text style={[styles.textH23Medium, {color: StyleConfig.COLORS.red}]}>{strings.cancel}</Text>
                         </TouchableOpacity>
                     </View>
-
-                    
                 </View>
             </View>
         </Modal>

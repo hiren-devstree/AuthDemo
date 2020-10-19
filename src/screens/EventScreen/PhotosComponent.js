@@ -1,13 +1,10 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, { Component} from 'react';
 import {
-    Alert,
     FlatList,
     ScrollView,
     View,
     Text,
     Image,
-    StatusBar,
-    TextInput,
     TouchableOpacity
   } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
@@ -78,8 +75,6 @@ class PhotosComponent extends Component{
             images[ind].datetime = utils.randomDate()
         }
         let albums = this.getGroupBy('Date')
-        // albums = this.getGroupBy('Member')
-        
         this.state={
             albums,
             width: StyleConfig.countPixelRatio(110),
@@ -137,22 +132,6 @@ class PhotosComponent extends Component{
         })
         this.setState({albums})
     }
-    // addAttachment=()=>Alert.alert(
-    //     "",
-    //     "",
-    //     [
-    //       {
-    //         text: "Cancel",
-    //         onPress: () => console.log("Cancel Pressed"),
-    //         style: "cancel"
-    //       },
-    //       { text: "Camera", onPress: () => this.props.navigation.navigate(Const.NK_ATTACH_IMAGE,{ callback: this.addPhoto })
-    //      },
-    //       { text: "Gallery", onPress: () => this.pickImage() }
-    //     ],
-    //     { cancelable: false }
-    //   );
-
     changeGroupBy=(type)=>{
         if(type == this.state.groupBy){
             this.setState({ showDropdown:false })
@@ -166,7 +145,6 @@ class PhotosComponent extends Component{
         let itemWidth = (StyleConfig.width - StyleConfig.countPixelRatio(64))/3
         console.log(JSON.stringify(albums))
         return(
-
             <View style={styles.flex1}>
                 <View style={{height:StyleConfig.statusBarHeight, flexDirection:'row-reverse', alignItems:'center'}}>
                     <TouchableOpacity onPress={()=> this.setState({showDropdown:!showDropdown})} style={{flexDirection:'row-reverse', width: StyleConfig.countPixelRatio(110), alignItems:'center', justifyContent:'space-between'}}>

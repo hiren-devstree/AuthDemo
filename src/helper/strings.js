@@ -29,7 +29,12 @@ const strings = {
     "type_a_message": "Type a Message",
     "accepted": "Accepted",
     "declined": "Declined",
-    "tentative": "Tentative"
+    "tentative": "Tentative",
+    "add_photos_from": "Add Photos From",
+    "take_picture": "Take picture",
+    "select_from_gallery": "Select from Gallery",
+    "cancel": "Cancel"
+
 
 
 };
