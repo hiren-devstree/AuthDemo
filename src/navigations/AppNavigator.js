@@ -18,9 +18,10 @@ import GuestScreen from '../screens/GuestScreen';
 import PhotosScreen from '../screens/PhotosScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import PreviewPhoto from '../screens/PreviewPhoto';
+import AttachImage from '../screens/AttachImage';
 import EventDetailScreen from '../screens/EventScreen/EventDetailScreen';
 import StyleConfig from "../helper/StyleConfig";
-import {NK_INIT, NK_REGISTER, NK_LOGIN, NK_OTP_VERIFICATION, NK_DASHBOARD, NK_PREVIEW_PHOTO,
+import {NK_INIT, NK_REGISTER, NK_LOGIN, NK_OTP_VERIFICATION, NK_DASHBOARD, NK_PREVIEW_PHOTO, NK_ATTACH_IMAGE,
   NK_EVENTS, NK_EVENT_DETAILS, NK_PHOTOS, NK_GUESTS, NK_SETTINGS} from 'src/helper/constant' 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -71,15 +72,13 @@ const AppNavigator = ({ ...props }) => {
       <Stack.Navigator
         headerMode={'screen'}
       >
-        <Stack.Screen options={{ headerShown: false }} name="Init" component={InitScreen} path={'init'} />
-        <Stack.Screen options={{ headerShown: false }} name="Register" component={RegisterScreen} />
-        <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
-        <Stack.Screen options={{ headerShown: false }} name="OTPVerificationScreen" component={OTPVerificationScreen} />
-
-        <Stack.Screen options={{ headerShown: false }} name="Dashboard" component={TabNavigator} />
-        <Stack.Screen options={{ headerShown: false }} name="PreviewPhoto" component={PreviewPhoto} />
-                
-       
+        <Stack.Screen options={{ headerShown: false }} name={NK_INIT} component={InitScreen} path={'init'} />
+        <Stack.Screen options={{ headerShown: false }} name={NK_REGISTER} component={RegisterScreen} />
+        <Stack.Screen options={{ headerShown: false }} name={NK_LOGIN} component={LoginScreen} />
+        <Stack.Screen options={{ headerShown: false }} name={NK_OTP_VERIFICATION} component={OTPVerificationScreen} />
+        <Stack.Screen options={{ headerShown: false }} name={NK_DASHBOARD} component={TabNavigator} />
+        <Stack.Screen options={{ headerShown: false }} name={NK_PREVIEW_PHOTO} component={PreviewPhoto} />
+        <Stack.Screen options={{ headerShown: false }} name={NK_ATTACH_IMAGE} component={AttachImage} />   
       </Stack.Navigator>
 
     </NavigationContainer >

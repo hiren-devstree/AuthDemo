@@ -14,6 +14,8 @@ export const NK_LOGIN ="Login";
 export const NK_OTP_VERIFICATION ="OTPVerificationScreen";
 export const NK_DASHBOARD ="Dashboard";
 export const NK_PREVIEW_PHOTO ="PreviewPhoto";
+export const NK_ATTACH_IMAGE ="AttachImage";
+
 export const NK_EVENTS ="EventScreen";
 export const NK_EVENT_DETAILS ="EventDetailScreen";
 export const NK_PHOTOS ="Photos";

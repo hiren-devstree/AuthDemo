@@ -1,6 +1,6 @@
 import React, {useState, useEffect, Component} from 'react';
 import {
-    SafeAreaView,
+    Alert,
     FlatList,
     ScrollView,
     View,
@@ -18,7 +18,10 @@ import { Button } from 'src/components/common/Button';
 import FontAwesome  from '@expo/vector-icons/FontAwesome';
 import styles from 'src/helper/styles';
 import utils from 'src/helper/utils';
+import moment from 'moment';
 import _ from 'lodash';
+import SelectPhotoTypeModal from 'src/components/SelectPhotoTypeModal';
+
 const users ={
     "6":{
         "id":"6",
@@ -81,7 +84,8 @@ class PhotosComponent extends Component{
             albums,
             width: StyleConfig.countPixelRatio(110),
             showDropdown:false,
-            groupBy:'Date'
+            groupBy:'Date',
+            showSelectMediaModal:false
         }
     }
     getGroupBy=(type)=>{
@@ -111,28 +115,44 @@ class PhotosComponent extends Component{
         }
     }
     pickImage = async () => {
+        this.setState({showSelectMediaModal:false})
         let result = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.All,
           allowsEditing: true,
           aspect: [3, 5],
           quality: 1,
         });
-    
-        console.log(result);
-        let {albums} = this.state;
         if (!result.cancelled) {
-          //setImage(result.uri);
-          albums[0].photos.push({
-            "datetime":"",
-            uri:result.uri
-          })
-          this.setState({albums})
-
+          this.addPhoto(result.uri)
         }
       };
     previewPhoto=(item)=>{
         this.props.navigation.navigate( Const.NK_PREVIEW_PHOTO, { photoUri:item.uri })
     }
+    addPhoto=(photoUri)=>{
+        let {albums} = this.state;
+        albums[0].photos.push({
+            "datetime": moment(new Date()).format("YYYY-MM-DD"),
+            uri: photoUri
+        })
+        this.setState({albums})
+    }
+    // addAttachment=()=>Alert.alert(
+    //     "",
+    //     "",
+    //     [
+    //       {
+    //         text: "Cancel",
+    //         onPress: () => console.log("Cancel Pressed"),
+    //         style: "cancel"
+    //       },
+    //       { text: "Camera", onPress: () => this.props.navigation.navigate(Const.NK_ATTACH_IMAGE,{ callback: this.addPhoto })
+    //      },
+    //       { text: "Gallery", onPress: () => this.pickImage() }
+    //     ],
+    //     { cancelable: false }
+    //   );
+
     changeGroupBy=(type)=>{
         if(type == this.state.groupBy){
             this.setState({ showDropdown:false })
@@ -140,10 +160,9 @@ class PhotosComponent extends Component{
             let albums = this.getGroupBy(type);
             this.setState({groupBy:type, albums, showDropdown:false})
         }
-        
     }
     render(){
-        const { albums, width, showDropdown, groupBy } = this.state;
+        const { albums, width, showDropdown, groupBy, showSelectMediaModal } = this.state;
         let itemWidth = (StyleConfig.width - StyleConfig.countPixelRatio(64))/3
         console.log(JSON.stringify(albums))
         return(
@@ -199,7 +218,7 @@ class PhotosComponent extends Component{
                 </View>}
     
                 <TouchableOpacity
-                    onPress={this.pickImage}
+                    onPress={()=> this.setState({showSelectMediaModal: true})}
                 style={{position:'absolute',zIndex:87,
                 borderRadius: StyleConfig.countPixelRatio(28),
                 alignItems:'center', justifyContent:'center',
@@ -208,7 +227,14 @@ class PhotosComponent extends Component{
                  width:StyleConfig.countPixelRatio(56), marginTop: StyleConfig.height -(StyleConfig.statusBarHeight * 4 +StyleConfig.countPixelRatio(60)), marginLeft: StyleConfig.width- StyleConfig.countPixelRatio(16+56), height:StyleConfig.countPixelRatio(56), backgroundColor: StyleConfig.COLORS.white}}>
                      <FontAwesome name={"plus"} size={StyleConfig.countPixelRatio(32)} color={"#333"} />
                 </TouchableOpacity>
-    
+                <SelectPhotoTypeModal 
+                    visible={showSelectMediaModal} 
+                    onPressCamera={()=>{
+                        this.setState({showSelectMediaModal:!showSelectMediaModal})
+                        this.props.navigation.navigate(Const.NK_ATTACH_IMAGE,{ callback: this.addPhoto })}} 
+                    onPressGallery={this.pickImage}
+                    onCancel={()=> this.setState({showSelectMediaModal:!showSelectMediaModal})}
+                    />
             </View>
             
         )

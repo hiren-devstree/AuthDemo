@@ -57,6 +57,13 @@ const styles= StyleSheet.create({
         height:StyleConfig.countPixelRatio(100),
         width:StyleConfig.countPixelRatio(200)
     },
+    modalSelectButtonWrap:{
+        alignItems:'center',
+        justifyContent:'center',
+        paddingVertical:StyleConfig.countPixelRatio(16),
+        borderBottomWidth:1,
+        borderColor: StyleConfig.COLORS.headerBorderColor
+    },
     appDescText: {
         includeFontPadding:false,
         fontFamily: StyleConfig.fontSemiBold,
