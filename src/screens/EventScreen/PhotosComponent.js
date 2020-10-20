@@ -33,7 +33,7 @@ const users ={
         "profilePhoto": "https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png",
     }
 }
-const images = [
+let images = [
     { "id":"12", datetime:"", uri:"https://media.weddingz.in/images/5ccc11ff9323aa867c3b4123a10b8211/small-birthday-party-places-in-nagpur-to-host-your-glittering-evening.jpg"},
     { "id":"12", datetime:"", uri:"https://static.toiimg.com/photo/msid-61737605,width-96,height-65.cms"},
     { "id":"12", datetime:"", uri:"https://www.claimsaction.co.uk/wp-content/uploads/2017/12/new_years_party.jpg"},
@@ -110,27 +110,29 @@ class PhotosComponent extends Component{
         }
     }
     pickImage = async () => {
-        this.setState({showSelectMediaModal:false})
         let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
-          allowsEditing: true,
-          aspect: [3, 5],
-          quality: 1,
-        });
-        if (!result.cancelled) {
-          this.addPhoto(result.uri)
-        }
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [3, 5],
+            quality: 1,
+          });
+          this.setState({showSelectMediaModal:false})
+          if (!result.cancelled) {
+            this.addPhoto(result.uri)
+          }
+        
       };
     previewPhoto=(item)=>{
         this.props.navigation.navigate( Const.NK_PREVIEW_PHOTO, { photoUri:item.uri })
     }
     addPhoto=(photoUri)=>{
-        let {albums} = this.state;
-        albums[0].photos.push({
+        images.push({
+            "id":"12",
             "datetime": moment(new Date()).format("YYYY-MM-DD"),
             uri: photoUri
         })
-        this.setState({albums})
+        let albums = this.getGroupBy(this.state.groupBy);
+        this.setState({ albums})
     }
     changeGroupBy=(type)=>{
         if(type == this.state.groupBy){
@@ -210,7 +212,7 @@ class PhotosComponent extends Component{
                     onPressCamera={()=>{
                         this.setState({showSelectMediaModal:!showSelectMediaModal})
                         this.props.navigation.navigate(Const.NK_ATTACH_IMAGE,{ callback: this.addPhoto })}} 
-                    onPressGallery={this.pickImage}
+                    onPressGallery={()=>this.pickImage()}
                     onCancel={()=> this.setState({showSelectMediaModal:!showSelectMediaModal})}
                     />
             </View>
