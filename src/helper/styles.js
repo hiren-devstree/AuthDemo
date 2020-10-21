@@ -136,7 +136,7 @@ const styles= StyleSheet.create({
         opacity: 0.8
     },
     card:{
-        ...StyleConfig.card
+        ...StyleConfig.card,overflow:'hidden'
     },
     cardRow:{
         ...StyleConfig.card,

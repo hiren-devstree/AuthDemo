@@ -82,8 +82,8 @@ export default {
     borderRadius: 5 * ratioCount,
     shadowColor: "#000",
     shadowOffset: {
-    width: 0,
-    height: 2* ratioCount,
+      width: 0,
+      height: 2* ratioCount,
     },
     shadowOpacity: 0.3,
     elevation: 2,

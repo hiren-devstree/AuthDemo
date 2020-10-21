@@ -16,8 +16,6 @@ import styles from 'src/helper/styles';
 
 
 const ContactsListModal = (props) => {
-    const [allContacts, setAllContacts]= useState([]);
-    
     return (
       <View>
         <Modal
@@ -48,8 +46,8 @@ const ContactsListModal = (props) => {
                         </TouchableOpacity>
                     </View>
                     <FlatList
-                        data={allContacts.length ? allContacts : props.contacts}
-                        extraData={allContacts}
+                        data={props.contacts}
+                        extraData={props}
                         renderItem={({item, index})=><TouchableOpacity 
                             onPress={()=> props.onSelectContact(index)}
                         style={{

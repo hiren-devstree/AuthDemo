@@ -47,7 +47,7 @@ class ChatComponent extends Component{
     }
     addPhoto=(photoUri)=>{
         let {chats}=this.state
-        chats=[{ message: null, userId: 50,uri: photoUri, type: "photo"}, ...chats]
+        chats=[{ message: null, userId: chats.length %2==0 ? 50 :0,uri: photoUri, type: "photo"}, ...chats]
         this.setState({ chats})
     }
     render(){
@@ -65,17 +65,17 @@ class ChatComponent extends Component{
                                 renderItem={({item})=>{
                                     console.log("uri-", item.uri)
                                     return(
-                                        <View style={{flexDirection: USER_ID == item.userId ? 'row-reverse': "row", paddingHorizontal:8}}>
+                                        <View style={{flexDirection: USER_ID == item.userId ? 'row-reverse': "row", paddingHorizontal:StyleConfig.countPixelRatio(8), marginTop: StyleConfig.countPixelRatio(8)}}>
                                             <Image 
                                                 source={{uri: item.userId ? "https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png": "https://icon-library.com/images/lady-icon/lady-icon-7.jpg"}}
                                                 style={styles.chatProfilePhoto}
                                             />
                                             {item.type == "photo" ?
-                                            <View>
-                                            <Image
-                                                source={{uri:item.uri}}
-                                                style={{width: StyleConfig.width*0.75, height: StyleConfig.width*0.75}}
-                                            />
+                                            <View style={[styles.cardRow,{padding:StyleConfig.countPixelRatio(2)}]}>
+                                                <Image
+                                                    source={{uri:item.uri}}
+                                                    style={{ width: StyleConfig.width*0.7, height: StyleConfig.width*0.7 }}
+                                                />
                                             </View>
                                             :
                                             <View style={ styles.cardRow}>

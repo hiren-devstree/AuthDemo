@@ -20,6 +20,7 @@ export const NK_EVENTS ="EventScreen";
 export const NK_EVENT_DETAILS ="EventDetailScreen";
 export const NK_PHOTOS ="Photos";
 export const NK_GUESTS ="Guests";
+export const NK_GUESTS_DETAILS = "GuestsDetails"
 export const NK_SETTINGS ="Settings";
 
 

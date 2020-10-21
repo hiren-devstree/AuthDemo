@@ -13,15 +13,16 @@ import {
   } from 'react-native';
 import Animated, {Easing} from 'react-native-reanimated';
 import * as Contacts from 'expo-contacts';
+import strings from 'src/helper/strings';
 import StyleConfig from 'src/helper/StyleConfig';
 import AppImages from 'src/assets/images';
 import { Button } from 'src/components/common/Button';
 import {FontAwesome, Ionicons} from '@expo/vector-icons';
 import styles from 'src/helper/styles';
-import ContactsListModal from 'src/screens/EventScreen/ContactsListModal';
+import ContactsListModal from 'src/components/ContactsListModal';
 import AddGuestModal from 'src/screens/EventScreen/AddGuestModal';
 import ExpandedComponent from 'src/components/ExpandedComponent';
-import strings from '../../helper/strings';
+
 
 const {
     set,

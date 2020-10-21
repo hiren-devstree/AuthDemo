@@ -33,7 +33,10 @@ const strings = {
     "add_photos_from": "Add Photos From",
     "take_picture": "Take picture",
     "select_from_gallery": "Select from Gallery",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "guest_details": "Guest Details",
+    "enter_guest_group_name": "Enter guest group name",
+    "guest_list":"Guest List"
 
 
 

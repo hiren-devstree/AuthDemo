@@ -28,12 +28,10 @@ class SettingsScreen extends Component{
             <>
               <StatusBar barStyle="dark-content" />
               <SafeAreaView style={{ flex:1, backgroundColor:'#fff'}}>
-                <ScrollView
-                  style={styles.scrollView}>
-                 <View style={{flexDirection: 'row', alignItems:'center', justifyContent:'center'}}>
-                         <Text style={styles.headerTitle}>Setting</Text>
-                    </View>
-                 
+                <View style={{flexDirection: 'row', alignItems:'center', justifyContent:'center'}}>
+                    <Text style={styles.headerTitle}>Setting</Text>
+                </View>
+                <ScrollView style={styles.scrollView}>
                 </ScrollView>
               </SafeAreaView>
             </>

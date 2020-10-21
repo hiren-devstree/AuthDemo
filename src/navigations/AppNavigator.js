@@ -15,6 +15,7 @@ import LoginScreen from '../screens/LoginScreen';
 import OTPVerificationScreen from '../screens/OTPVerificationScreen';
 import EventScreen from '../screens/EventScreen';
 import GuestScreen from '../screens/GuestScreen';
+import GuestDetailScreen from '../screens/GuestScreen/GuestDetailScreen';
 import PhotosScreen from '../screens/PhotosScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import PreviewPhoto from '../screens/PreviewPhoto';
@@ -22,7 +23,7 @@ import AttachImage from '../screens/AttachImage';
 import EventDetailScreen from '../screens/EventScreen/EventDetailScreen';
 import StyleConfig from "../helper/StyleConfig";
 import {NK_INIT, NK_REGISTER, NK_LOGIN, NK_OTP_VERIFICATION, NK_DASHBOARD, NK_PREVIEW_PHOTO, NK_ATTACH_IMAGE,
-  NK_EVENTS, NK_EVENT_DETAILS, NK_PHOTOS, NK_GUESTS, NK_SETTINGS} from 'src/helper/constant' 
+  NK_EVENTS, NK_EVENT_DETAILS, NK_PHOTOS, NK_GUESTS, NK_GUESTS_DETAILS, NK_SETTINGS} from 'src/helper/constant' 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const EventStack = ((props) =>
@@ -31,6 +32,14 @@ const EventStack = ((props) =>
     <Stack.Screen options={{ headerShown: false }} name={NK_EVENT_DETAILS} component={EventDetailScreen} />
   </Stack.Navigator>
 )
+
+const GuestStack = ((props) =>
+  <Stack.Navigator>
+    <Stack.Screen options={{ headerShown: false }} name={NK_GUESTS} component={GuestScreen} />
+    <Stack.Screen options={{ headerShown: false }} name={NK_GUESTS_DETAILS} component={GuestDetailScreen} />
+  </Stack.Navigator>
+)
+
 const TabNavigator = ((props) => {
   return (
     <Tab.Navigator
@@ -57,7 +66,7 @@ const TabNavigator = ((props) => {
     >
       <Tab.Screen name={NK_EVENTS} component={EventStack} />
       <Tab.Screen name={NK_PHOTOS} component={PhotosScreen} />
-      <Tab.Screen  name={NK_GUESTS} component={GuestScreen} />
+      <Tab.Screen  name={NK_GUESTS} component={GuestStack} />
       <Tab.Screen name={NK_SETTINGS} component={SettingsScreen} />
     </Tab.Navigator>
   )
