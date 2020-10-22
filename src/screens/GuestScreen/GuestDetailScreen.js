@@ -25,6 +25,9 @@ import * as Const from 'src/helper/constant';
 import * as Contacts from 'expo-contacts';
 const TextInputWrap=({children})=><View style={[styles.textInputWrap, {width:null,margin:StyleConfig.countPixelRatio(8)}]}>
                 {children}</View>
+const TextInputWrap2=({children})=><View style={[styles.textInputWrap, 
+{width: StyleConfig.width*0.5 - StyleConfig.countPixelRatio(32),  margin:StyleConfig.countPixelRatio(8)}]}>
+                {children}</View>
 class GuestDetailScreen extends Component{
     constructor(props){
         super(props);
@@ -84,9 +87,33 @@ class GuestDetailScreen extends Component{
                                 placeholder={strings.enter_guest_group_name}
                             />
                         </TextInputWrap>
+                        <View style={styles.row}>
+                        <TextInputWrap2>
+                            <TextInput
+                                style={styles.textH3Regular}
+                                value={name}
+                                keyboardType={'phone-pad'}
+                                onChangeText={(name)=> this.setState({name})}
+                                placeholderTextColor={StyleConfig.COLORS.hintTextColor}
+                                placeholder={'Adult'}
+                            />
+                        </TextInputWrap2>
+                        <TextInputWrap2>
+                            <TextInput
+                                style={styles.textH3Regular}
+                                value={name}
+                                keyboardType={'phone-pad'}
+                                onChangeText={(name)=> this.setState({name})}
+                                placeholderTextColor={StyleConfig.COLORS.hintTextColor}
+                                placeholder={'Children'}
+                            />
+                        </TextInputWrap2>
+                        
+                        </View>
+                        
                         <View style={[styles.rowAlignCenter, {justifyContent: 'space-between', padding: StyleConfig.countPixelRatio(8)}]}>
                             <Text style={styles.textH23Medium}>{`${strings.guest_list} (${this.state.contacts.length})`}</Text>
-                            <FontAwesome onPress={()=> this.setState({contactListVisible:true})} name={'plus'} color={StyleConfig.COLORS.defaultTextColor} size={StyleConfig.countPixelRatio(20)} />
+                            <FontAwesome onPress={()=> this.setState({contactListVisible:true})} name={'plus-square-o'} color={StyleConfig.COLORS.defaultTextColor} size={StyleConfig.countPixelRatio(30)} />
                         </View>
                         <FlatList 
                             data={this.state.contacts}
@@ -96,10 +123,16 @@ class GuestDetailScreen extends Component{
                                 alignItems:'center', 
                                 justifyContent:'space-between', 
                                 paddingHorizontal:StyleConfig.countPixelRatio(10),
-                                 paddingVertical: StyleConfig.countPixelRatio(8),
-                                  backgroundColor: index %2 == 0 ? "#fafaff": "#fafffa"}}>
-                                <Text style={styles.textH3Regular}>{`${item.firstName} ${item.lastName}`}</Text>
-                                <FontAwesome onPress={()=> alert("Do you want to delete contact?")} name={'close'} color={StyleConfig.COLORS.defaultTextColor} size={StyleConfig.countPixelRatio(18)} />
+                                 paddingVertical: StyleConfig.countPixelRatio(10),
+                                  backgroundColor: index %2 == 0 ? StyleConfig.COLORS.white : StyleConfig.COLORS.offWhite}}>
+                                      <View>
+                                            <Text style={styles.textH3Regular}>{`${item.firstName} ${item.lastName}`}</Text>
+                                            <View style={{height:4}} />
+                                            <Text style={styles.textH3Regular}>{`${item.phoneNumbers ? item.phoneNumbers[0].number:''}`}</Text>
+                                      </View>
+                                
+                                <FontAwesome onPress={()=> alert("Do you want to delete contact?")}
+                                 name={'trash-o'} color={StyleConfig.COLORS.defaultTextColor} size={StyleConfig.countPixelRatio(26)} />
                             </View>}
                         />
                     </View>

@@ -65,7 +65,7 @@ class GuestScreen extends Component{
                         <FontAwesome name={"plus-square-o"} color={StyleConfig.COLORS.purple} size={StyleConfig.headerIconSize*1} />
                       </TouchableOpacity>}
                       renderItem={({item,index})=>
-                        <View style={[styles.cardRow, {paddingHorizontal: StyleConfig.countPixelRatio(12)}]}>
+                        <View style={[styles.cardRow, {paddingHorizontal: StyleConfig.countPixelRatio(12), paddingVertical:12}]}>
                           <View style={styles.flex1}>
                             <Text style={styles.textH23Medium}>{item.name}</Text>
                             <Text style={styles.textH3Regular}>{`${item.contacts.length} contacts`}</Text>

@@ -21,7 +21,7 @@ const AddGuestModal = (props) => {
     return (
       <View>
         <Modal
-            animationType="fade"
+            animationType="slide"
             transparent={true}
             visible={props.visible}
             onRequestClose={() => {
@@ -31,12 +31,12 @@ const AddGuestModal = (props) => {
             <View style={styles.modalBackLayer}>
                 <View style={styles.extModalContainer}>
                     <View style={styles.extModalHeaderWrap}>
+                        <TouchableOpacity style={styles.center} onPress={props.onClose}>
+                            <Text style={[styles.textH3Regular, {color: StyleConfig.COLORS.white, marginLeft:StyleConfig.countPixelRatio(8) }]}>{strings.cancel}</Text>
+                        </TouchableOpacity>
                         <Text style={[styles.textH2Medium, {color: StyleConfig.COLORS.white, marginLeft:StyleConfig.countPixelRatio(8) }]}>{strings.add_guest}</Text>
-                        <TouchableOpacity onPress={props.onClose}>
-                            <FontAwesome name={ "close"} 
-                                color={StyleConfig.COLORS.white}
-                                size={StyleConfig.countPixelRatio(20)}
-                                />
+                        <TouchableOpacity style={styles.center} onPress={props.onClose}>
+                            <Text style={[styles.textH3Regular, {color: StyleConfig.COLORS.white, marginLeft:StyleConfig.countPixelRatio(8) }]}>{strings.done}</Text>
                         </TouchableOpacity>
                     </View>
                     <ScrollView style={{paddingVertical: StyleConfig.countPixelRatio(8)}}>
@@ -71,9 +71,9 @@ const AddGuestModal = (props) => {
                             }}
                         />
                     </View>
-                    <View style={styles.rowJustifyCenter}>
+                    {/* <View style={styles.rowJustifyCenter}>
                     <Button onPress={props.onApply} buttonWrap={{width:StyleConfig.width*0.5, minHeight:StyleConfig.countPixelRatio(36)}}>Invite</Button>
-                    </View>
+                    </View> */}
                     </ScrollView>
 
                     

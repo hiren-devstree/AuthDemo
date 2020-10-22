@@ -23,7 +23,7 @@ const styles= StyleSheet.create({
     modalBackLayer:{
         flex:1,
         backgroundColor:"#00000099",
-        justifyContent:'center'
+        justifyContent:'flex-end'
     },
     center: {
         alignItems:'center',
@@ -36,6 +36,9 @@ const styles= StyleSheet.create({
         flex:1,
         backgroundColor: StyleConfig.COLORS.white
     },
+    row:{
+        flexDirection:'row',
+    }, 
     flexRow1:{
         flexDirection:'row',
         flex:1
@@ -93,15 +96,19 @@ const styles= StyleSheet.create({
     },
     extModalContainer:{
         ...StyleConfig.card,
-        minHeight: StyleConfig.height*0.2
+        marginBottom: 0,
+        borderTopLeftRadius:StyleConfig.countPixelRatio(30),
+        borderTopRightRadius: StyleConfig.countPixelRatio(30),
+        overflow:'hidden',
+        minHeight: StyleConfig.height- StyleConfig.convertHeightPerVal(80)
     },
     extModalHeaderWrap:{ 
         justifyContent:'space-between',
         flexDirection:'row',
         backgroundColor:StyleConfig.COLORS.purple,
         padding:StyleConfig.countPixelRatio(16),
-        marginHorizontal: StyleConfig.countPixelRatio( -8),
-        marginTop: StyleConfig.countPixelRatio( -8)
+        marginHorizontal: StyleConfig.countPixelRatio(-8),
+        marginTop: StyleConfig.countPixelRatio(-8)
     },
     modalTextWrap:{
         marginLeft:StyleConfig.countPixelRatio(12)

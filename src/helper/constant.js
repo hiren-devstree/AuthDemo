@@ -16,9 +16,9 @@ export const NK_DASHBOARD ="Dashboard";
 export const NK_PREVIEW_PHOTO ="PreviewPhoto";
 export const NK_ATTACH_IMAGE ="AttachImage";
 
-export const NK_EVENTS ="EventScreen";
+export const NK_EVENTS ="Events";
 export const NK_EVENT_DETAILS ="EventDetailScreen";
-export const NK_PHOTOS ="Photos";
+export const NK_MEMORIES ="Memories";
 export const NK_GUESTS ="Guests";
 export const NK_GUESTS_DETAILS = "GuestsDetails"
 export const NK_SETTINGS ="Settings";

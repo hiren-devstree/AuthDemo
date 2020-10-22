@@ -70,7 +70,7 @@ const images = [
         ]
     }
 ]
-class PhotosScreen extends Component{
+class MemoriesScreen extends Component{
     constructor(props){
         super(props);
         let albums = images.map((album,index)=>({...album,
@@ -142,7 +142,6 @@ class PhotosScreen extends Component{
                                 keyExtractor={(item, index)=> `${item.id}${index}`}
                                 columnWrapperStyle={{
                                     flex: 1,
-                                    //justifyContent: "space-around",
                                     marginVertical:StyleConfig.countPixelRatio(4)
                                 }}
                                 renderItem={({item})=><TouchableOpacity onPress={()=> this.previewPhoto(item)}>
@@ -165,5 +164,5 @@ class PhotosScreen extends Component{
         )
     }
 }
-export default PhotosScreen;
+export default MemoriesScreen;
 
