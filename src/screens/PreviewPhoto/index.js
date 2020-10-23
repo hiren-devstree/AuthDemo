@@ -55,12 +55,9 @@ class PreviewPhoto extends Component {
                 </View>
                 { showHideDelete && <View style={{
                     position:'absolute',
-                    //width: StyleConfig.countPixelRatio(88),
                     backgroundColor: StyleConfig.COLORS.offWhite,
                     marginTop: this.state.topPadding,
                     right: StyleConfig.countPixelRatio(16)
-                    //marginLeft: StyleConfig.width - StyleConfig.countPixelRatio(100),
-
                 }}>
                     <TouchableOpacity onPress={()=> this.setState({showHideDelete:!showHideDelete})} style={{paddingHorizontal:StyleConfig.countPixelRatio(10), paddingVertical:StyleConfig.countPixelRatio(10)}}>
                         <Text style={styles.textH23Medium}>{"Hide"}</Text>

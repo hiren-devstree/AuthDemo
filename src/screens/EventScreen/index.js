@@ -6,7 +6,7 @@ import {
   ScrollView,
   View,
   Text,
-  Alert,
+  FlatList,
   StatusBar,
   TouchableOpacity
 } from 'react-native';
@@ -19,7 +19,8 @@ import styles from 'src/helper/styles';
 import * as Const from 'src/helper/constant';
 import AddEventComponent from 'src/screens/EventScreen/AddEventComponent';
 import EventListItem from 'src/screens/EventScreen/EventListItem';
-import { FlatList } from 'react-native-gesture-handler';
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+
 import strings from 'src/helper/strings';
 const userId = 50;
 
@@ -77,9 +78,11 @@ class EventScreen extends Component{
     constructor(props){
         super(props);
         this.state={
-          isCalendarView: false,
-          showWelcome: true,
-          data: []
+          isCalendarView: true,
+          showWelcome: false,
+          data: DUMMY_DATA,
+          calendarHeight: 0,
+          selectedDate: new Date()
         }
         this.setState({showWelcome:true})
         setTimeout(()=>{
@@ -88,11 +91,11 @@ class EventScreen extends Component{
         5000);
     }
     componentDidMount= async()=>{
-      this.props.loader(true);
-      setTimeout(()=>{
-        this.setState({data:DUMMY_DATA})
-        this.props.loader(false)
-      }, 2000);
+      // this.props.loader(true);
+      // setTimeout(()=>{
+      //   this.setState({data:DUMMY_DATA})
+      //   this.props.loader(false)
+      // }, 2000);
       
     }
     onSavePress=()=> {
@@ -114,7 +117,7 @@ class EventScreen extends Component{
         }
     }
     render(){
-      const { isCalendarView, showWelcome, data } = this.state;
+      const { isCalendarView, showWelcome, data, selectedDate, calendarHeight } = this.state;
         return (
             <>
               <StatusBar barStyle="dark-content" />
@@ -130,12 +133,53 @@ class EventScreen extends Component{
                         style={styles.backWrap}>
                         <FontAwesome name={ isCalendarView ? Const.IC_EVENT_LIST : Const.IC_EVENT_CALENDAR} color={'#333333dd'} size={StyleConfig.countPixelRatio(24)} />
                       </TouchableOpacity>
-                  </View>                 
-                <ScrollView
+                  </View>    
+                  {isCalendarView &&<View style={{ flex:1 }} >
+                      <Calendar
+                        theme={{
+                          calendarBackground: '#fcfcfc',
+                          textSectionTitleColor: StyleConfig.COLORS.purple,
+                          textSectionTitleDisabledColor: '#ff0000', // "#d9e1e8"
+                          selectedDayBackgroundColor: StyleConfig.COLORS.darkPurple, // "#00adf5"
+                          selectedDayTextColor: '#ffffff',
+                          todayTextColor: StyleConfig.COLORS.darkPurple,
+                          dayTextColor: '#2d4150',
+                          textDisabledColor: '#d9e1e8',
+                          dotColor: StyleConfig.COLORS.darkPurple,
+                          selectedDotColor: '#ffffff',
+                          arrowColor: StyleConfig.COLORS.darkPurple,
+                          disabledArrowColor: '#d9e1e8',
+                          monthTextColor: StyleConfig.COLORS.darkPurple,
+                          indicatorColor: StyleConfig.COLORS.darkPurple,
+                          textDayFontFamily: StyleConfig.fontLight,
+                          textMonthFontFamily: StyleConfig.fontBold,
+                          textDayHeaderFontFamily: StyleConfig.fontMedium,
+                          textTodayFontFamily: StyleConfig.fontBold,
+                          textDayFontSize: 16,
+                          textMonthFontSize: 16,
+                          textDayHeaderFontSize: 13
+                        }}
+                        onDayPress={({dateString}) => this.setState({ selectedDate:dateString })}
+                        markedDates={{
+                          [selectedDate]: {selected: true},
+                          '2020-10-17': {marked: true},
+                          '2020-10-18': {marked: true}
+                          
+                        }}
+                      />
+                      
+                      <FlatList 
+                        data={data}
+                        extraData={this.state}
+                        keyExtractor={(item,index)=>item.id.toString()}
+                        renderItem={({item,index})=> <EventListItem onPress={()=> this.onItemPress(item)} event={item} isHostedByMe={item.hostUserId == userId} /> }
+                        ListFooterComponent={() => <EventListItem onPress={ () => this.onItemPress(null)}/>}
+                      />
+                    </View>}             
+                {!isCalendarView  && <ScrollView
                   style={styles.content}>
                     { data.length == 0 &&  <AddEventComponent onSavePress={this.onSavePress} />}
-                    {data.length > 0 && !isCalendarView && 
-                      <FlatList 
+                    {data.length > 0 && <FlatList 
                         data={data}
                         extraData={this.state}
                         keyExtractor={(item,index)=>item.id.toString()}
@@ -151,6 +195,7 @@ class EventScreen extends Component{
                       </View>
                     </View>}
                 </ScrollView>
+                }
                 
               </SafeAreaView>
             </>
