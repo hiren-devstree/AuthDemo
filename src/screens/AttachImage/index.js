@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Platform } from 'react-native';
-import { Camera } from 'expo-camera'; 
+import { Camera } from 'expo-camera';
 import * as FileSystem from 'expo-file-system';
 import * as Permissions from 'expo-permissions';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
@@ -42,28 +42,32 @@ const wbIcons = {
   incandescent: 'wb-incandescent',
 };
 
-class AttachImage extends React.Component {
-  state = {
-    flash: 'off',
-    zoom: 0,
-    autoFocus: 'on',
-    type: 'back',
-    whiteBalance: 'auto',
-    ratio: '9:16',
-    ratios: [],
-    barcodeScanning: false,
-    faceDetecting: false,
-    faces: [],
-    newPhotos: false,
-    permissionsGranted: false,
-    pictureSize: undefined,
-    pictureSizes: [],
-    pictureSizeId: 0,
-    showGallery: false,
-    showMoreOptions: false,
-  };
+class AttachImage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      flash: 'off',
+      zoom: 0,
+      autoFocus: 'on',
+      type: 'back',
+      whiteBalance: 'auto',
+      ratio: '9:16',
+      ratios: [],
+      barcodeScanning: false,
+      faceDetecting: false,
+      faces: [],
+      newPhotos: false,
+      permissionsGranted: false,
+      pictureSize: undefined,
+      pictureSizes: [],
+      pictureSizeId: 0,
+      showGallery: false,
+      showMoreOptions: false,
+    };
+  }
 
-  async UNSAFE_componentWillMount() {
+
+  componentDidMount = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ permissionsGranted: status === 'granted' })
     try {
@@ -93,14 +97,14 @@ class AttachImage extends React.Component {
 
   zoomIn = () => this.setState({ zoom: this.state.zoom + 0.1 > 1 ? 1 : this.state.zoom + 0.1 });
 
-  takePicture = async() => {
+  takePicture = async () => {
     // Option 1 set exif:false
 
     // Option 2 
     if (this.camera) {
       await this.camera.takePictureAsync({
-        quality:0.5,
-        exif:true
+        quality: 0.5,
+        exif: true
       }).then(photo => {
         //photo.exif.Orientation = 1
         this.onPictureSaved(photo)
@@ -113,10 +117,10 @@ class AttachImage extends React.Component {
   onPictureSaved = async photo => {
     let resizedPhoto = await ImageManipulator.manipulateAsync(
       photo.uri,
-      [{ resize: { width: photo.width*0.6, height: photo.height*0.6 } }],
+      [{ resize: { width: photo.width * 0.6, height: photo.height * 0.6 } }],
       { compress: 0.60, format: ImageManipulator.SaveFormat.JPEG, base64: false }
     );
-    
+
     await FileSystem.copyAsync({
       from: resizedPhoto.uri,
       to: `${FileSystem.documentDirectory}photos/${Date.now()}.jpeg`,
@@ -135,7 +139,7 @@ class AttachImage extends React.Component {
         pictureSizeId = pictureSizes.indexOf('High');
       } else {
         // returned array is sorted in ascending order - default size is the largest one
-        pictureSizeId = pictureSizes.length-1;
+        pictureSizeId = pictureSizes.length - 1;
       }
       this.setState({ pictureSizes, pictureSizeId, pictureSize: pictureSizes[pictureSizeId] });
     }
@@ -150,20 +154,20 @@ class AttachImage extends React.Component {
     if (newId >= length) {
       newId = 0;
     } else if (newId < 0) {
-      newId = length -1;
+      newId = length - 1;
     }
     this.setState({ pictureSize: this.state.pictureSizes[newId], pictureSizeId: newId });
   }
 
-  renderNoPermissions = () => 
+  renderNoPermissions = () =>
     <View style={styles.noPermissions}>
       <Text style={{ color: StyleConfig.COLORS.white }}>{string.str_camera_permision}</Text>
     </View>
 
-  renderTopBar = () => 
+  renderTopBar = () =>
     <View
-      style={[styles.topBar,{flexDirection: 'row',}]}>
-      <TouchableOpacity style={styles.toggleButton} onPress={() => this.props.navigation.goBack() }>
+      style={[styles.topBar, { flexDirection: 'row', }]}>
+      <TouchableOpacity style={styles.toggleButton} onPress={() => this.props.navigation.goBack()}>
         <Ionicons name="md-arrow-back" size={32} color={StyleConfig.COLORS.white} />
       </TouchableOpacity>
       <TouchableOpacity style={styles.toggleButton} onPress={this.toggleFacing}>
@@ -178,45 +182,45 @@ class AttachImage extends React.Component {
     </View>
 
   renderSideBar = () =>
-  <View
-    style={styles.sideBar}>
+    <View
+      style={styles.sideBar}>
       <TouchableOpacity style={{}} onPress={this.zoomOut}>
         <MaterialIcons name={"zoom-out"} size={40} color={StyleConfig.COLORS.white} />
       </TouchableOpacity>
       <TouchableOpacity style={{}} onPress={this.zoomIn}>
         <MaterialIcons name={"zoom-in"} size={40} color={StyleConfig.COLORS.white} />
       </TouchableOpacity>
-  </View>
+    </View>
 
   renderBottomBar = () =>
-    <View style={[styles.bottomBar,{}]}>
-        <TouchableOpacity
-          onPress={this.takePicture}
-          style={{ alignSelf: 'center' }}
-        >
-          <Ionicons name="ios-radio-button-on" size={70} color={StyleConfig.COLORS.white} />
-        </TouchableOpacity>
+    <View style={[styles.bottomBar, {}]}>
+      <TouchableOpacity
+        onPress={this.takePicture}
+        style={{ alignSelf: 'center' }}
+      >
+        <Ionicons name="ios-radio-button-on" size={70} color={StyleConfig.COLORS.white} />
+      </TouchableOpacity>
     </View>
 
   renderCamera = () =>
     (
-        <Camera
-          ref={ref => {
-            this.camera = ref;
-          }}
-          
-          style={styles.camera}
-          type={this.state.type}
-          flashMode={this.state.flash}
-          zoom={this.state.zoom}
-          whiteBalance={this.state.whiteBalance}
-          ratio={this.state.ratio}
-          pictureSize={this.state.pictureSize}
-          >
-          {this.renderTopBar()}
-          {this.renderSideBar()}
-          {this.renderBottomBar()}
-        </Camera>
+      <Camera
+        ref={ref => {
+          this.camera = ref;
+        }}
+
+        style={styles.camera}
+        type={this.state.type}
+        flashMode={this.state.flash}
+        zoom={this.state.zoom}
+        whiteBalance={this.state.whiteBalance}
+        ratio={this.state.ratio}
+        pictureSize={this.state.pictureSize}
+      >
+        {this.renderTopBar()}
+        {this.renderSideBar()}
+        {this.renderBottomBar()}
+      </Camera>
     );
   render() {
     const cameraScreenContent = this.state.permissionsGranted
