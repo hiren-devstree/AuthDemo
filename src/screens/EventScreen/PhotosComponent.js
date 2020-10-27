@@ -157,20 +157,20 @@ class PhotosComponent extends Component {
                     </TouchableOpacity>
                 </View>
                 <ScrollView>
-                    {albums.map((item, index) => (
-                        <View key={item.id} style={[styles.card, { borderRadius: StyleConfig.countPixelRatio(20) }]}>
+                    {albums.map((albumItem, index) => (
+                        <View key={`${albumItem.id}`} style={[styles.card, { borderRadius: StyleConfig.countPixelRatio(20) }]}>
                             <View style={{ flexDirection: 'row', marginBottom: StyleConfig.countPixelRatio(10) }}>
                                 <Image
                                     style={{ width: StyleConfig.width * 0.15, height: StyleConfig.width * 0.15, borderRadius: StyleConfig.width * 0.075 }}
-                                    source={{ uri: item.profilePhoto }}
+                                    source={{ uri: albumItem.profilePhoto }}
                                 />
                                 <View style={{ marginLeft: StyleConfig.countPixelRatio(10), justifyContent: 'center' }}>
-                                    <Text style={styles.textH23Medium}>{item.name}</Text>
-                                    <Text style={styles.textH3Medium}>{item.designation}</Text>
+                                    <Text style={styles.textH23Medium}>{albumItem.name}</Text>
+                                    <Text style={styles.textH3Medium}>{albumItem.designation}</Text>
                                 </View>
                             </View>
                             <FlatList
-                                data={item.photos}
+                                data={albumItem.photos}
                                 numColumns={3}
                                 extraData={this.state}
                                 keyExtractor={(item, index) => `${item.id}${index}`}

@@ -117,7 +117,7 @@ class GuestDetailScreen extends Component {
                             </View>
                             <FlatList
                                 data={this.state.contacts}
-                                keyExtractor={({ item, index }) => `guestlist${index}`}
+                                keyExtractor={(item, index) => `guestlist${index}`}
                                 renderItem={({ item, index }) =>
                                     <View style={{
                                         flexDirection: 'row',

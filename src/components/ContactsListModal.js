@@ -41,7 +41,7 @@ const ContactsListModal = (props) => {
                         <FlatList
                             data={props.contacts}
                             extraData={props}
-                            keyExtractor={({ item, index }) => `contact${index}`}
+                            keyExtractor={(item, index) => `contact${index}`}
                             renderItem={({ item, index }) => <TouchableOpacity
                                 onPress={() => props.onSelectContact(index)}
                                 style={{

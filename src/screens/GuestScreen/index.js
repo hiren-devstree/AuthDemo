@@ -58,7 +58,7 @@ class GuestScreen extends Component {
             <FlatList
               data={this.state.data}
               extraData={this.state}
-              keyExtractor={({ item, index }) => `mainguestlist${index}`}
+              keyExtractor={(item, index) => `mainguestlist${index}`}
               ListFooterComponent={() => <TouchableOpacity onPress={() => this.props.navigation.navigate(Const.NK_GUESTS_DETAILS, { item: ITEM_OBJ })}
                 style={[styles.card, styles.center, {
                   paddingVertical: StyleConfig.countPixelRatio(8),

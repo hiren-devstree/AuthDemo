@@ -62,7 +62,7 @@ class ChatComponent extends Component {
                             <FlatList
                                 data={this.state.chats}
                                 inverted
-                                keyExtractor={({ item, index }) => `chat${index}`}
+                                keyExtractor={(item, index) => `chat${index}`}
                                 renderItem={({ item }) => {
                                     console.log("uri-", item.uri)
                                     return (

@@ -24,7 +24,7 @@ const VendorComponent = (props) => {
     const [phone, setPhone] = useState('');
     const [addNew, setIsNew] = useState(props.initial);
     return (
-        <ScrollView>
+        <View style={styles.flex1}>
             { addNew ?
                 <View style={[styles.flex1, styles.card,]}>
                     <Text style={styles.textH3Regular}>{'We want your party to be stressfree and painless. Let\'s add everyone who is going to serve at the event. Cateres, Photographers etc..'}</Text>
@@ -62,19 +62,22 @@ const VendorComponent = (props) => {
                     <View style={{ flexDirection: 'row-reverse' }}>
                         <Button onPress={props.onSavePress} buttonWrap={{ width: StyleConfig.width * 0.25, minHeight: StyleConfig.countPixelRatio(36) }}>Invite</Button>
                     </View>
-                </View> : <View style={[styles.flex1, styles.card,]}>
-                    <FlatList
-                        data={props.vendors}
-                        extraData={props}
-                        keyExtractor={(item) => `vendor${item.id}`}
-                        renderItem={({ item }) => <View style={{ flexDirection: 'row', borderBottomColor: StyleConfig.COLORS.headerBorderColor, borderBottomWidth: 1, alignItems: 'center', paddingVertical: StyleConfig.countPixelRatio(8) }}>
-                            <FontAwesome name={item.status == 1 ? "check-circle" : item.status == -1 ? "times-circle" : "question-circle"}
-                                size={StyleConfig.countPixelRatio(24)}
-                                color={item.status == 1 ? StyleConfig.COLORS.lightGreen : item.status == -1 ? StyleConfig.COLORS.lightRed : StyleConfig.COLORS.lightYellow} />
-                            <View style={{ width: StyleConfig.countPixelRatio(6) }} />
-                            <Text style={styles.textH23Medium}>{item.name}</Text>
-                        </View>}
-                        ListFooterComponent={() => <TouchableOpacity onPress={props.onAddNewPress} style={[styles.center, {
+                </View> :
+
+                <FlatList
+                    data={props.vendors}
+                    extraData={props}
+                    contentContainerStyle={[styles.flex1, styles.card,]}
+                    keyExtractor={(item) => `vendor${item.id}`}
+                    renderItem={({ item }) => <View style={{ flexDirection: 'row', borderBottomColor: StyleConfig.COLORS.headerBorderColor, borderBottomWidth: 1, alignItems: 'center', paddingVertical: StyleConfig.countPixelRatio(8) }}>
+                        <FontAwesome name={item.status == 1 ? "check-circle" : item.status == -1 ? "times-circle" : "question-circle"}
+                            size={StyleConfig.countPixelRatio(24)}
+                            color={item.status == 1 ? StyleConfig.COLORS.lightGreen : item.status == -1 ? StyleConfig.COLORS.lightRed : StyleConfig.COLORS.lightYellow} />
+                        <View style={{ width: StyleConfig.countPixelRatio(6) }} />
+                        <Text style={styles.textH23Medium}>{item.name}</Text>
+                    </View>}
+                    ListFooterComponent={() => {
+                        return (props.hostOfTheEvent ? <TouchableOpacity onPress={props.onAddNewPress} style={[styles.center, {
                             marginVertical: StyleConfig.countPixelRatio(8),
                             paddingVertical: StyleConfig.countPixelRatio(8),
                             borderWidth: 1,
@@ -84,12 +87,14 @@ const VendorComponent = (props) => {
                         }]} >
                             <Text style={[styles.textH23Medium, { color: StyleConfig.COLORS.purple }]}>{'Invite another vendor'}</Text>
                             <FontAwesome name={"plus-square-o"} color={StyleConfig.COLORS.purple} size={StyleConfig.headerIconSize * 1.5} />
-                        </TouchableOpacity>}
+                        </TouchableOpacity> : null)
 
-                    />
-                </View>
+                    }}
+
+                />
+
             }
-        </ScrollView>
+        </View>
     )
 }
 module.exports = VendorComponent;

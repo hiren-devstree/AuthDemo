@@ -113,7 +113,9 @@ class EventScreen extends Component {
     if (event == null) {
       this.setState({ data: [] })
     } else if (event.hostUserId == userId) {
-      this.props.navigation.navigate(Const.NK_EVENT_DETAILS, { event })
+      this.props.navigation.navigate(Const.NK_EVENT_DETAILS, { event, hostOfTheEvent: true })
+    } else {
+      this.props.navigation.navigate(Const.NK_EVENT_DETAILS, { event, hostOfTheEvent: false })
     }
   }
   render() {

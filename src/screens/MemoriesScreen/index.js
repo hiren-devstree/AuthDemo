@@ -139,7 +139,7 @@ class MemoriesScreen extends Component {
                                     <FlatList
                                         data={item.photos}
                                         numColumns={3}
-                                        keyExtractor={({ item, index }) => `memory${item.id}`}
+                                        keyExtractor={(item, index) => `memory${item.id}`}
                                         extraData={this.state}
                                         keyExtractor={(item, index) => `${item.id}${index}`}
                                         columnWrapperStyle={{
