@@ -28,7 +28,7 @@ export default {
   convertHeightPer: (per, isLandscape = false) => per * (isLandscape && width < height ? widthPer : heightPer),
   convertWidthPerVal: (val) => val * height / 812,
   convertHeightPerVal: (val) => val * width / 375,
-  statusBarHeight: Platform.OS === 'ios' ? 60*ratioCount : 44*ratioCount,
+  statusBarHeight: Platform.OS === 'ios' ? 60 * ratioCount : 44 * ratioCount,
   width,
   height,
   fontLight: 'Comfortaa-Light',
@@ -48,48 +48,49 @@ export default {
   isIphone: Platform.OS === 'ios',
   iPhoneX,
   isPad: Platform.OS === 'ios' && Platform.isPad,
-  headerIconSize: ratioCount*30,
-  COLORS:{
-      transparent:"#00000000",
-      rusticRed:"#40010D",
-      red: "#BF0436",
-      darkRed: "#8C0327",
-      darkPurple: "#250A40",
-      purple: "#462673",
-      purpleTran: "#46267388",
-      cyanBlue: "#2196F3",
-      green:"#4CAF50",
-      yellow: "#FDD835",
+  headerIconSize: ratioCount * 30,
+  COLORS: {
+    transparent: "#00000000",
+    rusticRed: "#40010D",
+    red: "#BF0436",
+    darkRed: "#8C0327",
+    darkPurple: "#250A40",
+    purple: "#462673",
+    purpleTran: "#46267388",
+    cyanBlue: "#2196F3",
+    green: "#4CAF50",
+    green2: "#388E3C",
+    yellow: "#FDD835",
 
-      white: "#fff",
-      offWhite: "#eee",
-      black: "#000",
-      gray20: "#333",
-      headerBorderColor: "#ccc",
-      inputHintColor: "#888",
+    white: "#fff",
+    offWhite: "#eee",
+    black: "#000",
+    gray20: "#333",
+    headerBorderColor: "#ccc",
+    inputHintColor: "#888",
 
-      defaultTextColor: "#333",
-      hintTextColor: "#888",
+    defaultTextColor: "#333",
+    hintTextColor: "#888",
 
-      lightRed: "#D32F2FCC",
-      lightYellow: "#FBC02DCC",
-      lightGreen: "#388E3CCC"
+    lightRed: "#D32F2FCC",
+    lightYellow: "#FBC02DCC",
+    lightGreen: "#388E3CCC"
 
   },
 
-  card:{
+  card: {
     backgroundColor: "#fff",
     borderRadius: 5 * ratioCount,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2* ratioCount,
+      height: 2 * ratioCount,
     },
     shadowOpacity: 0.3,
     elevation: 2,
-    shadowRadius: 2* ratioCount,
-    padding:8* ratioCount,
-    margin:8* ratioCount,
-    
-},
+    shadowRadius: 2 * ratioCount,
+    padding: 8 * ratioCount,
+    margin: 8 * ratioCount,
+
+  },
 }

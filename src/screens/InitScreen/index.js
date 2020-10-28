@@ -18,52 +18,52 @@ import * as SecureStore from 'expo-secure-store';
 import { CommonActions } from '@react-navigation/native';
 
 
-class InitScreen extends Component{
-    constructor(props){
-        super(props);
+class InitScreen extends Component {
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount = async () => {
+    let isLogin = await SecureStore.getItemAsync(Const.SS_IS_LOGIN);
+    if (isLogin == "true") {
+      // this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
     }
-    componentDidMount =async() =>{
-      let isLogin = await SecureStore.getItemAsync( Const.SS_IS_LOGIN );
-      if(isLogin == "true"){
-        this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
-      }
 
-    }
-    render(){
-        return (
-            <>
-              <StatusBar barStyle="light-content" />
-              <ImageBackground 
-                source={AppImages.initBack}
-                style={styles.container}
-              >
-                  <View style={styles.contentInit}>
-                      <Image
-                        source={AppImages.icIcon}
-                        resizeMode={'contain'}
-                        style={[styles.appIcon, {tintColor: StyleConfig.COLORS.white}]} />
-                      <Text style={styles.appDescText}>{strings.the_world_is_a_party_lets_plan_one_lets_emzee}</Text>
-                      <View style={ styles.content}>
+  }
+  render() {
+    return (
+      <>
+        <StatusBar barStyle="light-content" />
+        <ImageBackground
+          source={AppImages.initBack}
+          style={styles.container}
+        >
+          <View style={styles.contentInit}>
+            <Image
+              source={AppImages.icIcon}
+              resizeMode={'contain'}
+              style={[styles.appIcon, { tintColor: StyleConfig.COLORS.white }]} />
+            <Text style={styles.appDescText}>{strings.the_world_is_a_party_lets_plan_one_lets_emzee}</Text>
+            <View style={styles.content}>
 
-                      </View>
-                      <Button
-                        onPress={() => this.props.navigation.navigate(Const.NK_LOGIN)}
-                        buttonWrap={{backgroundColor:"#388E3C", borderColor:"#388E3C", marginBottom:StyleConfig.countPixelRatio(24)}}
-                      >{strings.ready_to_plan_lets_emzee}</Button>
-                      
-                      <Button
-                        buttonWrap={{backgroundColor:StyleConfig.COLORS.darkRed, marginBottom:StyleConfig.countPixelRatio(44)}}
-                        onPress={() => this.props.navigation.navigate(Const.NK_LOGIN)}
-                      >{strings.vendors_help_emzee}</Button>
-                      
-                  </View>
-                </ImageBackground>
-                
-            </>
-          );
-    }
+            </View>
+            <Button
+              onPress={() => this.props.navigation.navigate(Const.NK_LOGIN)}
+              buttonWrap={{ backgroundColor: StyleConfig.COLORS.green, borderColor: StyleConfig.COLORS.green, marginBottom: StyleConfig.countPixelRatio(24) }}
+            >{strings.ready_to_plan_lets_emzee}</Button>
+
+            <Button
+              buttonWrap={{ backgroundColor: StyleConfig.COLORS.darkRed, borderColor: StyleConfig.COLORS.darkRed, marginBottom: StyleConfig.countPixelRatio(44) }}
+              onPress={() => this.props.navigation.navigate(Const.NK_LOGIN)}
+            >{strings.vendors_help_emzee}</Button>
+
+          </View>
+        </ImageBackground>
+
+      </>
+    );
+  }
 }
-export default InitScreen ;
+export default InitScreen;
 
 // const styles = StyleSheet.create({
 //   ibContainer:{
@@ -86,5 +86,5 @@ export default InitScreen ;
 //     fontSize: StyleConfig.fontSizeH3,
 //     color: StyleConfig.COLORS.white,
 //   },
-  
+
 // });
