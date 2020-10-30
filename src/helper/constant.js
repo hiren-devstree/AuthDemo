@@ -2,7 +2,8 @@ export const BASE_URL = `https://www.baseurl.com/api/v1/`;
 export const KEY_POST_LOGIN = `${BASE_URL}login`;
 
 export const MASK_PHONE = "(999) 999-9999";
-export const MASK_OTP = "9 9 9 9 9 9";
+//export const MASK_OTP = "9 9 9 9 9 9";
+export const MASK_OTP = "999999";
 export const IC_BACK = "angle-left";
 export const IC_EVENT_LIST = "list";
 export const IC_EVENT_CALENDAR = "calendar";
