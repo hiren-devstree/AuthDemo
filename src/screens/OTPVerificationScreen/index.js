@@ -85,7 +85,8 @@ export default OTPVerificationScreen = ({ route, navigation }) => {
                   console.log("step 2", credential)
                   let res = await firebase.auth().signInWithCredential(credential);
                   console.log("res- ", res)
-                  navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
+                  navigation.navigate(Const.NK_VENDOR_REGISTER)
+                  // navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
                 } catch (err) {
                   showMessage({ text: `Error: ${err.message}`, color: "red" });
                 }

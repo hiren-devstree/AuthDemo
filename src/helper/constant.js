@@ -35,5 +35,6 @@ export const NK_MEMORIES = "Memories";
 export const NK_GUESTS = "Guests";
 export const NK_GUESTS_DETAILS = "GuestsDetails"
 export const NK_SETTINGS = "Settings";
+export const NK_VENDOR_REGISTER = "VendorRegister"
 
 
