@@ -15,6 +15,7 @@ import StyleConfig from 'src/helper/StyleConfig';
 
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import withLoader from 'src/redux/actionCreator/withLoader';
+import withVendor from 'src/redux/actionCreator/withVendor';
 import styles from 'src/helper/styles';
 import * as Const from 'src/helper/constant';
 import AddEventComponent from 'src/screens/EventScreen/AddEventComponent';
@@ -172,11 +173,12 @@ class EventScreen extends Component {
             />
 
             <FlatList
+
               data={data}
               extraData={this.state}
               keyExtractor={(item, index) => item.id.toString()}
-              renderItem={({ item, index }) => <EventListItem onPress={() => this.onItemPress(item)} event={item} isHostedByMe={item.hostUserId == userId} />}
-              ListFooterComponent={() => <EventListItem onPress={() => this.onItemPress(null)} />}
+              renderItem={({ item, index }) => <EventListItem {...this.props} onPress={() => this.onItemPress(item)} event={item} isHostedByMe={item.hostUserId == userId} />}
+              ListFooterComponent={() => <EventListItem {...this.props} onPress={() => this.onItemPress(null)} />}
             />
           </View>}
           {!isCalendarView && <ScrollView
@@ -185,8 +187,8 @@ class EventScreen extends Component {
               data={data}
               extraData={this.state}
               keyExtractor={(item, index) => `calender${item.id}`}
-              renderItem={({ item, index }) => <EventListItem onPress={() => this.onItemPress(item)} event={item} isHostedByMe={item.hostUserId == userId} />}
-              ListFooterComponent={() => <EventListItem onPress={() => this.onItemPress(null)} />}
+              renderItem={({ item, index }) => <EventListItem {...this.props} onPress={() => this.onItemPress(item)} event={item} isHostedByMe={item.hostUserId == userId} />}
+              ListFooterComponent={() => <EventListItem {...this.props} onPress={() => this.onItemPress(null)} />}
             />
             }
             {showWelcome && <View style={[styles.modalContainer, { position: 'absolute', }]}>
@@ -198,7 +200,7 @@ class EventScreen extends Component {
             </View>}
           </ScrollView>
           }
-          {data.length == 0 && <ScrollView style={styles.content}>
+          {data.length == 0 && this.props.isVen && <ScrollView style={styles.content}>
             <AddEventComponent onSavePress={this.onSavePress} />
           </ScrollView>}
 
@@ -207,4 +209,4 @@ class EventScreen extends Component {
     );
   }
 }
-export default withLoader(EventScreen);
+export default withVendor(withLoader(EventScreen));

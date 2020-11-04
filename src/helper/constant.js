@@ -9,6 +9,7 @@ export const IC_EVENT_LIST = "list";
 export const IC_EVENT_CALENDAR = "calendar";
 
 export const SS_IS_LOGIN = "IS_LOGIN";
+export const SS_IS_VENDOR = "IS_VENDOR";
 
 export const FIREBASE_CONFIGS = {
     apiKey: "AIzaSyCTkFxjPFVUEDw73XS75GDFEVIeiXLWrJU",

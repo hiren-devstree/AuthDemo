@@ -16,6 +16,7 @@ import {
 import StyleConfig from 'src/helper/StyleConfig';
 import strings from 'src/helper/strings';
 import * as Const from 'src/helper/constant'
+import * as SecureStore from 'expo-secure-store';
 
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { CommonActions } from '@react-navigation/native';
@@ -27,6 +28,10 @@ class VendorRegisterScreen extends Component {
     this.state = {
       phone: "+91 9033343516"
     }
+  }
+  onSave = async () => {
+    await SecureStore.setItemAsync(Const.SS_IS_VENDOR, "true")
+    this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
   }
   render() {
     const { phone } = this.state;
@@ -118,8 +123,7 @@ class VendorRegisterScreen extends Component {
             <View style={[styles.center, { marginTop: StyleConfig.countPixelRatio(16) }]}>
               <Button
                 buttonWrap={{ backgroundColor: StyleConfig.COLORS.darkPurple, borderColor: StyleConfig.COLORS.darkPurple, marginBottom: StyleConfig.countPixelRatio(44) }}
-                onPress={() =>
-                  this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))}
+                onPress={this.onSave}
               >{strings.save}</Button>
             </View>
 
