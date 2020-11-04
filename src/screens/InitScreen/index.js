@@ -16,7 +16,7 @@ import strings from 'src/helper/strings';
 import * as Const from 'src/helper/constant';
 import * as SecureStore from 'expo-secure-store';
 import { CommonActions } from '@react-navigation/native';
-
+import withVendor from 'src/redux/actionCreator/withVendor';
 
 class InitScreen extends Component {
   constructor(props) {
@@ -47,13 +47,19 @@ class InitScreen extends Component {
 
             </View>
             <Button
-              onPress={() => this.props.navigation.navigate(Const.NK_LOGIN)}
+              onPress={() => {
+                this.props.setIsVendor(false)
+                this.props.navigation.navigate(Const.NK_LOGIN)
+              }}
               buttonWrap={{ backgroundColor: StyleConfig.COLORS.green, borderColor: StyleConfig.COLORS.green, marginBottom: StyleConfig.countPixelRatio(24) }}
             >{strings.ready_to_plan_lets_emzee}</Button>
 
             <Button
               buttonWrap={{ backgroundColor: StyleConfig.COLORS.darkRed, borderColor: StyleConfig.COLORS.darkRed, marginBottom: StyleConfig.countPixelRatio(44) }}
-              onPress={() => this.props.navigation.navigate(Const.NK_VENDOR_REGISTER)}
+              onPress={() => {
+                this.props.setIsVendor(true)
+                this.props.navigation.navigate(Const.NK_LOGIN)
+              }}
             >{strings.vendors_help_emzee}</Button>
 
           </View>
@@ -63,7 +69,7 @@ class InitScreen extends Component {
     );
   }
 }
-export default InitScreen;
+export default withVendor(InitScreen);
 
 // const styles = StyleSheet.create({
 //   ibContainer:{

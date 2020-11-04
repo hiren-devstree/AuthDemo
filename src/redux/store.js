@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import {
     loader,
+    vendor,
     toast,
     internetConn,
     user
@@ -10,6 +11,7 @@ import {
 const store = createStore(
     combineReducers({
         loader,
+        vendor,
         toast,
         internetConn,
         user

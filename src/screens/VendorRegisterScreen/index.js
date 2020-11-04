@@ -18,7 +18,7 @@ import strings from 'src/helper/strings';
 import * as Const from 'src/helper/constant'
 
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-import AppImages from 'src/assets/images';
+import { CommonActions } from '@react-navigation/native';
 import { Button } from 'src/components/common/Button';
 import styles from 'src/helper/styles';
 class VendorRegisterScreen extends Component {
@@ -62,7 +62,7 @@ class VendorRegisterScreen extends Component {
               >{'Photographer'}</Button>
               <Button
                 disabled={true}
-                buttonWrap={{ width: null, paddingLeft: StyleConfig.countPixelRatio(8), backgroundColor: StyleConfig.COLORS.darkPurple, borderColor: StyleConfig.COLORS.darkPurple, }}
+                buttonWrap={{ width: null, marginHorizontal: StyleConfig.countPixelRatio(4), paddingLeft: StyleConfig.countPixelRatio(8), backgroundColor: StyleConfig.COLORS.darkPurple, borderColor: StyleConfig.COLORS.darkPurple, }}
                 buttonText={{ fontSize: StyleConfig.fontSizeH2_3 }}
                 onClosePress={() => alert("Test")}
                 showClose

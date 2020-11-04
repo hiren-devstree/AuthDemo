@@ -25,8 +25,9 @@ import * as Const from 'src/helper/constant';
 import { TextInputMask } from 'react-native-masked-text'
 import firebase from 'src/helper/firebaseConfig';
 import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
+import withVendor from 'src/redux/actionCreator/withVendor';
 
-export default OTPVerificationScreen = ({ route, navigation }) => {
+const OTPVerificationScreen = ({ route, navigation, ...props }) => {
   //const { verificationId, otherParam } = route.params.verificationId;
 
   const [verificationCode, setVerificationCode] = React.useState();
@@ -68,7 +69,7 @@ export default OTPVerificationScreen = ({ route, navigation }) => {
                 }}
                 style={styles.textH3Regular}
                 placeholderTextColor={StyleConfig.COLORS.hintTextColor}
-                placeholder={strings.enter_your_phone_number}
+                placeholder={strings.enter_otp}
                 value={verificationCode}
                 onChangeText={verificationCode => setVerificationCode(verificationCode)}
               />
@@ -85,8 +86,11 @@ export default OTPVerificationScreen = ({ route, navigation }) => {
                   console.log("step 2", credential)
                   let res = await firebase.auth().signInWithCredential(credential);
                   console.log("res- ", res)
-                  navigation.navigate(Const.NK_VENDOR_REGISTER)
-                  // navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
+                  if (props.isVendor) {
+                    navigation.navigate(Const.NK_VENDOR_REGISTER)
+                  } else {
+                    navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
+                  }
                 } catch (err) {
                   showMessage({ text: `Error: ${err.message}`, color: "red" });
                 }
@@ -99,6 +103,8 @@ export default OTPVerificationScreen = ({ route, navigation }) => {
     </>
   );
 }
+export default withVendor(OTPVerificationScreen)
+
 const local_styles = StyleSheet.create({
   scrollView: {
     backgroundColor: "#fff",

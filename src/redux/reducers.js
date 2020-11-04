@@ -1,5 +1,6 @@
 import {
     LOADER_SET,
+    VENDOR_SET,
     TOAST_SET,
     INTERNET_CONN_SET,
     LOGIN_SUCCESS,
@@ -16,6 +17,17 @@ export const loader = (state = false, action) => {
             return state;
     }
 };
+
+export const vendor = (state = false, action) => {
+    switch (action.type) {
+        case VENDOR_SET:
+            return action.state;
+        default:
+            return state;
+    }
+};
+
+
 
 export const toast = (state = '', action) => {
     switch (action.type) {
@@ -54,7 +66,7 @@ export const user = (state = userInitialState, action) => {
                     ...action.state.data,
                 },
             });
-            
+
             return {
                 ...state,
                 token: action.state.token,

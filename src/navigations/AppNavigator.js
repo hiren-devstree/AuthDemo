@@ -21,7 +21,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import PreviewPhoto from '../screens/PreviewPhoto';
 import AttachImage from '../screens/AttachImage';
 import VendorRegisterScreen from '../screens/VendorRegisterScreen';
-
+import withVendor from 'src/redux/actionCreator/withVendor';
 import EventDetailScreen from '../screens/EventScreen/EventDetailScreen';
 import StyleConfig from "../helper/StyleConfig";
 import {
@@ -76,10 +76,38 @@ const TabNavigator = ((props) => {
   )
 })
 
+const TabNavigatorVendor = ((props) => {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName = "birthday-cake";
+          if (route.name === NK_EVENTS) {
+            iconName = "birthday-cake";
+          } else if (route.name === NK_MEMORIES) {
+            iconName = "camera";
+          } else if (route.name === NK_SETTINGS) {
+            iconName = "gear";
+          }
+          return <FontAwesome name={iconName} size={StyleConfig.countPixelRatio(22)} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        showLabel: true,
+        activeTintColor: StyleConfig.COLORS.purple,
+        inactiveTintColor: "#333333aa"
+      }}
+    >
+      <Tab.Screen name={NK_EVENTS} component={EventStack} />
+      <Tab.Screen name={NK_MEMORIES} component={MemoriesScreen} />
+      <Tab.Screen name={NK_SETTINGS} component={SettingsScreen} />
+    </Tab.Navigator>
+  )
+})
 
 
 const AppNavigator = ({ ...props }) => {
-
+  console.log({ AppNavigator: props.isVendor })
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -90,7 +118,7 @@ const AppNavigator = ({ ...props }) => {
         <Stack.Screen options={{ headerShown: false }} name={NK_LOGIN} component={LoginScreen} />
         <Stack.Screen options={{ headerShown: false }} name={NK_OTP_VERIFICATION} component={OTPVerificationScreen} />
         <Stack.Screen options={{ headerShown: false }} name={NK_VENDOR_REGISTER} component={VendorRegisterScreen} />
-        <Stack.Screen options={{ headerShown: false }} name={NK_DASHBOARD} component={TabNavigator} />
+        <Stack.Screen options={{ headerShown: false }} name={NK_DASHBOARD} component={props.isVendor ? TabNavigatorVendor : TabNavigator} />
         <Stack.Screen options={{ headerShown: false }} name={NK_PREVIEW_PHOTO} component={PreviewPhoto} />
         <Stack.Screen options={{ headerShown: false }} name={NK_ATTACH_IMAGE} component={AttachImage} />
       </Stack.Navigator>
@@ -99,4 +127,4 @@ const AppNavigator = ({ ...props }) => {
   );
 }
 
-export default AppNavigator;
+export default withVendor(AppNavigator);

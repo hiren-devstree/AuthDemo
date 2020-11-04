@@ -1,4 +1,5 @@
 export const LOADER_SET = 'loader/SET'
+export const VENDOR_SET = 'vendor/SET'
 export const TOAST_SET = 'toast/SET'
 export const INTERNET_CONN_SET = 'internet/SET'
 
@@ -13,6 +14,11 @@ export const UPDATE_PROFILE = "UPDATE_PROFILE"
 
 export const loaderSet = state => ({
     type: LOADER_SET,
+    state
+});
+
+export const vendorSet = state => ({
+    type: VENDOR_SET,
     state
 });
 

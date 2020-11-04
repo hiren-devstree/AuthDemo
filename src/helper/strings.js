@@ -47,7 +47,9 @@ const strings = {
     "address_line_2": "Address Line #2",
     "city": "City",
     "state": "State",
-    "country": "Country"
+    "country": "Country",
+    "enter_otp": "Enter OTP"
+
 
 
 
