@@ -58,14 +58,15 @@ const EventListItem = ({ event, isHostedByMe, isVendor, ...props }) => {
 
 
                 </View> :
-                <View style={[styles.card, styles.center, {
-                    paddingVertical: StyleConfig.countPixelRatio(16),
-                    borderWidth: 1,
-                    borderColor: StyleConfig.COLORS.purple,
-                    borderStyle: 'dashed',
-                }]} >
-                    <FontAwesome name={"plus-square-o"} color={StyleConfig.COLORS.purple} size={StyleConfig.headerIconSize * 1.5} />
-                </View>}
+                isVendor ? null :
+                    <View style={[styles.card, styles.center, {
+                        paddingVertical: StyleConfig.countPixelRatio(16),
+                        borderWidth: 1,
+                        borderColor: StyleConfig.COLORS.purple,
+                        borderStyle: 'dashed',
+                    }]} >
+                        <FontAwesome name={"plus-square-o"} color={StyleConfig.COLORS.purple} size={StyleConfig.headerIconSize * 1.5} />
+                    </View>}
         </TouchableOpacity>
 
     )

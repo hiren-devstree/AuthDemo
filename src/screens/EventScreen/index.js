@@ -30,7 +30,7 @@ const DUMMY_DATA = [
     "id": 1001,
     "hostUserId": 50,
     "eventName": "Dev's Birthday",
-    "date": "Oct 20,2020",
+    "date": "2020-11-02",
     "location": "Honest Banquet",
     "address": "700 5th Avenue, New York",
     "eventType": "Birthday",
@@ -44,7 +44,7 @@ const DUMMY_DATA = [
     "id": 1002,
     "hostUserId": 49,
     "eventName": "James & Eline Anniversary",
-    "date": "Oct 25,2020",
+    "date": "2020-11-04",
     "location": "Mango Hotel",
     "address": "133, West 55th street. New York",
     "eventType": "Anniversary",
@@ -55,7 +55,7 @@ const DUMMY_DATA = [
     "id": 1003,
     "hostUserId": 49,
     "eventName": "Edan & Robin Anniversary",
-    "date": "Oct 25,2020",
+    "date": "2020-11-05",
     "location": "Mango Hotel",
     "address": "133, West 55th street. New York",
     "eventType": "Anniversary",
@@ -66,7 +66,54 @@ const DUMMY_DATA = [
     "id": 1004,
     "hostUserId": 49,
     "eventName": "Amelia's Birthday",
-    "date": "Nov 09,2020",
+    "date": "2020-11-05",
+    "location": "7Star Hotel",
+    "address": "15, West 24th street. New York",
+    "eventType": "Birthday",
+    "guest": null,
+    "myRes": 0 // tentative
+  },
+  {
+    "id": 1005,
+    "hostUserId": 50,
+    "eventName": "Dev's Birthday",
+    "date": "2020-11-11",
+    "location": "Honest Banquet",
+    "address": "700 5th Avenue, New York",
+    "eventType": "Birthday",
+    "guest": {
+      "confirmed": 22,
+      "cancelled": 8,
+      "tentative": 12
+    }
+  },
+  {
+    "id": 1006,
+    "hostUserId": 49,
+    "eventName": "James & Eline Anniversary",
+    "date": "2020-11-09",
+    "location": "Mango Hotel",
+    "address": "133, West 55th street. New York",
+    "eventType": "Anniversary",
+    "guest": null,
+    "myRes": 1 // accepted
+  },
+  {
+    "id": 1007,
+    "hostUserId": 49,
+    "eventName": "Edan & Robin Anniversary",
+    "date": "2020-11-08",
+    "location": "Mango Hotel",
+    "address": "133, West 55th street. New York",
+    "eventType": "Anniversary",
+    "guest": null,
+    "myRes": -1 // rejected
+  },
+  {
+    "id": 1008,
+    "hostUserId": 49,
+    "eventName": "Amelia's Birthday",
+    "date": "2020-11-07",
     "location": "7Star Hotel",
     "address": "15, West 24th street. New York",
     "eventType": "Birthday",
@@ -81,7 +128,8 @@ class EventScreen extends Component {
     showWelcome: false,
     data: DUMMY_DATA,
     calendarHeight: 0,
-    selectedDate: new Date()
+    selectedDate: new Date(),
+    calendarData: {}
   }
   constructor(props) {
     super(props);
@@ -97,7 +145,16 @@ class EventScreen extends Component {
     //   this.setState({data:DUMMY_DATA})
     //   this.props.loader(false)
     // }, 2000);
-
+    let newData = {};
+    for (let ind in DUMMY_DATA) {
+      if (newData.hasOwnProperty(DUMMY_DATA[ind].date)) {
+        newData[DUMMY_DATA[ind].date].data.push(DUMMY_DATA[ind])
+      } else {
+        newData[DUMMY_DATA[ind].date] = { data: [{ ...DUMMY_DATA[ind] }], "marked": true };
+      }
+    }
+    console.log(JSON.stringify(newData))
+    this.setState({ calendarData: newData })
   }
   onSavePress = () => {
     this.props.loader(true);
@@ -119,8 +176,19 @@ class EventScreen extends Component {
       this.props.navigation.navigate(Const.NK_EVENT_DETAILS, { event, hostOfTheEvent: false })
     }
   }
+  onDayPress = ({ dateString }) => {
+    console.log(dateString)
+    const { calendarData } = this.state;
+    if (calendarData.hasOwnProperty(dateString)) {
+      this.setState({ selectedDate: dateString, data: calendarData[dateString].data })
+    } else {
+      this.setState({ selectedDate: dateString, data: [] })
+    }
+
+  }
   render() {
-    const { isCalendarView, showWelcome, data, selectedDate } = this.state;
+    const { isCalendarView, showWelcome, data, selectedDate, calendarData } = this.state;
+    console.log(calendarData)
     return (
       <>
         <StatusBar barStyle="dark-content" />
@@ -138,7 +206,7 @@ class EventScreen extends Component {
             </TouchableOpacity>
           </View>
 
-          {isCalendarView && data.length > 0 && <View style={{ flex: 1 }} >
+          {isCalendarView && <View style={{ flex: 1 }} >
             <Calendar
               theme={{
                 calendarBackground: '#fcfcfc',
@@ -163,17 +231,11 @@ class EventScreen extends Component {
                 textMonthFontSize: 16,
                 textDayHeaderFontSize: 13
               }}
-              onDayPress={({ dateString }) => this.setState({ selectedDate: dateString })}
-              markedDates={{
-                [selectedDate]: { selected: true },
-                '2020-10-17': { marked: true },
-                '2020-10-18': { marked: true }
-
-              }}
+              onDayPress={this.onDayPress}
+              markedDates={{ ...calendarData, [selectedDate]: { selected: true } }}
             />
 
             <FlatList
-
               data={data}
               extraData={this.state}
               keyExtractor={(item, index) => item.id.toString()}
