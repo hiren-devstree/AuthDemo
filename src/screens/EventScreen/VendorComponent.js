@@ -77,7 +77,8 @@ const VendorComponent = (props) => {
                         <Text style={styles.textH23Medium}>{item.name}</Text>
                     </View>}
                     ListFooterComponent={() => {
-                        return (props.hostOfTheEvent ? <TouchableOpacity onPress={props.onAddNewPress} style={[styles.center, {
+
+                        return props.isVendor ? null : (props.hostOfTheEvent ? <TouchableOpacity onPress={props.onAddNewPress} style={[styles.center, {
                             marginVertical: StyleConfig.countPixelRatio(8),
                             paddingVertical: StyleConfig.countPixelRatio(8),
                             borderWidth: 1,

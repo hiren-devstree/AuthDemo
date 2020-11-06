@@ -19,6 +19,7 @@ import GuestComponent from 'src/screens/EventScreen/GuestComponent';
 import PhotosComponent from 'src/screens/EventScreen/PhotosComponent';
 import ChatComponent from 'src/screens/EventScreen/ChatComponent';
 import withLoader from 'src/redux/actionCreator/withLoader';
+import withVendor from 'src/redux/actionCreator/withVendor';
 import styles from 'src/helper/styles';
 import * as Const from 'src/helper/constant';
 import strings from 'src/helper/strings';
@@ -32,6 +33,17 @@ const vendors = [
   { "id": "vendors3", "name": "M20 Banquet", "status": -1 },
   { "id": "vendors4", "name": "Rosy\'s Flowers", "status": 0 }
 ]
+const routes = [
+  { key: 'vendors', title: 'Vendors' },
+  { key: 'guests', title: 'Guests' },
+  { key: 'photos', title: 'Photos' },
+  { key: 'chat', title: 'Chat' },
+]
+const routesVendor = [
+  { key: 'vendors', title: 'Vendors' },
+  { key: 'photos', title: 'Photos' },
+  { key: 'chat', title: 'Chat' },
+]
 class EventDetailScreen extends Component {
   constructor(props) {
     super(props);
@@ -43,12 +55,6 @@ class EventDetailScreen extends Component {
       isAddNewVendor: false,
       event,
       hostOfTheEvent,
-      routes: [
-        { key: 'vendors', title: 'Vendors' },
-        { key: 'guests', title: 'Guests' },
-        { key: 'photos', title: 'Photos' },
-        { key: 'chat', title: 'Chat' },
-      ],
       index: 0
     }
     setTimeout(() => {
@@ -92,9 +98,14 @@ class EventDetailScreen extends Component {
     );
   };
   render() {
-    const { hostOfTheEvent, isAddNewVendor, showNewEventCreate, event, index, routes } = this.state;
-    const renderScene = SceneMap({
-      vendors: () => <VendorComponent initial={isAddNewVendor} vendors={vendors} hostOfTheEvent={hostOfTheEvent} onSavePress={() => this.setState({ isAddNewVendor: false })} onAddNewPress={() => this.setState({ isAddNewVendor: true })} />,
+    const { isVendor } = this.props
+    const { hostOfTheEvent, isAddNewVendor, showNewEventCreate, event, index } = this.state;
+    const renderScene = this.props.isVendor ? SceneMap({
+      vendors: () => <VendorComponent {...this.props} initial={isAddNewVendor} vendors={vendors} hostOfTheEvent={hostOfTheEvent} onSavePress={() => this.setState({ isAddNewVendor: false })} onAddNewPress={() => this.setState({ isAddNewVendor: true })} />,
+      photos: () => <PhotosComponent {...this.props} hostOfTheEvent={hostOfTheEvent} />,
+      chat: () => <ChatComponent {...this.props} hostOfTheEvent={hostOfTheEvent} />
+    }) : SceneMap({
+      vendors: () => <VendorComponent {...this.props} initial={isAddNewVendor} vendors={vendors} hostOfTheEvent={hostOfTheEvent} onSavePress={() => this.setState({ isAddNewVendor: false })} onAddNewPress={() => this.setState({ isAddNewVendor: true })} />,
       guests: () => <GuestComponent {...this.props} hostOfTheEvent={hostOfTheEvent} />,
       photos: () => <PhotosComponent {...this.props} hostOfTheEvent={hostOfTheEvent} />,
       chat: () => <ChatComponent {...this.props} hostOfTheEvent={hostOfTheEvent} />
@@ -118,7 +129,7 @@ class EventDetailScreen extends Component {
           </View>
           <View style={styles.content}>
             <TabView
-              navigationState={{ index, routes }}
+              navigationState={{ index, routes: isVendor ? routesVendor : routes }}
               renderScene={renderScene}
               renderTabBar={this._renderTabBar}
               onIndexChange={(index) => this.setState({ index })}
@@ -140,4 +151,4 @@ class EventDetailScreen extends Component {
     );
   }
 }
-export default withLoader(EventDetailScreen);
+export default withVendor(withLoader(EventDetailScreen));
