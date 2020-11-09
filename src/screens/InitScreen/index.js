@@ -25,12 +25,12 @@ class InitScreen extends Component {
   componentDidMount = async () => {
     let isLogin = await SecureStore.getItemAsync(Const.SS_IS_LOGIN);
     let isVendor = await SecureStore.getItemAsync(Const.SS_IS_VENDOR);
-    if (isVendor == "true") {
-      this.props.setIsVendor(true)
-    }
-    if (isLogin == "true") {
-      this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
-    }
+    // if (isVendor == "true") {
+    //   this.props.setIsVendor(true)
+    // }
+    // if (isLogin == "true") {
+    //   this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
+    // }
 
   }
   render() {

@@ -14,6 +14,7 @@ import {
 import StyleConfig from 'src/helper/StyleConfig';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import InfoComponent from 'src/screens/EventScreen/InfoComponent';
 import VendorComponent from 'src/screens/EventScreen/VendorComponent';
 import GuestComponent from 'src/screens/EventScreen/GuestComponent';
 import PhotosComponent from 'src/screens/EventScreen/PhotosComponent';
@@ -40,7 +41,7 @@ const routes = [
   { key: 'chat', title: 'Chat' },
 ]
 const routesVendor = [
-  { key: 'vendors', title: 'Vendors' },
+  { key: 'info', title: 'Info' },
   { key: 'photos', title: 'Photos' },
   { key: 'chat', title: 'Chat' },
 ]
@@ -101,7 +102,7 @@ class EventDetailScreen extends Component {
     const { isVendor } = this.props
     const { hostOfTheEvent, isAddNewVendor, showNewEventCreate, event, index } = this.state;
     const renderScene = this.props.isVendor ? SceneMap({
-      vendors: () => <VendorComponent {...this.props} initial={isAddNewVendor} vendors={vendors} hostOfTheEvent={hostOfTheEvent} onSavePress={() => this.setState({ isAddNewVendor: false })} onAddNewPress={() => this.setState({ isAddNewVendor: true })} />,
+      info: () => <InfoComponent {...this.props} initial={isAddNewVendor} vendors={vendors} hostOfTheEvent={hostOfTheEvent} onSavePress={() => this.setState({ isAddNewVendor: false })} onAddNewPress={() => this.setState({ isAddNewVendor: true })} />,
       photos: () => <PhotosComponent {...this.props} hostOfTheEvent={hostOfTheEvent} />,
       chat: () => <ChatComponent {...this.props} hostOfTheEvent={hostOfTheEvent} />
     }) : SceneMap({
@@ -140,7 +141,7 @@ class EventDetailScreen extends Component {
             }]}>
               <FontAwesome name={"check-circle"} size={StyleConfig.countPixelRatio(30)} color={StyleConfig.COLORS.lightGreen} />
               <View style={{ marginLeft: StyleConfig.countPixelRatio(12) }}>
-                <Text style={styles.textH23Medium}>{}</Text>
+                <Text style={styles.textH23Medium}>{ }</Text>
                 <Text style={styles.textH23Medium}>{strings.lets_add_your_first_event_now}</Text>
               </View>
             </View>}

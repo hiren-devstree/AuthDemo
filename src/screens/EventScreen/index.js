@@ -21,7 +21,7 @@ import * as Const from 'src/helper/constant';
 import AddEventComponent from 'src/screens/EventScreen/AddEventComponent';
 import EventListItem from 'src/screens/EventScreen/EventListItem';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
-
+import moment from 'moment';
 import strings from 'src/helper/strings';
 const userId = 50;
 
@@ -153,8 +153,11 @@ class EventScreen extends Component {
         newData[DUMMY_DATA[ind].date] = { data: [{ ...DUMMY_DATA[ind] }], "marked": true };
       }
     }
-    console.log(JSON.stringify(newData))
-    this.setState({ calendarData: newData })
+    this.setState({ calendarData: newData }, () => {
+      let dateString = moment(new Date()).format("YYYY-MM-DD")
+      this.onDayPress({ dateString })
+    })
+
   }
   onSavePress = () => {
     this.props.loader(true);
@@ -177,7 +180,6 @@ class EventScreen extends Component {
     }
   }
   onDayPress = ({ dateString }) => {
-    console.log(dateString)
     const { calendarData } = this.state;
     if (calendarData.hasOwnProperty(dateString)) {
       this.setState({ selectedDate: dateString, data: calendarData[dateString].data })

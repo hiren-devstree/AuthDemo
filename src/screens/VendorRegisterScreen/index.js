@@ -21,12 +21,14 @@ import * as SecureStore from 'expo-secure-store';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { CommonActions } from '@react-navigation/native';
 import { Button } from 'src/components/common/Button';
+import SelectServiceTypeModal from 'src/screens/VendorRegisterScreen/SelectServiceTypeModal';
 import styles from 'src/helper/styles';
 class VendorRegisterScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      phone: "+91 9033343516"
+      phone: "+91 9033343516",
+      showSelectServiceTypeModal: true
     }
   }
   onSave = async () => {
@@ -34,7 +36,7 @@ class VendorRegisterScreen extends Component {
     this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
   }
   render() {
-    const { phone } = this.state;
+    const { phone, showSelectServiceTypeModal } = this.state;
     return (
       <>
         <StatusBar barStyle="dark-content" />
@@ -129,6 +131,10 @@ class VendorRegisterScreen extends Component {
 
 
           </ScrollView>
+          <SelectServiceTypeModal
+            visible={showSelectServiceTypeModal}
+            onClose={() => this.setState({ showSelectServiceTypeModal: false })}
+            onApply={() => this.setState({ showSelectServiceTypeModal: false })} />
         </SafeAreaView>
       </>
     );
