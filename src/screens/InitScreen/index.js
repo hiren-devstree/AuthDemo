@@ -17,7 +17,7 @@ import * as Const from 'src/helper/constant';
 import * as SecureStore from 'expo-secure-store';
 import { CommonActions } from '@react-navigation/native';
 import withVendor from 'src/redux/actionCreator/withVendor';
-
+import ApiManager from 'src/apiManager'
 class InitScreen extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +32,34 @@ class InitScreen extends Component {
     //   this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
     // }
 
+    // TODO REGISTER API CALL DEMO
+    // let data = {
+    //   "id": "9033343516",
+    //   "email": "",
+    //   "firstname": "",
+    //   "initials": "ASS",
+    //   "lastname": "",
+    //   "type": 1
+    // }
+    // let response = await ApiManager.postRegister(data)
+
+
+    //TODO GET USER PROFILE API CALL DEMO
+    // let response = await ApiManager.getUserProfile(Const.STATIC_USER)
+
+    //TODO GET ALL USERS API CALL
+    //let response = await ApiManager.getAllUsers()
+
+
+    let data = {
+      "email": "hiren.devstree@gmail.com",
+      "firstname": "Hiren",
+      "initials": "ASE",
+      "lastname": "Vaghela",
+      "type": 1
+    }
+    let response = await ApiManager.postUpdateProfile(Const.STATIC_USER, data)
+    console.log({ response })
   }
   render() {
     return (

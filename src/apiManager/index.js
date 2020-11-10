@@ -1,14 +1,77 @@
 import React from 'react'
 import {
-    KEY_POST_LOGIN
-} from 'src/helper/Constants'
+    AUTH_TOKEN,
+    KEY_POST_LOGIN,
+    KEY_POST_USERS
+} from 'src/helper/constant'
 
 
-
-
-const apiManager = {
+const ApiManager = {
+    postRegister: async (data) => {
+        return fetch(KEY_POST_USERS, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "auth": AUTH_TOKEN
+            },
+            body: JSON.stringify(data)
+        }).then((response) => {
+            return response.json()
+        }, function (error) {
+            console.log('error', error)
+        }).catch((error) => {
+            console.log('error', error)
+        });
+    },
+    postUpdateProfile: async (userId, data) => {
+        return fetch(`${KEY_POST_USERS}/${userId}`, {
+            method: "PUT",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then((response) => {
+            return response.json()
+        }, function (error) {
+            console.log('error', error)
+        }).catch((error) => {
+            console.log('error', error)
+        });
+    },
+    getUserProfile: async (userId) => {
+        return fetch(`${KEY_POST_USERS}/${userId}`, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+        }).then((response) => {
+            return response.json()
+        }, function (error) {
+            console.log('error', error)
+        }).catch((error) => {
+            console.log('error', error)
+        });
+    },
+    getAllUsers: async () => {
+        return fetch(KEY_POST_USERS, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+        }).then((response) => {
+            return response.json()
+        }, function (error) {
+            console.log('error', error)
+        }).catch((error) => {
+            console.log('error', error)
+        });
+    },
     postLogin: async (email, password) => {
-        console.log({ email, password })
+
         return fetch(KEY_POST_LOGIN, {
             method: "POST",
             headers: {
@@ -34,4 +97,4 @@ const apiManager = {
 
     }
 }
-module.exports = apiManager;
+module.exports = ApiManager;

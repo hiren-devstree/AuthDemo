@@ -5,7 +5,7 @@ import {
     ScrollView,
     Text,
     View,
-    TextInput,
+    FlatList,
     TouchableOpacity
 } from "react-native";
 import { TextInputMask } from 'react-native-masked-text'
@@ -15,9 +15,15 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import styles from 'src/helper/styles';
 import strings from 'src/helper/strings';
 import * as Const from 'src/helper/constant'
+const DATA = [
+    { "id": 1, "name": "Service 1" },
+    { "id": 2, "name": "Service 2" },
+    { "id": 3, "name": "Service 3" }
+]
 
 const SelectServiceTypeModal = (props) => {
     const [phone, setPhone] = useState('')
+    const [data, setData] = useState(DATA)
     return (
         <View>
             <Modal
@@ -39,6 +45,11 @@ const SelectServiceTypeModal = (props) => {
                                 <Text style={[styles.textH3Regular, { color: StyleConfig.COLORS.white, marginLeft: StyleConfig.countPixelRatio(8) }]}>{strings.done}</Text>
                             </TouchableOpacity>
                         </View>
+                        <FlatList
+                            data={data}
+                            renderItem={() => { }}
+
+                        />
                     </View>
                 </View>
             </Modal>
