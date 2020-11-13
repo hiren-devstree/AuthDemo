@@ -24,7 +24,7 @@ import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import moment from 'moment';
 import strings from 'src/helper/strings';
 const userId = 50;
-
+import ApiManager from 'src/apiManager'
 const DUMMY_DATA = [
   {
     "id": 1001,
@@ -145,6 +145,9 @@ class EventScreen extends Component {
     //   this.setState({data:DUMMY_DATA})
     //   this.props.loader(false)
     // }, 2000);
+
+    let response = await ApiManager.getAllEvents();
+    console.log(response)
     let newData = {};
     for (let ind in DUMMY_DATA) {
       if (newData.hasOwnProperty(DUMMY_DATA[ind].date)) {

@@ -18,6 +18,8 @@ import * as SecureStore from 'expo-secure-store';
 import { CommonActions } from '@react-navigation/native';
 import withVendor from 'src/redux/actionCreator/withVendor';
 import ApiManager from 'src/apiManager'
+import { STATIC_EVENT } from '../../helper/constant';
+
 class InitScreen extends Component {
   constructor(props) {
     super(props);
@@ -25,12 +27,12 @@ class InitScreen extends Component {
   componentDidMount = async () => {
     let isLogin = await SecureStore.getItemAsync(Const.SS_IS_LOGIN);
     let isVendor = await SecureStore.getItemAsync(Const.SS_IS_VENDOR);
-    // if (isVendor == "true") {
-    //   this.props.setIsVendor(true)
-    // }
-    // if (isLogin == "true") {
-    //   this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
-    // }
+    if (isVendor == "true") {
+      //this.props.setIsVendor(true)
+    }
+    if (isLogin == "true") {
+      this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
+    }
 
     // TODO REGISTER API CALL DEMO
     // let data = {
@@ -47,19 +49,52 @@ class InitScreen extends Component {
     //TODO GET USER PROFILE API CALL DEMO
     // let response = await ApiManager.getUserProfile(Const.STATIC_USER)
 
-    //TODO GET ALL USERS API CALL
-    //let response = await ApiManager.getAllUsers()
+    //TODO GET ALL EVENTS API CALL
+    // let response = await ApiManager.getAllEvents()
 
 
-    let data = {
-      "email": "hiren.devstree@gmail.com",
-      "firstname": "Hiren",
-      "initials": "ASE",
-      "lastname": "Vaghela",
-      "type": 1
-    }
-    let response = await ApiManager.postUpdateProfile(Const.STATIC_USER, data)
-    console.log({ response })
+    // TODO UPDATE PROFILE API CALL
+    // let data = {
+    //   "email": "hiren.devstree@gmail.com",
+    //   "firstname": "Hiren",
+    //   "initials": "ASE",
+    //   "lastname": "Vaghela",
+    //   "type": 1
+    // }
+    // let response = await ApiManager.postUpdateProfile(Const.STATIC_USER, data)
+
+    // ----------------------------------------------------
+    // TODO REGISTER API CALL DEMO
+    // let data = {
+    //   "name": "My 27th",
+    //   "startdate": "01-01-2020",
+    //   "enddate": "02-01-2020",
+    //   "userid": Const.STATIC_USER,
+    //   "usertype": "1"
+    // }
+
+    // let response = await ApiManager.postEvent(data)
+
+
+    //TODO GET EVENT API CALL DEMO
+    // let response = await ApiManager.getEventDetails(STATIC_EVENT)
+
+    //TODO GET ALL EVENTS API CALL
+    // let response = await ApiManager.getAllEvents()
+
+    // TODO UPDATE EVENT API CALL
+    // let data = {
+    //   "name": "My 25th",
+    //   "startdate": "01-11-2020",
+    //   "enddate": "02-11-2020",
+    //   "userid": Const.STATIC_USER,
+    //   "usertype": "1"
+    // }
+    // let response = await ApiManager.postUpdateEvent(STATIC_EVENT, data)
+
+    // let response = await ApiManager.getServiceProvider(STATIC_EVENT)
+
+    //console.log({ response })
   }
   render() {
     return (
