@@ -30,14 +30,14 @@ const EventListItem = ({ event, isHostedByMe, isVendor, ...props }) => {
             {event ?
                 <View style={styles.card}>
                     <View style={[styles.eventItemRow1, styles.eventItemRow]}>
-                        <Text style={styles.textH23Bold}>{event.eventName}</Text>
+                        <Text style={styles.textH23Bold}>{event.name}</Text>
                         <FontAwesome name={headerIconName} color={headerIconColor} size={StyleConfig.headerIconSize} />
                     </View>
                     <View style={styles.rowAlignCenter}>
                         <View style={[styles.flex1, styles.eventItemRow]}>
-                            <Text style={[styles.textH3Bold, styles.eventItemRow]}>{event.date}</Text>
-                            <Text style={[styles.textH3Regular, styles.eventItemRow]}>{event.location}</Text>
-                            <Text style={[styles.textH3Regular, styles.eventItemRow]}>{event.address}</Text>
+                            <Text style={[styles.textH3Bold, styles.eventItemRow]}>{event.startdate}</Text>
+                            <Text style={[styles.textH3Regular, styles.eventItemRow]}>{event.enddate}</Text>
+                            <Text style={[styles.textH3Regular, styles.eventItemRow]}></Text>
                             {isHostedByMe && !isVendor &&
                                 <View style={[styles.rowAlignCenter, styles.eventItemRow]}>
                                     <FontAwesome name={"check"} color={StyleConfig.COLORS.green} size={StyleConfig.headerIconSize} />

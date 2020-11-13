@@ -147,15 +147,21 @@ class EventScreen extends Component {
     // }, 2000);
 
     let response = await ApiManager.getAllEvents();
+    response = response.map((item) => {
+      let start = item.data.startdate.split("-")
+      let startdate = `${start[2]}-${start[1]}-${start[0]}`
+      return { ...item.data, "id": item.id, startdate }
+    });
     console.log(response)
     let newData = {};
-    for (let ind in DUMMY_DATA) {
-      if (newData.hasOwnProperty(DUMMY_DATA[ind].date)) {
-        newData[DUMMY_DATA[ind].date].data.push(DUMMY_DATA[ind])
+    for (let ind in response) {
+      if (newData.hasOwnProperty(response[ind].startdate)) {
+        newData[response[ind].startdate].data.push(response[ind])
       } else {
-        newData[DUMMY_DATA[ind].date] = { data: [{ ...DUMMY_DATA[ind] }], "marked": true };
+        newData[response[ind].startdate] = { data: [{ ...response[ind] }], "marked": true };
       }
     }
+    console.log(newData)
     this.setState({ calendarData: newData }, () => {
       let dateString = moment(new Date()).format("YYYY-MM-DD")
       this.onDayPress({ dateString })
@@ -193,7 +199,7 @@ class EventScreen extends Component {
   }
   render() {
     const { isCalendarView, showWelcome, data, selectedDate, calendarData } = this.state;
-    console.log(calendarData)
+    //  console.log(calendarData)
     return (
       <>
         <StatusBar barStyle="dark-content" />
