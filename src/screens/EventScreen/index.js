@@ -129,7 +129,8 @@ class EventScreen extends Component {
     data: DUMMY_DATA,
     calendarHeight: 0,
     selectedDate: new Date(),
-    calendarData: {}
+    calendarData: {},
+    showAddEvent: false
   }
   constructor(props) {
     super(props);
@@ -171,7 +172,7 @@ class EventScreen extends Component {
   onSavePress = () => {
     this.props.loader(true);
     setTimeout(() => {
-      this.setState({ data: DUMMY_DATA })
+      this.setState({ showAddEvent: false })
       this.props.loader(false)
     }, 2000);
   }
@@ -181,7 +182,7 @@ class EventScreen extends Component {
   }
   onItemPress = (event) => {
     if (event == null) {
-      this.setState({ data: [] })
+      this.setState({ showAddEvent: true })
     } else if (event.hostUserId == userId) {
       this.props.navigation.navigate(Const.NK_EVENT_DETAILS, { event, hostOfTheEvent: true })
     } else {
@@ -198,7 +199,7 @@ class EventScreen extends Component {
 
   }
   render() {
-    const { isCalendarView, showWelcome, data, selectedDate, calendarData } = this.state;
+    const { isCalendarView, showWelcome, data, selectedDate, calendarData, showAddEvent } = this.state;
     //  console.log(calendarData)
     return (
       <>
@@ -217,7 +218,7 @@ class EventScreen extends Component {
             </TouchableOpacity>
           </View>
 
-          {isCalendarView && <View style={{ flex: 1 }} >
+          {isCalendarView && !showAddEvent && <View style={{ flex: 1 }} >
             <Calendar
               theme={{
                 calendarBackground: '#fcfcfc',
@@ -254,7 +255,7 @@ class EventScreen extends Component {
               ListFooterComponent={() => <EventListItem {...this.props} onPress={() => this.onItemPress(null)} />}
             />
           </View>}
-          {!isCalendarView && <ScrollView
+          {!isCalendarView && !showAddEvent && <ScrollView
             style={styles.content}>
             {data.length > 0 && <FlatList
               data={data}
@@ -273,7 +274,7 @@ class EventScreen extends Component {
             </View>}
           </ScrollView>
           }
-          {data.length == 0 && this.props.isVen && <ScrollView style={styles.content}>
+          {showAddEvent && <ScrollView style={styles.content}>
             <AddEventComponent onSavePress={this.onSavePress} />
           </ScrollView>}
 
