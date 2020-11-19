@@ -13,7 +13,10 @@ import {
     Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import StyleConfig from 'src/helper/StyleConfig';
+import * as SecureStore from 'expo-secure-store';
 
+import { CommonActions } from '@react-navigation/native';
+import * as Const from 'src/helper/constant';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import AppImages from 'src/assets/images';
 import { Button } from 'src/components/common/Button';
@@ -23,7 +26,9 @@ class ProfileScreen extends Component {
         super(props);
     }
     onLogout = async () => {
-
+        await SecureStore.deleteItemAsync(Const.SS_IS_LOGIN)
+        await SecureStore.deleteItemAsync(Const.SS_IS_VENDOR)
+        this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_LOGIN }] }))
     }
     render() {
         return (

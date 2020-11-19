@@ -27,6 +27,7 @@ import firebase from 'src/helper/firebaseConfig';
 import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
 import withVendor from 'src/redux/actionCreator/withVendor';
 
+import * as SecureStore from 'expo-secure-store';
 const OTPVerificationScreen = ({ route, navigation, ...props }) => {
   //const { verificationId, otherParam } = route.params.verificationId;
 
@@ -90,6 +91,7 @@ const OTPVerificationScreen = ({ route, navigation, ...props }) => {
                     navigation.navigate(Const.NK_VENDOR_REGISTER)
                   } else {
                     await SecureStore.setItemAsync(Const.SS_IS_LOGIN, "true")
+
                     navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
                   }
                 } catch (err) {

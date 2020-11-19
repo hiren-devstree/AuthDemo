@@ -147,6 +147,10 @@ class EventScreen extends Component {
     //   this.props.loader(false)
     // }, 2000);
 
+    this.getInitialData();
+
+  }
+  getInitialData = async () => {
     let response = await ApiManager.getAllEvents();
     response = response.map((item) => {
       let start = item.data.startdate.split("-")
@@ -167,14 +171,14 @@ class EventScreen extends Component {
       let dateString = moment(new Date()).format("YYYY-MM-DD")
       this.onDayPress({ dateString })
     })
-
   }
-  onSavePress = () => {
+  onSavePress = async (data) => {
     this.props.loader(true);
-    setTimeout(() => {
-      this.setState({ showAddEvent: false })
-      this.props.loader(false)
-    }, 2000);
+    this.setState({ showAddEvent: false })
+    let addEventRes = await ApiManager.postEvent(data)
+    console.log({ addEventRes })
+    this.getInitialData()
+    this.props.loader(false)
   }
 
   onAddPress = () => {
@@ -275,7 +279,7 @@ class EventScreen extends Component {
           </ScrollView>
           }
           {showAddEvent && <ScrollView style={styles.content}>
-            <AddEventComponent onSavePress={this.onSavePress} />
+            <AddEventComponent onSavePress={(data) => this.onSavePress(data)} />
           </ScrollView>}
 
         </SafeAreaView>

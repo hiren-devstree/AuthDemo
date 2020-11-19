@@ -31,13 +31,25 @@ class AddEventComponent extends React.Component {
 
     }
     onDateConfirm = (date) => {
-        let eventDateTime = moment(date).format("DD-mm-yyyy hh:MM A")
+        let eventDateTime = moment(date).format("DD-MM-yyyy")
         this.setState({ eventDateTime, showDateTimePicker: false })
     }
 
+    onSubmit = () => {
+        const { onSavePress } = this.props;
+        const { showDateTimePicker, eventDateTime, eventName, location, address, typeOfEvent } = this.state;
+        let data = {
+            startdate: eventDateTime,
+            name: eventName,
+            location,
+            address,
+            typeOfEvent
+        }
+        console.log({ data })
+        onSavePress(data)
+    }
 
     render() {
-        const { onSavePress } = this.props;
         const { showDateTimePicker, eventDateTime, eventName, location, address, typeOfEvent } = this.state;
         return (
             <View style={[styles.card, { margin: StyleConfig.countPixelRatio(16) }]}>
@@ -83,11 +95,11 @@ class AddEventComponent extends React.Component {
                     <FontAwesome name={Const.IC_EVENT_CALENDAR} color={StyleConfig.COLORS.defaultTextColor} size={StyleConfig.countPixelRatio(24)} />
                 </TouchableOpacity>
                 <View style={styles.rowReverse}>
-                    <Button onPress={onSavePress} buttonWrap={{ width: StyleConfig.width * 0.25, height: StyleConfig.countPixelRatio(36) }}>{strings.save}</Button>
+                    <Button onPress={this.onSubmit} buttonWrap={{ width: StyleConfig.width * 0.25, height: StyleConfig.countPixelRatio(36) }}>{strings.save}</Button>
                 </View>
                 <DateTimePickerModal
                     isVisible={showDateTimePicker}
-                    mode="datetime"
+                    mode="date"
                     headerTextIOS={strings.select_event_date_time}
                     onConfirm={this.onDateConfirm}
                     onCancel={() => this.setState({ showDateTimePicker: false })}

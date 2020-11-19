@@ -64,7 +64,7 @@ class InitScreen extends Component {
     // let response = await ApiManager.postUpdateProfile(Const.STATIC_USER, data)
 
     // ----------------------------------------------------
-    // TODO REGISTER API CALL DEMO
+    // TODO ADD EVENT API CALL DEMO
     // let data = {
     //   "name": "My 27th",
     //   "startdate": "01-01-2020",
