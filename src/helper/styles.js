@@ -142,6 +142,15 @@ const styles = StyleSheet.create({
         fontSize: StyleConfig.fontSizeH2,
         opacity: 0.8
     },
+    errorText: {
+        includeFontPadding: false,
+        fontFamily: StyleConfig.fontMedium,
+        fontSize: StyleConfig.fontSizeH3_4,
+        opacity: 0.8,
+        color: StyleConfig.COLORS.red,
+        marginLeft: StyleConfig.countPixelRatio(8),
+        marginTop: StyleConfig.countPixelRatio(-4)
+    },
     card: {
         ...StyleConfig.card, overflow: 'hidden'
     },
@@ -212,7 +221,7 @@ const styles = StyleSheet.create({
         includeFontPadding: false,
         fontFamily: StyleConfig.fontRegular,
         fontSize: StyleConfig.fontSizeH4,
-        marginTop: StyleConfig.countPixelRatio(-6),
+        marginTop: StyleConfig.countPixelRatio(-4),
         marginLeft: StyleConfig.countPixelRatio(8),
         marginBottom: StyleConfig.countPixelRatio(8)
     },

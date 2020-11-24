@@ -48,7 +48,8 @@ const strings = {
     "city": "City",
     "state": "State",
     "country": "Country",
-    "enter_otp": "Enter OTP"
+    "enter_otp": "Enter OTP",
+    "required": "Required"
 
 
 

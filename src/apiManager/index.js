@@ -159,14 +159,45 @@ const ApiManager = {
             console.log('error', error)
         });
     },
-
-
     generateOtp: async (phoneNumber) => {
         const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
         console.log({ confirmation })
     },
-    verifyOtp: async (code) => {
-
+    getMessages: async (eventId) => {
+        return fetch(`${KEY_EVENTS}${eventId}/messages`, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+        }).then((response) => {
+            return response.json()
+        }, function (error) {
+            console.log('error', error)
+        }).catch((error) => {
+            console.log('error', error)
+        });
+    },
+    postMessage: async (eventId) => {
+        return fetch(`${KEY_EVENTS}${eventId}/messages`, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "text": "Hello world",
+                "createdByUserId": "EGDtaROorlajrAOb9dmv",
+                "createdDateTime": "02-01-2020",
+                "toUserId": "EGDtaROorlajrAOb9dmv"
+            })
+        }).then((response) => {
+            return response.json()
+        }, function (error) {
+            console.log('error', error)
+        }).catch((error) => {
+            console.log('error', error)
+        });
     }
 }
 module.exports = ApiManager;

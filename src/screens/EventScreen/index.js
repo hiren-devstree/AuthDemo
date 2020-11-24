@@ -126,11 +126,11 @@ class EventScreen extends Component {
   state = {
     isCalendarView: true,
     showWelcome: false,
-    data: DUMMY_DATA,
+    data: [],
     calendarHeight: 0,
     selectedDate: new Date(),
     calendarData: {},
-    showAddEvent: false
+    showAddEvent: true
   }
   constructor(props) {
     super(props);
