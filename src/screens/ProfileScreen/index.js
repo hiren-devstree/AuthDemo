@@ -28,7 +28,7 @@ class ProfileScreen extends Component {
     onLogout = async () => {
         await SecureStore.deleteItemAsync(Const.SS_IS_LOGIN)
         await SecureStore.deleteItemAsync(Const.SS_IS_VENDOR)
-        this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_LOGIN }] }))
+        this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_INIT }] }))
     }
     render() {
         return (

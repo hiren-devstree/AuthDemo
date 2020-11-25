@@ -24,6 +24,19 @@ import { Button } from 'src/components/common/Button';
 import SelectServiceTypeModal from 'src/screens/VendorRegisterScreen/SelectServiceTypeModal';
 import styles from 'src/helper/styles';
 import ApiManager from 'src/apiManager'
+const errorInit = {
+  phone: undefined,
+  businessName: undefined,
+  address: undefined,
+  address2: undefined,
+  city: undefined,
+  state: undefined,
+  country: undefined,
+  type_of_services: undefined
+}
+const TextInputWrap = ({ error, children }) => <View style={[styles.textInputWrap, { width: null, margin: StyleConfig.countPixelRatio(8), borderColor: error ? StyleConfig.COLORS.red : StyleConfig.COLORS.defaultTextColor }]}>
+  {children}</View>
+
 class VendorRegisterScreen extends Component {
   constructor(props) {
     super(props);
@@ -35,26 +48,62 @@ class VendorRegisterScreen extends Component {
       address2: '',
       city: '',
       state: '',
-      country: ''
+      country: '',
+      error: {
+        ...errorInit
+      }
     }
   }
   onSave = async () => {
     const { phone, businessName, address, address2, city, state, country } = this.state;
-    console.log("step0")
-    let data = {
-      "id": phone,
-      businessName, address, address2, city, state, country,
-      "initials": "ASS",
-      "type": 1
+    let error = {
+      ...errorInit
     }
-    console.log("step1")
-    let response = await ApiManager.postRegister(data)
-    console.log(response)
-    await SecureStore.setItemAsync(Const.SS_IS_VENDOR, "true")
-    this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
+    if (phone.length == 0) {
+      error.phone = strings.required
+    }
+    if (businessName.length == 0) {
+      error.businessName = strings.required
+    }
+    if (address.length == 0) {
+      error.address = strings.required
+    }
+    if (address2.length == 0) {
+      error.address2 = strings.required
+    }
+    if (city.length == 0) {
+      error.city = strings.required
+    }
+    if (state.length == 0) {
+      error.state = strings.required
+    }
+    if (country.length == 0) {
+      error.country = strings.required
+    }
+    if (JSON.stringify(error) == JSON.stringify(errorInit)) {
+      let data = {
+        "id": phone,
+        businessName, address, address2, city, state, country,
+        "initials": "ASS",
+        "type": 1
+      }
+      console.log("step1")
+      let response = await ApiManager.postRegister(data)
+      console.log(response)
+      await SecureStore.setItemAsync(Const.SS_IS_VENDOR, "true")
+      this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
+    } else {
+      this.setState({ error })
+    }
+
+
+
+
+
+
   }
   render() {
-    const { phone, showSelectServiceTypeModal, businessName, address, address2, city, state, country } = this.state;
+    const { phone, showSelectServiceTypeModal, businessName, address, address2, city, state, country, error } = this.state;
     return (
       <>
         <StatusBar barStyle="dark-content" />
@@ -63,23 +112,24 @@ class VendorRegisterScreen extends Component {
             <Text style={styles.headerTitle}>{strings.vendor_profile}</Text>
           </View>
           <ScrollView style={styles.contentWithPadding}>
-            <View style={[styles.textInputWrap, { width: null, margin: StyleConfig.countPixelRatio(8) }]}>
+            <TextInputWrap error={error.businessName != undefined}>
               <TextInput
                 style={styles.textH3Regular}
                 placeholderTextColor={StyleConfig.COLORS.hintTextColor}
                 placeholder={strings.your_business_name}
                 value={businessName}
-                onChangeText={(businessName) => this.setState({ businessName })}
+                onChangeText={(businessName) => this.setState({ businessName, error: { ...error, businessName: undefined } })}
               />
-            </View>
-            <View style={[styles.textInputWrap, { width: null, margin: StyleConfig.countPixelRatio(8) }]}>
+            </TextInputWrap>
+            {error.businessName && <Text style={styles.errorText}>{error.businessName}</Text>}
+            <TextInputWrap error={error.type_of_services != undefined}>
               <TextInput
                 style={styles.textH3Regular}
                 placeholderTextColor={StyleConfig.COLORS.hintTextColor}
                 placeholder={strings.type_of_services}
-
               />
-            </View>
+            </TextInputWrap>
+            {error.type_of_services && <Text style={styles.errorText}>{error.type_of_services}</Text>}
             <View style={{ flexDirection: 'row', margin: StyleConfig.countPixelRatio(8) }} >
               <Button
                 disabled={true}
@@ -97,61 +147,70 @@ class VendorRegisterScreen extends Component {
               >{'Catering'}</Button>
 
             </View>
-            <View style={[styles.textInputWrap, { width: null, margin: StyleConfig.countPixelRatio(8), marginBottom: StyleConfig.countPixelRatio(20) }]}>
+            <TextInputWrap error={error.phone != undefined}>
               <TextInput
                 style={styles.textH3Regular}
                 placeholderTextColor={StyleConfig.COLORS.hintTextColor}
                 value={phone}
                 editable={false}
-
               />
-            </View>
-            <Text style={styles.textH23Medium}>{strings.your_location_details}</Text>
-            <View style={[styles.textInputWrap, { width: null, margin: StyleConfig.countPixelRatio(8) }]}>
+            </TextInputWrap>
+            {error.phone && <Text style={styles.errorText}>{error.phone}</Text>}
+            <Text style={[styles.textH23Medium, { marginTop: StyleConfig.countPixelRatio(20) }]}>{strings.your_location_details}</Text>
+            <TextInputWrap error={error.address != undefined}>
               <TextInput
                 style={styles.textH3Regular}
                 placeholderTextColor={StyleConfig.COLORS.hintTextColor}
                 placeholder={strings.address}
                 value={address}
-                onChangeText={(address) => this.setState({ address })}
+                onChangeText={(address) => this.setState({ address, error: { ...error, address: undefined } })}
               />
-            </View>
-            <View style={[styles.textInputWrap, { width: null, margin: StyleConfig.countPixelRatio(8) }]}>
+            </TextInputWrap>
+            {error.address && <Text style={styles.errorText}>{error.address}</Text>}
+            <TextInputWrap error={error.address2 != undefined}>
               <TextInput
                 style={styles.textH3Regular}
                 placeholderTextColor={StyleConfig.COLORS.hintTextColor}
                 placeholder={strings.address_line_2}
                 value={address2}
-                onChangeText={(address2) => this.setState({ address2 })}
+                onChangeText={(address2) => this.setState({ address2, error: { ...error, address2: undefined } })}
               />
-            </View>
-            <View style={[styles.textInputWrap, { width: null, margin: StyleConfig.countPixelRatio(8) }]}>
+            </TextInputWrap>
+            {error.address2 && <Text style={styles.errorText}>{error.address2}</Text>}
+            <TextInputWrap error={error.address2 != undefined}>
               <TextInput
                 style={styles.textH3Regular}
                 placeholderTextColor={StyleConfig.COLORS.hintTextColor}
                 placeholder={strings.city}
                 value={city}
-                onChangeText={(city) => this.setState({ city })}
+                onChangeText={(city) => this.setState({ city, error: { ...error, city: undefined } })}
               />
-            </View>
+            </TextInputWrap>
+            {error.city && <Text style={styles.errorText}>{error.city}</Text>}
             <View style={styles.row}>
-              <View style={[styles.textInputWrap, { width: null, flex: 1, margin: StyleConfig.countPixelRatio(8) }]}>
-                <TextInput
-                  style={styles.textH3Regular}
-                  placeholderTextColor={StyleConfig.COLORS.hintTextColor}
-                  placeholder={strings.state}
-                  value={state}
-                  onChangeText={(state) => this.setState({ state })}
-                />
+              <View style={{ width: null, flex: 1, }}>
+                <View style={[styles.textInputWrap, { width: null, flex: 1, margin: StyleConfig.countPixelRatio(8), borderColor: error.state != undefined ? StyleConfig.COLORS.red : StyleConfig.COLORS.defaultTextColor }]}>
+                  <TextInput
+                    style={styles.textH3Regular}
+                    placeholderTextColor={StyleConfig.COLORS.hintTextColor}
+                    placeholder={strings.state}
+                    value={state}
+                    onChangeText={(state) => this.setState({ state, error: { ...error, state: undefined } })}
+                  />
+                </View>
+                {error.state && <Text style={styles.errorText}>{error.state}</Text>}
               </View>
-              <View style={[styles.textInputWrap, { width: null, flex: 1, margin: StyleConfig.countPixelRatio(8) }]}>
-                <TextInput
-                  style={styles.textH3Regular}
-                  placeholderTextColor={StyleConfig.COLORS.hintTextColor}
-                  placeholder={strings.country}
-                  value={country}
-                  onChangeText={(country) => this.setState({ country })}
-                />
+              <View style={{ width: null, flex: 1, }}>
+                <View style={[styles.textInputWrap, { width: null, flex: 1, margin: StyleConfig.countPixelRatio(8), borderColor: error.country != undefined ? StyleConfig.COLORS.red : StyleConfig.COLORS.defaultTextColor }]}>
+                  <TextInput
+                    style={styles.textH3Regular}
+                    placeholderTextColor={StyleConfig.COLORS.hintTextColor}
+                    placeholder={strings.country}
+                    value={country}
+                    onChangeText={(country) => this.setState({ country, error: { ...error, country: undefined } })}
+                  />
+                </View>
+                {error.country && <Text style={styles.errorText}>{error.country}</Text>}
               </View>
             </View>
             <View style={[styles.center, { marginTop: StyleConfig.countPixelRatio(16) }]}>
