@@ -85,7 +85,7 @@ class VendorRegisterScreen extends Component {
         "id": phone,
         businessName, address, address2, city, state, country,
         "initials": "ASS",
-        "type": 1
+        "type": Const.VENDOR
       }
       console.log("step1")
       let response = await ApiManager.postRegister(data)

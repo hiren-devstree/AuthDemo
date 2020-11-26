@@ -21,9 +21,16 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import AppImages from 'src/assets/images';
 import { Button } from 'src/components/common/Button';
 import styles from 'src/helper/styles';
+import ApiManager from 'src/apiManager'
 class ProfileScreen extends Component {
     constructor(props) {
         super(props);
+    }
+    componentDidMount = async () => {
+
+        let response = await ApiManager.getUserProfile(Const.STATIC_USER)
+        console.log({ response })
+
     }
     onLogout = async () => {
         await SecureStore.deleteItemAsync(Const.SS_IS_LOGIN)

@@ -125,8 +125,8 @@ class InitScreen extends Component {
               buttonWrap={{ backgroundColor: StyleConfig.COLORS.darkRed, borderColor: StyleConfig.COLORS.darkRed, marginBottom: StyleConfig.countPixelRatio(44) }}
               onPress={() => {
                 this.props.setIsVendor(true)
-                //this.props.navigation.navigate(Const.NK_LOGIN)
-                this.props.navigation.navigate(Const.NK_VENDOR_REGISTER)
+                this.props.navigation.navigate(Const.NK_LOGIN)
+                //this.props.navigation.navigate(Const.NK_VENDOR_REGISTER)
 
               }}
             >{strings.vendors_help_emzee}</Button>

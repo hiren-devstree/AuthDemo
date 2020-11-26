@@ -86,9 +86,10 @@ const OTPVerificationScreen = ({ route, navigation, ...props }) => {
                   );
                   console.log("step 2", credential)
                   let res = await firebase.auth().signInWithCredential(credential);
+                  console.log("step 3", res)
 
                   if (props.isVendor) {
-                    navigation.navigate(Const.NK_VENDOR_REGISTER)
+                    navigation.navigate(Const.NK_VENDOR_REGISTER, {})
                   } else {
                     await SecureStore.setItemAsync(Const.SS_IS_LOGIN, "true")
 

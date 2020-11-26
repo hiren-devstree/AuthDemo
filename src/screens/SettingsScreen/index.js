@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
+  FlatList,
   View,
   Text,
   Image,
+  TextInput, TouchableOpacity,
   StatusBar,
 } from 'react-native';
 
@@ -15,14 +16,28 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import StyleConfig from 'src/helper/StyleConfig';
 
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import AppImages from 'src/assets/images';
 import { Button } from 'src/components/common/Button';
 import styles from 'src/helper/styles';
 import * as Const from 'src/helper/constant';
+import { FontAwesome } from '@expo/vector-icons';
 class SettingsScreen extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      data: [
+        {
+          "id": 1,
+          "name": "childhood",
+          "contacts": [{}, {}]
+        },
+        {
+          "id": 2,
+          "name": "Prompt Group",
+          "contacts": [{}, {}]
+        }
+      ]
+    }
   }
   onProfile = () => {
     this.props.navigation.navigate(Const.NK_PROFILE)
@@ -32,17 +47,22 @@ class SettingsScreen extends Component {
       <>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={styles.headerTitle}>Setting</Text>
+          <View style={styles.headerWrapSingle}>
+            <Text style={styles.headerTitle}>Settings</Text>
           </View>
-          <ScrollView style={styles.scrollView}>
+
+          <View style={[styles.flex1, { paddingTop: StyleConfig.countPixelRatio(8) }]}>
             <TouchableOpacity
               onPress={this.onProfile}
-              style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={styles.headerTitle}>Profile</Text>
+              style={[styles.cardRow, { paddingHorizontal: StyleConfig.countPixelRatio(12), paddingVertical: 12 }]}>
+              <View style={styles.flex1}>
+                <Text style={styles.textH23Medium}>{'Profile'}</Text>
+              </View>
+              <View style={styles.center}>
+                <FontAwesome name={"angle-right"} size={StyleConfig.countPixelRatio(20)} color={StyleConfig.COLORS.defaultTextColor} />
+              </View>
             </TouchableOpacity>
-
-          </ScrollView>
+          </View>
         </SafeAreaView>
       </>
     );
