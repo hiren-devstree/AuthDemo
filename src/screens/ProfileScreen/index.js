@@ -25,11 +25,16 @@ import ApiManager from 'src/apiManager'
 class ProfileScreen extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            data: {}
+        }
     }
     componentDidMount = async () => {
 
         let response = await ApiManager.getUserProfile(Const.STATIC_USER)
-        console.log({ response })
+        if (response.hasOwnProperty("data")) {
+            this.setState({ data: response.data });
+        }
 
     }
     onLogout = async () => {
@@ -38,6 +43,7 @@ class ProfileScreen extends Component {
         this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_INIT }] }))
     }
     render() {
+        const { data } = this.state
         return (
             <>
                 <StatusBar barStyle="dark-content" />
@@ -51,6 +57,7 @@ class ProfileScreen extends Component {
                             style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={styles.headerTitle}>Logout</Text>
                         </TouchableOpacity>
+                        <Text style={styles.headerTitle}>{data.toString()}</Text>
 
                     </ScrollView>
                 </SafeAreaView>
