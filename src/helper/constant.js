@@ -15,6 +15,7 @@ export const IC_BACK = "angle-left";
 export const IC_EVENT_LIST = "list";
 export const IC_EVENT_CALENDAR = "calendar";
 export const VENDOR = 2;
+export const USER = 1;
 export const SS_IS_LOGIN = "IS_LOGIN";
 export const SS_IS_VENDOR = "IS_VENDOR";
 

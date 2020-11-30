@@ -10,7 +10,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome } from '@expo/vector-icons';
 
 import InitScreen from '../screens/InitScreen';
-import RegisterScreen from '../screens/RegisterScreen';
 import LoginScreen from '../screens/LoginScreen';
 import OTPVerificationScreen from '../screens/OTPVerificationScreen';
 import EventScreen from '../screens/EventScreen';
@@ -123,7 +122,6 @@ const AppNavigator = ({ ...props }) => {
         headerMode={'screen'}
       >
         <Stack.Screen options={{ headerShown: false }} name={NK_INIT} component={InitScreen} path={'init'} />
-        <Stack.Screen options={{ headerShown: false }} name={NK_REGISTER} component={RegisterScreen} />
         <Stack.Screen options={{ headerShown: false }} name={NK_LOGIN} component={LoginScreen} />
         <Stack.Screen options={{ headerShown: false }} name={NK_OTP_VERIFICATION} component={OTPVerificationScreen} />
         <Stack.Screen options={{ headerShown: false }} name={NK_VENDOR_REGISTER} component={VendorRegisterScreen} />

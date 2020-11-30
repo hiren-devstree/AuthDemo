@@ -116,7 +116,8 @@ class InitScreen extends Component {
             <Button
               onPress={() => {
                 this.props.setIsVendor(false)
-                this.props.navigation.navigate(Const.NK_LOGIN)
+                this.props.navigation.navigate(Const.NK_VENDOR_REGISTER)
+                //this.props.navigation.navigate(Const.NK_LOGIN)
               }}
               buttonWrap={{ backgroundColor: StyleConfig.COLORS.green, borderColor: StyleConfig.COLORS.green, marginBottom: StyleConfig.countPixelRatio(24) }}
             >{strings.ready_to_plan_lets_emzee}</Button>

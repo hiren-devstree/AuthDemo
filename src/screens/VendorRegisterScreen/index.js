@@ -23,8 +23,11 @@ import { CommonActions } from '@react-navigation/native';
 import { Button } from 'src/components/common/Button';
 import SelectServiceTypeModal from 'src/screens/VendorRegisterScreen/SelectServiceTypeModal';
 import styles from 'src/helper/styles';
+import withVendor from 'src/redux/actionCreator/withVendor';
 import ApiManager from 'src/apiManager'
 const errorInit = {
+  firstName: undefined,
+  lastName: undefined,
   phone: undefined,
   businessName: undefined,
   address: undefined,
@@ -42,6 +45,8 @@ class VendorRegisterScreen extends Component {
     super(props);
     this.state = {
       phone: "+91 9033343516",
+      firstName: '',
+      lastName: '',
       showSelectServiceTypeModal: false,
       businessName: '',
       address: '',
@@ -55,14 +60,22 @@ class VendorRegisterScreen extends Component {
     }
   }
   onSave = async () => {
-    const { phone, businessName, address, address2, city, state, country } = this.state;
+    const { firstName, lastName, phone, businessName, address, address2, city, state, country } = this.state;
+    const { isVendor } = this.props ;
     let error = {
       ...errorInit
     }
     if (phone.length == 0) {
       error.phone = strings.required
     }
-    if (businessName.length == 0) {
+    if (firstName.length == 0) {
+      error.firstName = strings.required
+    }
+    if (lastName.length == 0) {
+      error.lastName = strings.required
+    }
+
+    if (businessName.length == 0 && isVendor ) {
       error.businessName = strings.required
     }
     if (address.length == 0) {
@@ -81,11 +94,23 @@ class VendorRegisterScreen extends Component {
       error.country = strings.required
     }
     if (JSON.stringify(error) == JSON.stringify(errorInit)) {
-      let data = {
-        "id": phone,
-        businessName, address, address2, city, state, country,
-        "initials": "ASS",
-        "type": Const.VENDOR
+      let data = {}
+      if(isVendor){
+        data = {
+          "id": phone,
+          businessName, address, address2, city, state, country,
+          "initials": "ASS",
+          "type": Const.VENDOR
+        }
+      }else{
+        data = {
+          "id": phone,
+          firstName,
+          lastName,
+          address, address2, city, state, country,
+          "initials": "ASS",
+          "type": Const.USER
+        }
       }
       console.log("step1")
       let response = await ApiManager.postRegister(data)
@@ -103,7 +128,8 @@ class VendorRegisterScreen extends Component {
 
   }
   render() {
-    const { phone, showSelectServiceTypeModal, businessName, address, address2, city, state, country, error } = this.state;
+    const { firstName,phone, showSelectServiceTypeModal, businessName, address, address2, city, state, country, error } = this.state;
+    const {isVendor} = this.props;
     return (
       <>
         <StatusBar barStyle="dark-content" />
@@ -112,7 +138,8 @@ class VendorRegisterScreen extends Component {
             <Text style={styles.headerTitle}>{strings.vendor_profile}</Text>
           </View>
           <ScrollView style={styles.contentWithPadding}>
-            <TextInputWrap error={error.businessName != undefined}>
+            {isVendor ? <>
+              <TextInputWrap error={error.businessName != undefined}>
               <TextInput
                 style={styles.textH3Regular}
                 placeholderTextColor={StyleConfig.COLORS.hintTextColor}
@@ -147,6 +174,29 @@ class VendorRegisterScreen extends Component {
               >{'Catering'}</Button>
 
             </View>
+            </> : <>
+            <TextInputWrap error={error.firstName != undefined}>
+              <TextInput
+                style={styles.textH3Regular}
+                placeholderTextColor={StyleConfig.COLORS.hintTextColor}
+                placeholder={strings.first_name}
+                value={firstName}
+                onChangeText={(firstName) => this.setState({ firstName, error: { ...error, firstName: undefined } })}
+              />
+            </TextInputWrap>
+            {error.firstName && <Text style={styles.errorText}>{error.firstName}</Text>}
+            <TextInputWrap error={error.lastName != undefined}>
+              <TextInput
+                style={styles.textH3Regular}
+                placeholderTextColor={StyleConfig.COLORS.hintTextColor}
+                placeholder={strings.last_name}
+                value={firstName}
+                onChangeText={(lastName) => this.setState({ lastName, error: { ...error, lastName: undefined } })}
+              />
+            </TextInputWrap>
+            {error.lastName && <Text style={styles.errorText}>{error.lastName}</Text>}
+            </>}
+            
             <TextInputWrap error={error.phone != undefined}>
               <TextInput
                 style={styles.textH3Regular}
@@ -231,4 +281,4 @@ class VendorRegisterScreen extends Component {
     );
   }
 }
-export default VendorRegisterScreen;
+export default withVendor(VendorRegisterScreen);

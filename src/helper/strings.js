@@ -49,7 +49,9 @@ const strings = {
     "state": "State",
     "country": "Country",
     "enter_otp": "Enter OTP",
-    "required": "Required"
+    "required": "Required",
+    "first_name": "First name",
+    "last_name": "Last name"
 
 
 
