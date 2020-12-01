@@ -109,7 +109,7 @@ class MemoriesScreen extends Component {
         }
     };
     previewPhoto = (item) => {
-        this.props.navigation.navigate(Const.NK_PREVIEW_PHOTO, { photoUri: item.uri })
+       // this.props.navigation.navigate(Const.NK_PREVIEW_PHOTO, { photoUri: item.uri })
     }
     render() {
         const { albums, width, showDropdown, groupBy } = this.state;

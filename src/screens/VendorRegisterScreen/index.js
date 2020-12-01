@@ -128,7 +128,7 @@ class VendorRegisterScreen extends Component {
 
   }
   render() {
-    const { firstName,phone, showSelectServiceTypeModal, businessName, address, address2, city, state, country, error } = this.state;
+    const { firstName, lastName, phone, showSelectServiceTypeModal, businessName, address, address2, city, state, country, error } = this.state;
     const {isVendor} = this.props;
     return (
       <>
@@ -190,7 +190,7 @@ class VendorRegisterScreen extends Component {
                 style={styles.textH3Regular}
                 placeholderTextColor={StyleConfig.COLORS.hintTextColor}
                 placeholder={strings.last_name}
-                value={firstName}
+                value={lastName}
                 onChangeText={(lastName) => this.setState({ lastName, error: { ...error, lastName: undefined } })}
               />
             </TextInputWrap>

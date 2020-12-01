@@ -59,7 +59,7 @@ class GuestScreen extends Component {
               data={this.state.data}
               extraData={this.state}
               keyExtractor={(item, index) => `mainguestlist${index}`}
-              ListFooterComponent={() => <TouchableOpacity onPress={() => this.props.navigation.navigate(Const.NK_GUESTS_DETAILS, { item: ITEM_OBJ })}
+              ListFooterComponent={() => <TouchableOpacity onPress={() =>  console.log("footer item press")}
                 style={[styles.card, styles.center, {
                   paddingVertical: StyleConfig.countPixelRatio(8),
                   borderWidth: 1,
@@ -75,7 +75,7 @@ class GuestScreen extends Component {
                     <Text style={styles.textH3Regular}>{`${item.contacts.length} contacts`}</Text>
                   </View>
                   <View style={styles.center}>
-                    <FontAwesome onPress={() => this.props.navigation.navigate(Const.NK_GUESTS_DETAILS, { item })} name={'pencil'} size={StyleConfig.countPixelRatio(20)} color={StyleConfig.COLORS.defaultTextColor} />
+                    <FontAwesome onPress={() => console.log("pencil icon press")} name={'pencil'} size={StyleConfig.countPixelRatio(20)} color={StyleConfig.COLORS.defaultTextColor} />
                   </View>
                 </View>}
             />

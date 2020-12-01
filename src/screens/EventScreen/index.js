@@ -18,7 +18,6 @@ import withLoader from 'src/redux/actionCreator/withLoader';
 import withVendor from 'src/redux/actionCreator/withVendor';
 import styles from 'src/helper/styles';
 import * as Const from 'src/helper/constant';
-import AddEventComponent from 'src/screens/EventScreen/AddEventComponent';
 import EventListItem from 'src/screens/EventScreen/EventListItem';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import moment from 'moment';
@@ -184,15 +183,6 @@ class EventScreen extends Component {
   onAddPress = () => {
     this.setState({ data: [] })
   }
-  onItemPress = (event) => {
-    if (event == null) {
-      this.setState({ showAddEvent: true })
-    } else if (event.hostUserId == userId) {
-      this.props.navigation.navigate(Const.NK_EVENT_DETAILS, { event, hostOfTheEvent: true })
-    } else {
-      this.props.navigation.navigate(Const.NK_EVENT_DETAILS, { event, hostOfTheEvent: false })
-    }
-  }
   onDayPress = ({ dateString }) => {
     const { calendarData } = this.state;
     if (calendarData.hasOwnProperty(dateString)) {
@@ -278,9 +268,7 @@ class EventScreen extends Component {
             </View>}
           </ScrollView>
           }
-          {showAddEvent && <ScrollView style={styles.content}>
-            <AddEventComponent onSavePress={(data) => this.onSavePress(data)} />
-          </ScrollView>}
+          
 
         </SafeAreaView>
       </>

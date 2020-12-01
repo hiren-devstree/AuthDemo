@@ -92,8 +92,8 @@ const OTPVerificationScreen = ({ route, navigation, ...props }) => {
                     navigation.navigate(Const.NK_VENDOR_REGISTER, {})
                   } else {
                     await SecureStore.setItemAsync(Const.SS_IS_LOGIN, "true")
-
-                    navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
+                    navigation.navigate(Const.NK_VENDOR_REGISTER, {})
+                    //navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
                   }
                 } catch (err) {
                   showMessage({ text: `Error: ${err.message}`, color: "red" });

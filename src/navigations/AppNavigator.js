@@ -14,19 +14,13 @@ import LoginScreen from '../screens/LoginScreen';
 import OTPVerificationScreen from '../screens/OTPVerificationScreen';
 import EventScreen from '../screens/EventScreen';
 import GuestScreen from '../screens/GuestScreen';
-import GuestDetailScreen from '../screens/GuestScreen/GuestDetailScreen';
 import MemoriesScreen from '../screens/MemoriesScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import PreviewPhoto from '../screens/PreviewPhoto';
-import AttachImage from '../screens/AttachImage';
 import VendorRegisterScreen from '../screens/VendorRegisterScreen';
 import withVendor from 'src/redux/actionCreator/withVendor';
-import EventDetailScreen from '../screens/EventScreen/EventDetailScreen';
 import StyleConfig from "../helper/StyleConfig";
 import {
-  NK_INIT, NK_REGISTER, NK_LOGIN, NK_OTP_VERIFICATION, NK_DASHBOARD, NK_PREVIEW_PHOTO, NK_ATTACH_IMAGE,
-  NK_EVENTS, NK_EVENT_DETAILS, NK_MEMORIES, NK_GUESTS, NK_GUESTS_DETAILS, NK_SETTINGS, NK_PROFILE, NK_VENDOR_REGISTER
+  NK_INIT, NK_REGISTER, NK_LOGIN, NK_OTP_VERIFICATION, NK_DASHBOARD, NK_EVENTS, NK_MEMORIES, NK_GUESTS, NK_SETTINGS, NK_VENDOR_REGISTER
 } from 'src/helper/constant'
 
 const Stack = createStackNavigator();
@@ -34,21 +28,18 @@ const Tab = createBottomTabNavigator();
 const EventStack = ((props) =>
   <Stack.Navigator>
     <Stack.Screen options={{ headerShown: false }} name={NK_EVENTS} component={EventScreen} />
-    <Stack.Screen options={{ headerShown: false }} name={NK_EVENT_DETAILS} component={EventDetailScreen} />
   </Stack.Navigator>
 )
 
 const GuestStack = ((props) =>
   <Stack.Navigator>
     <Stack.Screen options={{ headerShown: false }} name={NK_GUESTS} component={GuestScreen} />
-    <Stack.Screen options={{ headerShown: false }} name={NK_GUESTS_DETAILS} component={GuestDetailScreen} />
   </Stack.Navigator>
 )
 
 const SettingStack = ((props) =>
   <Stack.Navigator>
     <Stack.Screen options={{ headerShown: false }} name={NK_SETTINGS} component={SettingsScreen} />
-    <Stack.Screen options={{ headerShown: false }} name={NK_PROFILE} component={ProfileScreen} />
   </Stack.Navigator>
 )
 
@@ -126,9 +117,6 @@ const AppNavigator = ({ ...props }) => {
         <Stack.Screen options={{ headerShown: false }} name={NK_OTP_VERIFICATION} component={OTPVerificationScreen} />
         <Stack.Screen options={{ headerShown: false }} name={NK_VENDOR_REGISTER} component={VendorRegisterScreen} />
         <Stack.Screen options={{ headerShown: false }} name={NK_DASHBOARD} component={props.isVendor ? TabNavigatorVendor : TabNavigator} />
-        <Stack.Screen options={{ headerShown: false }} name={NK_PREVIEW_PHOTO} component={PreviewPhoto} />
-        <Stack.Screen options={{ headerShown: false }} name={NK_ATTACH_IMAGE} component={AttachImage} />
-
       </Stack.Navigator>
 
     </NavigationContainer >

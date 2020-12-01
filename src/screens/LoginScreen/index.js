@@ -27,14 +27,14 @@ firebase.auth().isAppVerificationDisabledForTesting = true
 
 const LoginScreen = ({ navigation, ...props }) => {
   const recaptchaVerifier = React.useRef(null);
-  const [phoneNumber, setPhoneNumber] = React.useState('9033343516');
+  const [phoneNumber, setPhoneNumber] = React.useState('');
   const [verificationId, setVerificationId] = React.useState();
   const [verificationCode, setVerificationCode] = React.useState();
   const firebaseConfig = firebase.apps.length ? firebase.app().options : undefined;
   const [message, showMessage] = React.useState((!firebaseConfig || Platform.OS === 'web')
     ? { text: "To get started, provide a valid firebase config in App.js and open this snack on an iOS or Android device." }
     : undefined);
-  console.log({ vendor: props.isVendor })
+  
   return (
     <>
       <StatusBar barStyle="dark-content" />

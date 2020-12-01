@@ -28,73 +28,11 @@ class InitScreen extends Component {
     let isLogin = await SecureStore.getItemAsync(Const.SS_IS_LOGIN);
     let isVendor = await SecureStore.getItemAsync(Const.SS_IS_VENDOR);
     if (isVendor == "true") {
-      //this.props.setIsVendor(true)
+      this.props.setIsVendor(true)
     }
     if (isLogin == "true") {
-      this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
+    //  this.props.navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: Const.NK_DASHBOARD }] }))
     }
-
-    // TODO REGISTER API CALL DEMO
-    // let data = {
-    //   "id": "9033343516",
-    //   "email": "",
-    //   "firstname": "",
-    //   "initials": "ASS",
-    //   "lastname": "",
-    //   "type": 1
-    // }
-    // let response = await ApiManager.postRegister(data)
-
-
-    //TODO GET USER PROFILE API CALL DEMO
-    // let response = await ApiManager.getUserProfile(Const.STATIC_USER)
-
-    //TODO GET ALL EVENTS API CALL
-    // let response = await ApiManager.getAllEvents()
-
-
-    // TODO UPDATE PROFILE API CALL
-    // let data = {
-    //   "email": "hiren.devstree@gmail.com",
-    //   "firstname": "Hiren",
-    //   "initials": "ASE",
-    //   "lastname": "Vaghela",
-    //   "type": 1
-    // }
-    // let response = await ApiManager.postUpdateProfile(Const.STATIC_USER, data)
-
-    // ----------------------------------------------------
-    // TODO ADD EVENT API CALL DEMO
-    // let data = {
-    //   "name": "My 27th",
-    //   "startdate": "01-01-2020",
-    //   "enddate": "02-01-2020",
-    //   "userid": Const.STATIC_USER,
-    //   "usertype": "1"
-    // }
-
-    // let response = await ApiManager.postEvent(data)
-
-
-    //TODO GET EVENT API CALL DEMO
-    // let response = await ApiManager.getEventDetails(STATIC_EVENT)
-
-    //TODO GET ALL EVENTS API CALL
-    // let response = await ApiManager.getAllEvents()
-
-    // TODO UPDATE EVENT API CALL
-    // let data = {
-    //   "name": "My 25th",
-    //   "startdate": "01-11-2020",
-    //   "enddate": "02-11-2020",
-    //   "userid": Const.STATIC_USER,
-    //   "usertype": "1"
-    // }
-    // let response = await ApiManager.postUpdateEvent(STATIC_EVENT, data)
-
-    // let response = await ApiManager.getServiceProvider(STATIC_EVENT)
-
-    //console.log({ response })
   }
   render() {
     return (
@@ -116,8 +54,7 @@ class InitScreen extends Component {
             <Button
               onPress={() => {
                 this.props.setIsVendor(false)
-                this.props.navigation.navigate(Const.NK_VENDOR_REGISTER)
-                //this.props.navigation.navigate(Const.NK_LOGIN)
+                this.props.navigation.navigate(Const.NK_LOGIN)
               }}
               buttonWrap={{ backgroundColor: StyleConfig.COLORS.green, borderColor: StyleConfig.COLORS.green, marginBottom: StyleConfig.countPixelRatio(24) }}
             >{strings.ready_to_plan_lets_emzee}</Button>

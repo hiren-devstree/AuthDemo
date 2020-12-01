@@ -26,21 +26,12 @@ class SettingsScreen extends Component {
     super(props);
     this.state = {
       data: [
-        {
-          "id": 1,
-          "name": "childhood",
-          "contacts": [{}, {}]
-        },
-        {
-          "id": 2,
-          "name": "Prompt Group",
-          "contacts": [{}, {}]
-        }
+        
       ]
     }
   }
   onProfile = () => {
-    this.props.navigation.navigate(Const.NK_PROFILE)
+    //this.props.navigation.navigate(Const.NK_PROFILE)
   }
   render() {
     return (
